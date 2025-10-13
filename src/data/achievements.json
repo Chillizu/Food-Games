@@ -1,0 +1,132 @@
+{
+  "achievements": [
+    {
+      "id": "first-meal",
+      "name": "初次尝试",
+      "description": "完成你的第一顿饭",
+      "icon": "🌱",
+      "color": "#4ade80",
+      "unlocked": false,
+      "condition": "complete_first_meal"
+    },
+    {
+      "id": "eco-warrior",
+      "name": "环保战士",
+      "description": "连续5次选择低碳饮食",
+      "icon": "🌍",
+      "color": "#22c55e",
+      "unlocked": false,
+      "condition": "eco_streak_5"
+    },
+    {
+      "id": "food-explorer",
+      "name": "美食探索家",
+      "description": "尝试所有不同类型的食材",
+      "icon": "🔍",
+      "color": "#3b82f6",
+      "unlocked": false,
+      "condition": "try_all_categories"
+    },
+    {
+      "id": "healthy-chef",
+      "name": "健康厨师",
+      "description": "连续3次选择健康度80%以上的食物",
+      "icon": "❤️",
+      "color": "#ef4444",
+      "unlocked": false,
+      "condition": "healthy_streak_3"
+    },
+    {
+      "id": "inventor",
+      "name": "发明家",
+      "description": "使用实验室培育的食物制作料理",
+      "icon": "🧪",
+      "color": "#8b5cf6",
+      "unlocked": false,
+      "condition": "use_lab_food"
+    },
+    {
+      "id": "vegetarian-master",
+      "name": "素食大师",
+      "description": "连续10次只选择植物性食物",
+      "icon": "🥬",
+      "color": "#10b981",
+      "unlocked": false,
+      "condition": "vegetarian_streak_10"
+    },
+    {
+      "id": "balanced-diet",
+      "name": "均衡饮食",
+      "description": "在一顿饭中包含所有营养类别",
+      "icon": "⚖️",
+      "color": "#f59e0b",
+      "unlocked": false,
+      "condition": "balanced_meal"
+    },
+    {
+      "id": "water-saver",
+      "name": "节水专家",
+      "description": "制作水足迹低于0.3的料理",
+      "icon": "💧",
+      "color": "#06b6d4",
+      "unlocked": false,
+      "condition": "low_water_footprint"
+    },
+    {
+      "id": "carbon-neutral",
+      "name": "碳中和达人",
+      "description": "制作碳足迹低于0.2的料理",
+      "icon": "🌱",
+      "color": "#22c55e",
+      "unlocked": false,
+      "condition": "low_carbon_footprint"
+    },
+    {
+      "id": "gourmet-chef",
+      "name": "美食家",
+      "description": "解锁20种不同的食谱组合",
+      "icon": "👨‍🍳",
+      "color": "#f97316",
+      "unlocked": false,
+      "condition": "unlock_20_recipes"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "salad",
+      "name": "绿色沙拉",
+      "ingredients": ["vegetable", "fruit"],
+      "description": "清爽的蔬菜水果沙拉",
+      "carbonScore": 0.25,
+      "waterScore": 0.35,
+      "healthScore": 0.85
+    },
+    {
+      "id": "tofu-stir-fry",
+      "name": "豆腐炒菜",
+      "ingredients": ["tofu", "vegetable"],
+      "description": "营养丰富的豆腐蔬菜",
+      "carbonScore": 0.3,
+      "waterScore": 0.4,
+      "healthScore": 0.8
+    },
+    {
+      "id": "insect-protein-bowl",
+      "name": "昆虫蛋白碗",
+      "ingredients": ["insect", "grains"],
+      "description": "未来感的昆虫蛋白料理",
+      "carbonScore": 0.15,
+      "waterScore": 0.25,
+      "healthScore": 0.75
+    },
+    {
+      "id": "balanced-meal",
+      "name": "均衡营养餐",
+      "ingredients": ["chicken", "vegetable", "grains"],
+      "description": "包含蛋白质、蔬菜和主食的均衡餐",
+      "carbonScore": 0.4,
+      "waterScore": 0.45,
+      "healthScore": 0.75
+    }
+  ]
+}

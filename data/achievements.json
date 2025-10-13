@@ -1,0 +1,347 @@
+{
+  "achievements": {
+    "recipe_collection": {
+      "id": "recipe_collection",
+      "name": "食谱收集家",
+      "description": "收集10种不同的食谱",
+      "icon": "📚",
+      "rarity": "common",
+      "category": "recipe",
+      "requirements": {
+        "type": "recipe_count",
+        "target": 10
+      },
+      "reward": {
+        "type": "badge",
+        "value": "recipe_master"
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "恭喜！你已成为食谱收集家！"
+    },
+    
+    "eco_warrior": {
+      "id": "eco_warrior",
+      "name": "环保战士",
+      "description": "连续5次获得环保评分90分以上",
+      "icon": "🌱",
+      "rarity": "rare",
+      "category": "environmental",
+      "requirements": {
+        "type": "streak_score",
+        "target": 5,
+        "minScore": 90
+      },
+      "reward": {
+        "type": "badge",
+        "value": "eco_hero"
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "你是真正的环保战士！"
+    },
+    
+    "master_chef": {
+      "id": "master_chef",
+      "name": "料理大师",
+      "description": "成功制作50道菜",
+      "icon": "👨‍🍳",
+      "rarity": "epic",
+      "category": "cooking",
+      "requirements": {
+        "type": "total_cooking",
+        "target": 50
+      },
+      "reward": {
+        "type": "badge",
+        "value": "master_chef_badge"
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "恭喜成为料理大师！"
+    },
+    
+    "plant_lover": {
+      "id": "plant_lover",
+      "name": "植物爱好者",
+      "description": "使用植物性食材制作20道菜",
+      "icon": "🥬",
+      "rarity": "common",
+      "category": "ingredient",
+      "requirements": {
+        "type": "ingredient_type",
+        "target": 20,
+        "ingredientType": "plant"
+      },
+      "reward": {
+        "type": "badge",
+        "value": "plant_expert"
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "你真的很喜欢植物性食材！"
+    },
+    
+    "protein_master": {
+      "id": "protein_master",
+      "name": "蛋白质大师",
+      "description": "使用蛋白质食材制作15道菜",
+      "icon": "🥩",
+      "rarity": "rare",
+      "category": "ingredient",
+      "requirements": {
+        "type": "ingredient_type",
+        "target": 15,
+        "ingredientType": "animal"
+      },
+      "reward": {
+        "type": "badge",
+        "value": "protein_master_badge"
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "蛋白质大师就是你！"
+    },
+    
+    "insect_pioneer": {
+      "id": "insect_pioneer",
+      "name": "昆虫先锋",
+      "description": "首次使用昆虫蛋白食材",
+      "icon": "🐛",
+      "rarity": "legendary",
+      "category": "ingredient",
+      "requirements": {
+        "type": "first_use",
+        "ingredientType": "insect"
+      },
+      "reward": {
+        "type": "badge",
+        "value": "insect_pioneer_badge"
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "你是真正的昆虫蛋白先锋！"
+    },
+    
+    "lab_food_explorer": {
+      "id": "lab_food_explorer",
+      "name": "实验室食品探索者",
+      "description": "使用实验室培育食材制作10道菜",
+      "icon": "🔬",
+      "rarity": "rare",
+      "category": "ingredient",
+      "requirements": {
+        "type": "ingredient_type",
+        "target": 10,
+        "ingredientType": "lab"
+      },
+      "reward": {
+        "type": "badge",
+        "value": "lab_explorer_badge"
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "你是未来的食品探索者！"
+    },
+    
+    "perfect_score": {
+      "id": "perfect_score",
+      "name": "完美得分",
+      "description": "单次游戏获得100分环保评分",
+      "icon": "💯",
+      "rarity": "legendary",
+      "category": "score",
+      "requirements": {
+        "type": "perfect_score",
+        "target": 100
+      },
+      "reward": {
+        "type": "badge",
+        "value": "perfect_score_badge"
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "完美！你是环保烹饪的典范！"
+    },
+    
+    "combo_master": {
+      "id": "combo_master",
+      "name": "连击大师",
+      "description": "单次选择9种食材",
+      "icon": "🎯",
+      "rarity": "epic",
+      "category": "combo",
+      "requirements": {
+        "type": "max_selection",
+        "target": 9
+      },
+      "reward": {
+        "type": "badge",
+        "value": "combo_master_badge"
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "连击大师就是你！"
+    },
+    
+    "water_saver": {
+      "id": "water_saver",
+      "name": "节水专家",
+      "description": "10次游戏水耗评分低于20%",
+      "icon": "💧",
+      "rarity": "rare",
+      "category": "environmental",
+      "requirements": {
+        "type": "resource_efficiency",
+        "target": 10,
+        "resourceType": "water",
+        "maxUsage": 0.2
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "你是真正的节水专家！"
+    },
+    
+    "carbon_neutral": {
+      "id": "carbon_neutral",
+      "name": "碳中和达人",
+      "description": "5次游戏碳排放评分低于15%",
+      "icon": "🌍",
+      "rarity": "epic",
+      "category": "environmental",
+      "requirements": {
+        "type": "resource_efficiency",
+        "target": 5,
+        "resourceType": "carbon",
+        "maxUsage": 0.15
+      },
+      "unlocked": false,
+      "progress": 0,
+      "unlockMessage": "你达到了碳中和水平！"
+    }
+  },
+  
+  "badges": {
+    "recipe_master": {
+      "id": "recipe_master",
+      "name": "食谱大师",
+      "description": "收集了10种食谱的专家",
+      "icon": "📖",
+      "rarity": "common",
+      "color": "#4ade80",
+      "effects": ["recipe_bonus_x1.1"]
+    },
+    
+    "eco_hero": {
+      "id": "eco_hero",
+      "name": "环保英雄",
+      "description": "环保意识的守护者",
+      "icon": "🌟",
+      "rarity": "rare",
+      "color": "#22c55e",
+      "effects": ["eco_score_bonus_x1.2"]
+    },
+    
+    "master_chef_badge": {
+      "id": "master_chef_badge",
+      "name": "料理大师徽章",
+      "description": "制作了50道菜的传奇厨师",
+      "icon": "👑",
+      "rarity": "epic",
+      "color": "#f59e0b",
+      "effects": ["cooking_speed_bonus_x1.3"]
+    },
+    
+    "plant_expert": {
+      "id": "plant_expert",
+      "name": "植物专家",
+      "description": "植物性食材的专家",
+      "icon": "🌿",
+      "rarity": "common",
+      "color": "#16a34a",
+      "effects": ["plant_bonus_x1.2"]
+    },
+    
+    "protein_master_badge": {
+      "id": "protein_master_badge",
+      "name": "蛋白质大师",
+      "description": "蛋白质料理的大师",
+      "icon": "💪",
+      "rarity": "rare",
+      "color": "#dc2626",
+      "effects": ["protein_bonus_x1.15"]
+    },
+    
+    "insect_pioneer_badge": {
+      "id": "insect_pioneer_badge",
+      "name": "昆虫先锋",
+      "description": "昆虫蛋白的先驱者",
+      "icon": "🏆",
+      "rarity": "legendary",
+      "color": "#7c3aed",
+      "effects": ["insect_bonus_x1.5", "unique_recipes"]
+    },
+    
+    "lab_explorer_badge": {
+      "id": "lab_explorer_badge",
+      "name": "实验室探索者",
+      "description": "未来食品的探索者",
+      "icon": "🚀",
+      "rarity": "rare",
+      "color": "#06b6d4",
+      "effects": ["lab_bonus_x1.3", "future_recipes"]
+    },
+    
+    "perfect_score_badge": {
+      "id": "perfect_score_badge",
+      "name": "完美得分",
+      "description": "达到了完美的环保评分",
+      "icon": "💎",
+      "rarity": "legendary",
+      "color": "#fbbf24",
+      "effects": ["perfect_bonus", "respect_multiplier"]
+    },
+    
+    "combo_master_badge": {
+      "id": "combo_master_badge",
+      "name": "连击大师",
+      "description": "掌握了食材搭配的艺术",
+      "icon": "⚡",
+      "rarity": "epic",
+      "color": "#f97316",
+      "effects": ["combo_bonus_x1.4", "recipe_variety"]
+    }
+  },
+  
+  "rarity_levels": {
+    "common": {
+      "color": "#6b7280",
+      "background": "#f3f4f6",
+      "borderColor": "#d1d5db"
+    },
+    "rare": {
+      "color": "#3b82f6",
+      "background": "#dbeafe",
+      "borderColor": "#93c5fd"
+    },
+    "epic": {
+      "color": "#a855f7",
+      "background": "#f3e8ff",
+      "borderColor": "#c084fc"
+    },
+    "legendary": {
+      "color": "#f59e0b",
+      "background": "#fef3c7",
+      "borderColor": "#fcd34d"
+    }
+  },
+  
+  "categories": {
+    "recipe": "食谱成就",
+    "environmental": "环保成就",
+    "cooking": "烹饪成就",
+    "ingredient": "食材成就",
+    "score": "评分成就",
+    "combo": "连击成就"
+  }
+}
