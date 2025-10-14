@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { IconLeaf, IconDroplet, IconWorld, IconHeart } from '@tabler/icons-react'
 
 const FoodCard = ({ food, isSelected, onSelect }) => {
   const cardVariants = {
@@ -30,15 +31,22 @@ const FoodCard = ({ food, isSelected, onSelect }) => {
         <p className="food-card__description">{food.description}</p>
         <div className="food-card__footer">
           <div className="food-card__stats">
-            <span className="stat" title="碳排放">
-              🌍 {Math.round(food.carbonFootprint * 100)}
-            </span>
-            <span className="stat" title="水资源消耗">
-              💧 {Math.round(food.waterUsage * 100)}
-            </span>
-            <span className="stat" title="健康指数">
-              ❤️ {Math.round(food.healthScore * 100)}
-            </span>
+            <div className="stat-item" title={`碳排放: ${food.carbonFootprint}`}>
+              <IconLeaf size={18} />
+              <span>{Math.round(food.carbonFootprint * 100)}</span>
+            </div>
+            <div className="stat-item" title={`水消耗: ${food.waterUsage}`}>
+              <IconDroplet size={18} />
+              <span>{Math.round(food.waterUsage * 100)}</span>
+            </div>
+            <div className="stat-item" title={`土地占用: ${food.landUsage}`}>
+              <IconWorld size={18} />
+              <span>{Math.round(food.landUsage * 100)}</span>
+            </div>
+            <div className="stat-item" title={`健康指数: ${food.healthScore}`}>
+              <IconHeart size={18} />
+              <span>{Math.round(food.healthScore * 100)}</span>
+            </div>
           </div>
           <div className={`food-card__select-indicator ${isSelected ? 'visible' : ''}`}>
             ✓

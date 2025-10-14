@@ -1,29 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import FoodCard from '../Cards/FoodCard'
 import { getFoods, getFoodCategories } from '../../utils/dataProcessing'
+import { IconBook } from '@tabler/icons-react'
 
 const FoodSelectionScreen = ({
   selectedFoods,
-  onSelectFood,
+  onToggleFoodSelection,
   onDeselectFood,
   onStartCooking,
-  canStartCooking
+  canStartCooking,
+  openCookbook
 }) => {
+  const [activeCategory, setActiveCategory] = useState('all')
   const foods = getFoods()
   const categories = getFoodCategories()
+
+  const filteredFoods = activeCategory === 'all'
+    ? foods
+    : foods.filter(food => food.category === activeCategory)
 
   return (
     <div className="food-selection-screen">
       {/* Header */}
       <div className="screen-header">
-        <motion.h1
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          选择你的实验食材
-        </motion.h1>
+        <div className="title-with-button">
+          <motion.h1
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            选择你的实验食材
+          </motion.h1>
+          <motion.button
+            className="button-icon"
+            onClick={openCookbook}
+            title="打开食谱图鉴"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <IconBook size={32} />
+          </motion.button>
+        </div>
         <motion.p
           className="screen-subtitle"
           initial={{ opacity: 0, x: -50 }}
@@ -41,8 +60,18 @@ const FoodSelectionScreen = ({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
+        <button
+          className={`category-chip ${activeCategory === 'all' ? 'active' : ''}`}
+          onClick={() => setActiveCategory('all')}
+        >
+          全部
+        </button>
         {Object.entries(categories).map(([key, category]) => (
-          <button key={key} className="category-chip">
+          <button
+            key={key}
+            className={`category-chip ${activeCategory === key ? 'active' : ''}`}
+            onClick={() => setActiveCategory(key)}
+          >
             {category.name}
           </button>
         ))}
@@ -50,12 +79,12 @@ const FoodSelectionScreen = ({
 
       {/* Food Grid */}
       <div className="food-grid">
-        {foods.map((food) => (
+        {filteredFoods.map((food) => (
           <FoodCard
             key={food.id}
             food={food}
             isSelected={selectedFoods.some(f => f.id === food.id)}
-            onSelect={() => onSelectFood(food)}
+            onSelect={() => onToggleFoodSelection(food)}
           />
         ))}
       </div>
@@ -68,7 +97,7 @@ const FoodSelectionScreen = ({
         transition={{ type: 'spring', stiffness: 100, delay: 0.4 }}
       >
         <div className="action-bar__info">
-          已选 <strong>{selectedFoods.length}</strong> / 9 种食材
+          已选 <strong>{selectedFoods.length}</strong> 种食材
         </div>
         <div className="action-bar__buttons">
           {selectedFoods.length > 0 && (

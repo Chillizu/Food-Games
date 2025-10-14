@@ -21,7 +21,7 @@ const FoodParticle = ({ food, position, ...props }) => {
       
       // 边界检测
       if (Math.abs(meshRef.current.position.x) > 2) velocity[0] *= -1
-      if (meshRef.current.position.y > 1 || meshRef.current.position.y < -1) velocity[1] *= -1
+      if (Math.abs(meshRef.current.position.y) > 1 || Math.abs(meshRef.current.position.y) < -1) velocity[1] *= -1
       if (Math.abs(meshRef.current.position.z) > 2) velocity[2] *= -1
       
       // 旋转
@@ -50,17 +50,13 @@ const FoodParticle = ({ food, position, ...props }) => {
     <group position={position} {...props}>
       <mesh ref={meshRef}>
         {getGeometry()}
-        <meshStandardMaterial 
-          color={food.color} 
-          emissive={food.color}
-          emissiveIntensity={0.3}
-        />
+        <meshToonMaterial color={food.color} />
       </mesh>
       {/* 食材图标 */}
       <Text
         position={[0, 0.2, 0]}
         fontSize={0.15}
-        color="white"
+        color="#64748b"
         anchorX="center"
         anchorY="middle"
       >
@@ -85,42 +81,13 @@ const CookingPot = () => {
     <group ref={meshRef}>
       {/* 锅体 */}
       <Cylinder args={[0.8, 1, 0.8, 32]} position={[0, -0.4, 0]}>
-        <meshStandardMaterial 
-          color="#8b4513" 
-          metalness={0.3}
-          roughness={0.7}
-        />
+        <meshToonMaterial color="#94a3b8" />
       </Cylinder>
       
       {/* 锅盖 */}
       <Cylinder args={[0.85, 0.85, 0.1, 32]} position={[0, 0, 0]}>
-        <meshStandardMaterial 
-          color="#a0522d" 
-          metalness={0.4}
-          roughness={0.6}
-        />
+        <meshToonMaterial color="#cbd5e1" />
       </Cylinder>
-      
-      {/* 蒸汽效果 */}
-      <group position={[0, 0.5, 0]}>
-        {[...Array(5)].map((_, i) => (
-          <Sphere
-            key={i}
-            args={[0.05, 8, 8]}
-            position={[
-              (Math.random() - 0.5) * 0.3,
-              Math.random() * 0.5,
-              (Math.random() - 0.5) * 0.3
-            ]}
-          >
-            <meshBasicMaterial 
-              color="white" 
-              transparent
-              opacity={0.6}
-            />
-          </Sphere>
-        ))}
-      </group>
     </group>
   )
 }
@@ -144,16 +111,16 @@ const FlameEffect = () => {
 
   return (
     <group ref={groupRef} position={[0, -0.8, 0]}>
-      {[...Array(3)].map((_, i) => (
+      {[...Array(2)].map((_, i) => (
         <Cone
           key={i}
-          args={[0.2, 0.5, 8]}
-          position={[0, i * 0.1, 0]}
+          args={[0.15, 0.4, 8]}
+          position={[0, i * 0.08, 0]}
         >
           <meshBasicMaterial 
-            color={['#ff6b35', '#f7931e', '#ffcc02'][i]}
+            color={i === 0 ? '#f97316' : '#fbbf24'}
             transparent
-            opacity={0.8}
+            opacity={0.7}
           />
         </Cone>
       ))}
@@ -180,56 +147,51 @@ const CookingAnimation = ({ selectedFoods }) => {
   }, [selectedFoods])
 
   return (
-    <div className="cooking-animation">
-      <div className="animation-container">
-        <Canvas
-          camera={{ position: [0, 0, 5], fov: 60 }}
-          style={{
-            background: 'linear-gradient(to bottom, #2c1810, #8b4513)',
-            width: '100%',
-            height: '100%'
-          }}
-        >
-        <ambientLight intensity={0.3} />
-        <pointLight position={[0, 5, 0]} intensity={1} color="#ff6b35" />
-        <pointLight position={[0, -5, 0]} intensity={0.5} color="#4ade80" />
-        
-        {/* 烹饪器具 */}
-        <CookingPot />
-        
-        {/* 火焰效果 */}
-        <FlameEffect />
-        
-        {/* 食材粒子 */}
-        {particles.map((particle) => (
-          <FoodParticle
-            key={particle.id}
-            food={particle.food}
-            position={particle.position}
+    <Canvas
+      camera={{ position: [0, 0, 5], fov: 60 }}
+      style={{
+        background: 'var(--color-background)',
+        width: '100%',
+        height: '100%'
+      }}
+    >
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[5, 5, 5]} intensity={0.8} />
+          
+          {/* 烹饪器具 */}
+          <CookingPot />
+          
+          {/* 火焰效果 */}
+          <FlameEffect />
+          
+          {/* 食材粒子 */}
+          {particles.map((particle) => (
+            <FoodParticle
+              key={particle.id}
+              food={particle.food}
+              position={particle.position}
+            />
+          ))}
+          
+          {/* 烹饪文字 */}
+          <Text
+            position={[0, 2, 0]}
+            fontSize={0.3}
+            color="#64748b"
+            anchorX="center"
+            anchorY="middle"
+          >
+            🍳 烹饪中...
+          </Text>
+          
+          <OrbitControls
+            enablePan={false}
+            enableZoom={false}
+            enableRotate={true}
+            autoRotate
+            autoRotateSpeed={0.5}
           />
-        ))}
-        
-        {/* 烹饪文字 */}
-        <Text
-          position={[0, 2, 0]}
-          fontSize={0.3}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-        >
-          🍳 烹饪中...
-        </Text>
-        
-        <OrbitControls
-          enablePan={false}
-          enableZoom={false}
-          enableRotate={true}
-          autoRotate
-          autoRotateSpeed={0.5}
-        />
-      </Canvas>
-      </div>
-    </div>
+    </Canvas>
   )
 }
 

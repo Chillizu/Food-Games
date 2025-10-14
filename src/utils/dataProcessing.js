@@ -1,5 +1,7 @@
 import foodsData from '../data/foods.json'
 import achievementsData from '../data/achievements.json'
+import recipesData from '../data/recipes.json'
+import sdgsData from '../data/sdgs.json'
 
 // 计算环境影响分数
 export function calculateEnvironmentalImpact(selectedFoods) {
@@ -93,6 +95,16 @@ export function calculatePlanetStatus(environmentalScore) {
   }
 }
 
+// 根据分数获取SDG信息
+export function getSDGMessage(totalScore) {
+  for (const sdg of sdgsData) {
+    if (totalScore >= sdg.scoreRange[0] && totalScore < sdg.scoreRange[1]) {
+      return sdg;
+    }
+  }
+  return null;
+}
+
 // 检查成就解锁
 export function checkAchievements(selectedFoods, gameStats) {
   const achievements = []
@@ -152,31 +164,37 @@ export function checkAchievements(selectedFoods, gameStats) {
   return achievements
 }
 
-// 识别食谱
-export function identifyRecipe(selectedFoods) {
-  const foodIds = selectedFoods.map(food => food.id).sort()
-  
-  // 检查预设食谱
-  const recipes = achievementsData.recipes
-  for (const recipe of recipes) {
-    const ingredientIds = recipe.ingredients.sort()
-    if (JSON.stringify(foodIds) === JSON.stringify(ingredientIds)) {
-      return recipe
+// 识别菜品组合
+export function identifyRecipes(selectedFoods) {
+  const availableFoodIds = new Set(selectedFoods.map(food => food.id));
+  const matchedRecipes = [];
+  const remainingFoods = [...selectedFoods];
+
+  // 贪心算法：优先匹配需要食材最多的菜品
+  const sortedRecipes = [...recipesData].sort((a, b) => b.ingredients.length - a.ingredients.length);
+
+  for (const recipe of sortedRecipes) {
+    const requiredIngredients = new Set(recipe.ingredients);
+    
+    // 检查当前可用食材是否能满足菜品需求
+    const canMake = [...requiredIngredients].every(id => availableFoodIds.has(id));
+
+    if (canMake) {
+      matchedRecipes.push(recipe);
+      // 从可用食材中移除已用于该菜品的食材
+      for (const id of requiredIngredients) {
+        availableFoodIds.delete(id);
+      }
     }
   }
 
-  // 如果没有匹配的预设食谱，创建一个自定义食谱
-  const environmentalImpact = calculateEnvironmentalImpact(selectedFoods)
-  
+  // 筛选出未被用于任何菜品的独立食材
+  const finalRemainingFoods = remainingFoods.filter(food => availableFoodIds.has(food.id));
+
   return {
-    id: `custom_${Date.now()}`,
-    name: '自定义料理',
-    description: '你的独特创造！',
-    ingredients: foodIds,
-    carbonScore: environmentalImpact.carbonFootprint,
-    waterScore: environmentalImpact.waterUsage,
-    healthScore: environmentalImpact.healthScore
-  }
+    foundRecipes: matchedRecipes,
+    unmatchedFoods: finalRemainingFoods
+  };
 }
 
 // 获取食材数据
@@ -196,7 +214,7 @@ export function getAchievements() {
 
 // 获取食谱数据
 export function getRecipes() {
-  return achievementsData.recipes
+  return recipesData
 }
 
 // 生成游戏提示

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PlanetVisualization from '../3D/PlanetVisualization'
 import AchievementPopup from '../UI/AchievementPopup'
-import { getAchievements } from '../../utils/dataProcessing'
+import { getAchievements, getSDGMessage } from '../../utils/dataProcessing'
 
 const ResultScreen = ({
   selectedFoods,
   environmentalImpact,
   planetStatus,
-  currentRecipe,
-  additionalRecipes,
+  foundRecipes,
+  unmatchedFoods,
   planetHistory,
   tips,
   unlockedAchievements,
@@ -32,6 +32,8 @@ const ResultScreen = ({
       setShowAchievements(true)
     }
   }, [unlockedAchievements, achievements])
+
+  const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null;
 
   const handleNextAchievement = () => {
     if (currentAchievementIndex < displayedAchievements.length - 1) {
@@ -114,45 +116,54 @@ const ResultScreen = ({
             <div className="impact-bars">
               {/* Impact Bars Here */}
               <div className="impact-bar-item">
-                <span className="impact-bar-item__label">🌍 碳排放</span>
+                <span className="impact-bar-item__label">碳排放</span>
                 <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" style={{width: `${environmentalImpact.carbonFootprint * 100}%`, backgroundColor: '#dc2626'}} animate={{width: `${environmentalImpact.carbonFootprint * 100}%`}}/>
+                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${100 - environmentalImpact.carbonFootprint * 100}%` }} />
                 </div>
+                <span className="impact-bar-item__value">{Math.round(100 - environmentalImpact.carbonFootprint * 100)}</span>
               </div>
               <div className="impact-bar-item">
-                <span className="impact-bar-item__label">💧 水资源</span>
+                <span className="impact-bar-item__label">水资源</span>
                 <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" style={{width: `${environmentalImpact.waterUsage * 100}%`, backgroundColor: '#06b6d4'}} animate={{width: `${environmentalImpact.waterUsage * 100}%`}}/>
+                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${100 - environmentalImpact.waterUsage * 100}%` }} />
                 </div>
+                <span className="impact-bar-item__value">{Math.round(100 - environmentalImpact.waterUsage * 100)}</span>
               </div>
               <div className="impact-bar-item">
-                <span className="impact-bar-item__label">🏞️ 土地占用</span>
+                <span className="impact-bar-item__label">土地占用</span>
                 <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" style={{width: `${environmentalImpact.landUsage * 100}%`, backgroundColor: '#f59e0b'}} animate={{width: `${environmentalImpact.landUsage * 100}%`}}/>
+                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${100 - environmentalImpact.landUsage * 100}%` }} />
                 </div>
+                <span className="impact-bar-item__value">{Math.round(100 - environmentalImpact.landUsage * 100)}</span>
               </div>
               <div className="impact-bar-item">
-                <span className="impact-bar-item__label">❤️ 健康度</span>
+                <span className="impact-bar-item__label">健康度</span>
                 <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" style={{width: `${environmentalImpact.healthScore * 100}%`, backgroundColor: '#22c55e'}} animate={{width: `${environmentalImpact.healthScore * 100}%`}}/>
+                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${environmentalImpact.healthScore * 100}%` }} />
                 </div>
+                <span className="impact-bar-item__value">{Math.round(environmentalImpact.healthScore * 100)}</span>
               </div>
             </div>
           </div>
 
-          {currentRecipe && (
+          {(foundRecipes.length > 0 || unmatchedFoods.length > 0) && (
             <div className="content-block">
-              <h2 className="content-block__title">📖 解锁食谱</h2>
-              <div className="recipe-card">
-                <h3 className="recipe-card__name">{currentRecipe.name}</h3>
-                <p className="recipe-card__description">{currentRecipe.description}</p>
+              <h2 className="content-block__title">🍽️ 本次实验成果</h2>
+              <div className="meal-composition">
+                {foundRecipes.map(recipe => (
+                  <div key={recipe.id} className="composition-item recipe-item">
+                    <span className="composition-icon">{recipe.icon}</span>
+                    <span className="composition-name">{recipe.name}</span>
+                    <span className="composition-bonus">+{recipe.bonusScore}分</span>
+                  </div>
+                ))}
+                {unmatchedFoods.map(food => (
+                  <div key={food.id} className="composition-item food-item">
+                    <span className="composition-icon">{food.emoji}</span>
+                    <span className="composition-name">{food.name}</span>
+                  </div>
+                ))}
               </div>
-              {additionalRecipes.length > 0 && additionalRecipes.map((recipe, index) => (
-                <div key={index} className="recipe-card recipe-card--additional">
-                  <h3 className="recipe-card__name">{recipe.name}</h3>
-                  <p className="recipe-card__description">{recipe.description}</p>
-                </div>
-              ))}
             </div>
           )}
 
@@ -165,6 +176,13 @@ const ResultScreen = ({
                 ))}
               </ul>
             </div>
+          )}
+          
+          {sdgMessage && (
+           <div className="content-block sdg-info-block">
+             <h2 className="content-block__title">{sdgMessage.icon} {sdgMessage.title}</h2>
+             <p>{sdgMessage.message}</p>
+           </div>
           )}
         </motion.div>
       </div>

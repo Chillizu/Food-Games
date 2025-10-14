@@ -1,0 +1,79 @@
+[
+  {
+    "id": "recipe_1",
+    "name": "经典沙拉",
+    "icon": "🥗",
+    "ingredients": ["lettuce", "apple", "nuts"],
+    "bonusScore": 10
+  },
+  {
+    "id": "recipe_2",
+    "name": "蘑菇炒蛋",
+    "icon": "🍳",
+    "ingredients": ["mushroom", "egg"],
+    "bonusScore": 8
+  },
+  {
+    "id": "recipe_3",
+    "name": "鸡肉炒玉米",
+    "icon": "🍗",
+    "ingredients": ["chicken", "corn"],
+    "bonusScore": 12
+  },
+  {
+    "id": "recipe_4",
+    "name": "牛肉汉堡",
+    "icon": "🍔",
+    "ingredients": ["beef", "lettuce", "fast_food"],
+    "bonusScore": -5
+  },
+  {
+    "id": "recipe_5",
+    "name": "未来蛋白棒",
+    "icon": " फ्यूचर",
+    "ingredients": ["insect", "nuts", "berries"],
+    "bonusScore": 20
+  },
+  {
+    "id": "recipe_6",
+    "name": "人造肉三明治",
+    "icon": "🥪",
+    "ingredients": ["lab_meat", "lettuce", "avocado"],
+    "bonusScore": 18
+  },
+  {
+    "id": "recipe_7",
+    "name": "海鲜炒饭",
+    "icon": "🍤",
+    "ingredients": ["rice", "shrimp", "egg"],
+    "bonusScore": 14
+  },
+  {
+    "id": "recipe_8",
+    "name": "土豆蘑菇汤",
+    "icon": "🥣",
+    "ingredients": ["potato", "mushroom"],
+    "bonusScore": 11
+  },
+  {
+    "id": "recipe_9",
+    "name": "鳄梨吐司",
+    "icon": "🥑",
+    "ingredients": ["avocado", "rice"],
+    "bonusScore": 15
+  },
+  {
+    "id": "recipe_10",
+    "name": "浆果麦片粥",
+    "icon": "🥣",
+    "ingredients": ["berries", "quinoa", "dairy"],
+    "bonusScore": 16
+  },
+  {
+    "id": "recipe_11",
+    "name": "海藻豆腐汤",
+    "icon": "🍲",
+    "ingredients": ["seaweed", "tofu"],
+    "bonusScore": 13
+  }
+]

@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { getAchievements } from '../../utils/dataProcessing'
 
 const AchievementPopup = ({ achievement, onNext, isLast }) => {
   return (
@@ -36,9 +35,6 @@ const AchievementPopup = ({ achievement, onNext, isLast }) => {
               delay: 0.2
             }}
           >
-            <div className="achievement-icon-ring">
-              <div className="achievement-icon-bg"></div>
-            </div>
             <div className="achievement-icon">
               {achievement.icon}
             </div>
@@ -60,7 +56,6 @@ const AchievementPopup = ({ achievement, onNext, isLast }) => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5 }}
-              style={{ color: achievement.color }}
             >
               {achievement.name}
             </motion.h3>
@@ -75,19 +70,11 @@ const AchievementPopup = ({ achievement, onNext, isLast }) => {
             </motion.p>
 
             {/* 成就进度条 */}
-            <motion.div 
-              className="achievement-progress"
-              initial={{ width: 0 }}
-              animate={{ width: '100%' }}
-              transition={{ duration: 1, delay: 0.7 }}
-            >
-              <div className="progress-fill" style={{ backgroundColor: achievement.color }} />
-            </motion.div>
           </div>
 
           {/* 继续按钮 */}
           <motion.button
-            className="achievement-continue-button"
+            className="button button--primary achievement-continue-button"
             onClick={onNext}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
