@@ -1,26 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { IconBook, IconAward } from '@tabler/icons-react';
+import styles from './HeaderActions.module.css';
 
 const HeaderActions = ({ onCookbookClick, onAchievementsClick }) => {
+  const buttonVariants = {
+    hover: { scale: 1.05 },
+    tap: { scale: 0.95 }
+  };
+
   return (
-    <div className="header-actions">
+    <div className={styles.container}>
       <motion.button
-        className="button-icon"
+        className={styles.actionButton}
         onClick={onCookbookClick}
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        whileTap={{ scale: 0.9 }}
+        variants={buttonVariants}
+        whileHover="hover"
+        whileTap="tap"
         title="打开图鉴"
       >
-        📖
+        <IconBook size={20} />
+        <span>图鉴</span>
       </motion.button>
       <motion.button
-        className="button-icon"
+        className={styles.actionButton}
         onClick={onAchievementsClick}
-        whileHover={{ scale: 1.1, rotate: -5 }}
-        whileTap={{ scale: 0.9 }}
+        variants={buttonVariants}
+        whileHover="hover"
+        whileTap="tap"
         title="查看成就"
       >
-        🏆
+        <IconAward size={20} />
+        <span>成就</span>
       </motion.button>
     </div>
   );

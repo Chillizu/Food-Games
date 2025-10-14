@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import HeaderActions from '../UI/HeaderActions'
+import styles from './IntroScreen.module.css'
 
 const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements }) => {
   const containerVariants = {
@@ -20,25 +21,25 @@ const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievement
 
   return (
     <motion.div
-      className="intro-screen"
+      className={styles.screen}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <HeaderActions onCookbookClick={onOpenCookbook} onAchievementsClick={onOpenAchievements} />
-      <div className="intro-screen__content">
-        <motion.div className="content-block" variants={itemVariants}>
-          <h1 className="intro-screen__title">未来食物实验室</h1>
-          <p className="intro-screen__subtitle">探索可持续饮食，塑造更美好的地球。</p>
+      <div className={styles.content}>
+        <motion.div className={styles.contentBlock} variants={itemVariants}>
+          <h1 className={styles.title}>未来食物实验室</h1>
+          <p className={styles.subtitle}>探索可持续饮食，塑造更美好的地球。</p>
         </motion.div>
 
-        <motion.div className="content-block" variants={itemVariants}>
-          <h2 className="content-block__title">🌍 故事背景</h2>
+        <motion.div className={styles.contentBlock} variants={itemVariants}>
+          <h2 className={styles.contentBlockTitle}>🌍 故事背景</h2>
           <p>2050年，地球资源紧张。作为“未来食物实验室”的研究员，你的每次选择都将决定我们星球的未来。</p>
         </motion.div>
 
-        <motion.div className="content-block" variants={itemVariants}>
-          <h2 className="content-block__title">🎮 游戏目标</h2>
+        <motion.div className={styles.contentBlock} variants={itemVariants}>
+          <h2 className={styles.contentBlockTitle}>🎮 游戏目标</h2>
           <ul>
             <li>选择不同食材进行组合实验。</li>
             <li>观察并学习每种选择对环境的影响。</li>
@@ -47,20 +48,20 @@ const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievement
         </motion.div>
 
         {gameStats.totalMeals > 0 && (
-          <motion.div className="content-block" variants={itemVariants}>
-            <h2 className="content-block__title">🏆 过往成就</h2>
-            <div className="stats-grid">
-              <div className="stat-item">
-                <span className="stat-number">{gameStats.totalMeals}</span>
-                <span className="stat-label">完成实验</span>
+          <motion.div className={styles.contentBlock} variants={itemVariants}>
+            <h2 className={styles.contentBlockTitle}>🏆 过往成就</h2>
+            <div className={styles.statsGrid}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>{gameStats.totalMeals}</span>
+                <span className={styles.statLabel}>完成实验</span>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">{gameStats.unlockedAchievements.length}</span>
-                <span className="stat-label">解锁成就</span>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>{gameStats.unlockedAchievements.length}</span>
+                <span className={styles.statLabel}>解锁成就</span>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">{gameStats.ecoStreak}</span>
-                <span className="stat-label">环保连击</span>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>{gameStats.ecoStreak}</span>
+                <span className={styles.statLabel}>环保连击</span>
               </div>
             </div>
           </motion.div>
@@ -68,7 +69,7 @@ const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievement
 
         <motion.div variants={itemVariants}>
           <motion.button
-            className="button button--primary button--large"
+            className={styles.startButton}
             onClick={onStartGame}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

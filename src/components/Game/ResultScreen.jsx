@@ -1,21 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React from 'react'
+import { motion } from 'framer-motion'
 import PlanetVisualization from '../3D/PlanetVisualization'
 import MealComposition from '../UI/MealComposition'
 import { getSDGMessage } from '../../utils/dataProcessing'
+import styles from './ResultScreen.module.css'
+
+const StatCard = ({ label, value }) => (
+  <div className={styles.statCard}>
+    <div className={styles.statValue}>{value}</div>
+    <div className={styles.statLabel}>{label}</div>
+  </div>
+)
 
 const ResultScreen = ({
-  selectedFoods,
   environmentalImpact,
   planetStatus,
   foundRecipes,
   unmatchedFoods,
-  planetHistory,
   tips,
   onRestart,
   onNewGame
 }) => {
-  const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null;
+  const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null
 
   const getScoreMessage = (score) => {
     if (score >= 80) return '优秀'
@@ -27,145 +33,86 @@ const ResultScreen = ({
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
   }
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }
+  }
+
+  if (!environmentalImpact || !planetStatus) {
+    return <div>加载结果中...</div>
   }
 
   return (
     <motion.div
-      className="result-screen"
+      className={styles.screen}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      exit={{ opacity: 0 }}
     >
-      <div className="screen-header">
-        <motion.h1 variants={itemVariants}>实验结果分析</motion.h1>
-        <motion.p className="screen-subtitle" variants={itemVariants}>
-          你的选择如何塑造了饮食星球？
-        </motion.p>
-      </div>
+      <motion.h1 variants={itemVariants} className={styles.title}>
+        实验结果分析
+      </motion.h1>
+      <motion.p variants={itemVariants} className={styles.subtitle}>
+        你的选择如何塑造了饮食星球？
+      </motion.p>
 
-      <div className="result-screen__grid">
-        {/* Left Column */}
-        <motion.div className="result-screen__column" variants={itemVariants}>
-          <div className="content-block">
-            <h2 className="content-block__title">🌍 饮食星球状态</h2>
-            <div className="result-screen__planet-container">
-              <PlanetVisualization planetStatus={planetStatus} />
-            </div>
-            <div className="planet-status-info">
-              <span className="planet-status-info__indicator" style={{backgroundColor: planetStatus.color}} />
-              <span className="planet-status-info__text">{planetStatus.description}</span>
-            </div>
+      <motion.div variants={itemVariants} className={styles.mainContent}>
+        <div className={styles.planetContainer}>
+          <PlanetVisualization planetStatus={planetStatus} />
+        </div>
+
+        <div className={styles.resultsContainer}>
+          <div className={styles.statsGrid}>
+            <StatCard label="综合评分" value={environmentalImpact.totalScore} />
+            <StatCard label="碳排放" value={Math.round(100 - environmentalImpact.carbonFootprint * 100)} />
+            <StatCard label="水资源" value={Math.round(100 - environmentalImpact.waterUsage * 100)} />
+            <StatCard label="健康度" value={Math.round(environmentalImpact.healthScore * 100)} />
           </div>
-          
-          {planetHistory && planetHistory.length > 1 && (
-            <div className="content-block">
-              <h2 className="content-block__title">📈 星球进化史</h2>
-              <ul className="timeline">
-                {planetHistory.map((entry, index) => (
-                  <li key={entry.timestamp} className="timeline__item">
-                    第{index + 1}次实验: <strong>{entry.score}分</strong> - {entry.status.description}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          
-          {tips && tips.length > 0 && (
-            <div className="content-block">
-              <h2 className="content-block__title">💡 环保建议</h2>
-              <ul className="tips-list">
-                {tips.map((tip, index) => (
-                  <li key={index} className="tips-list__item">{tip}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+
+          <div className={styles.feedback}>
+            <h3 className={styles.feedbackTitle}>星球状态: {planetStatus.description}</h3>
+            <p className={styles.feedbackText}>
+              你的饮食选择的综合评分为 <strong>{environmentalImpact.totalScore}分</strong>，
+              表现 <strong>{getScoreMessage(environmentalImpact.totalScore)}</strong>。
+              {tips && tips.length > 0 && ` ${tips[0]}`}
+            </p>
+          </div>
           
           {sdgMessage && (
-           <div className="content-block sdg-info-block">
-             <h2 className="content-block__title">{sdgMessage.icon} {sdgMessage.title}</h2>
-             <p>{sdgMessage.message}</p>
+           <div className={styles.feedback}>
+             <h3 className={styles.feedbackTitle}>{sdgMessage.icon} {sdgMessage.title}</h3>
+             <p className={styles.feedbackText}>{sdgMessage.message}</p>
            </div>
           )}
-        </motion.div>
 
-        {/* Right Column */}
-        <motion.div className="result-screen__column" variants={itemVariants}>
-          <div className="content-block">
-            <h2 className="content-block__title">📊 环境影响总览</h2>
-            <div className="overall-score">
-              <div className="overall-score__value">{environmentalImpact.totalScore}</div>
-              <div className="overall-score__label">综合环保评分</div>
-              <div className="overall-score__tag">{getScoreMessage(environmentalImpact.totalScore)}</div>
-            </div>
-            <div className="impact-bars">
-              {/* Impact Bars Here */}
-              <div className="impact-bar-item">
-                <span className="impact-bar-item__label">碳排放</span>
-                <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${100 - environmentalImpact.carbonFootprint * 100}%` }} />
-                </div>
-                <span className="impact-bar-item__value">{Math.round(100 - environmentalImpact.carbonFootprint * 100)}</span>
-              </div>
-              <div className="impact-bar-item">
-                <span className="impact-bar-item__label">水资源</span>
-                <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${100 - environmentalImpact.waterUsage * 100}%` }} />
-                </div>
-                <span className="impact-bar-item__value">{Math.round(100 - environmentalImpact.waterUsage * 100)}</span>
-              </div>
-              <div className="impact-bar-item">
-                <span className="impact-bar-item__label">土地占用</span>
-                <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${100 - environmentalImpact.landUsage * 100}%` }} />
-                </div>
-                <span className="impact-bar-item__value">{Math.round(100 - environmentalImpact.landUsage * 100)}</span>
-              </div>
-              <div className="impact-bar-item">
-                <span className="impact-bar-item__label">健康度</span>
-                <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${environmentalImpact.healthScore * 100}%` }} />
-                </div>
-                <span className="impact-bar-item__value">{Math.round(environmentalImpact.healthScore * 100)}</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="content-block">
-            <h2 className="content-block__title">🍽️ 本次实验成果</h2>
+          <div className={styles.feedback}>
+            <h3 className={styles.feedbackTitle}>🍽️ 本次实验成果</h3>
             <MealComposition
               foundRecipes={foundRecipes}
               unmatchedFoods={unmatchedFoods}
             />
           </div>
-        </motion.div>
-      </div>
-
-      <motion.div className="result-screen__actions" variants={itemVariants}>
-        <motion.button
-          className="button button--primary button--large"
-          onClick={onNewGame}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          🚀 开始新实验
-        </motion.button>
-        <motion.button
-          className="button button--secondary button--large"
-          onClick={onRestart}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          🔄 重新制作
-        </motion.button>
+        </div>
       </motion.div>
 
+      <motion.div variants={itemVariants} className={styles.actions}>
+        <button
+          className={`${styles.button} ${styles.buttonPrimary}`}
+          onClick={onNewGame}
+        >
+          🚀 开始新实验
+        </button>
+        <button
+          className={`${styles.button} ${styles.buttonSecondary}`}
+          onClick={onRestart}
+        >
+          🔄 重新制作
+        </button>
+      </motion.div>
     </motion.div>
   )
 }

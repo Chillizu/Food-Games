@@ -1,54 +1,53 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { IconLeaf, IconDroplet, IconWorld, IconHeart } from '@tabler/icons-react'
+import styles from './FoodCard.module.css'
 
 const FoodCard = ({ food, isSelected, onSelect }) => {
   const cardVariants = {
     initial: { opacity: 0, y: 20, scale: 0.95 },
     animate: { opacity: 1, y: 0, scale: 1 },
-    hover: { y: -5, scale: 1.03, boxShadow: "var(--shadow-large)" },
+    hover: { y: -6, scale: 1.03 },
     tap: { scale: 0.97 }
   }
 
+  const cardClasses = `${styles.card} ${isSelected ? styles.selected : ''}`
+
   return (
     <motion.div
-      className={`food-card ${isSelected ? 'selected' : ''}`}
+      className={cardClasses}
       onClick={onSelect}
       variants={cardVariants}
       initial="initial"
       animate="animate"
-      whileHover={!isSelected ? "hover" : ""}
-      whileTap={!isSelected ? "tap" : ""}
+      whileHover="hover"
+      whileTap="tap"
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       layout
     >
-      <div className="food-card__emoji-background">{food.emoji}</div>
-      <div className="food-card__content">
-        <div className="food-card__header">
-          <span className="food-card__emoji">{food.emoji}</span>
-          <h3 className="food-card__name">{food.name}</h3>
+      <div className={styles.emojiBackground}>{food.emoji}</div>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <div className={styles.emoji}>{food.emoji}</div>
+          <h3 className={styles.name}>{food.name}</h3>
         </div>
-        <p className="food-card__description">{food.description}</p>
-        <div className="food-card__footer">
-          <div className="food-card__stats">
-            <div className="stat-item" title={`碳排放: ${food.carbonFootprint}`}>
-              <IconLeaf size={18} />
+        <p className={styles.description}>{food.description}</p>
+        <div className={styles.footer}>
+          <div className={styles.stats}>
+            <div className={styles.statItem} title={`碳排放 (越低越好): ${food.carbonFootprint}`}>
+              <IconLeaf size={16} />
               <span>{Math.round(food.carbonFootprint * 100)}</span>
             </div>
-            <div className="stat-item" title={`水消耗: ${food.waterUsage}`}>
-              <IconDroplet size={18} />
+            <div className={styles.statItem} title={`水消耗 (越低越好): ${food.waterUsage}`}>
+              <IconDroplet size={16} />
               <span>{Math.round(food.waterUsage * 100)}</span>
             </div>
-            <div className="stat-item" title={`土地占用: ${food.landUsage}`}>
-              <IconWorld size={18} />
-              <span>{Math.round(food.landUsage * 100)}</span>
-            </div>
-            <div className="stat-item" title={`健康指数: ${food.healthScore}`}>
-              <IconHeart size={18} />
+            <div className={styles.statItem} title={`健康指数 (越高越好): ${food.healthScore}`}>
+              <IconHeart size={16} />
               <span>{Math.round(food.healthScore * 100)}</span>
             </div>
           </div>
-          <div className={`food-card__select-indicator ${isSelected ? 'visible' : ''}`}>
+          <div className={`${styles.selectIndicator} ${isSelected ? styles.visible : ''}`}>
             ✓
           </div>
         </div>

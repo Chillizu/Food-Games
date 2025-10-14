@@ -1,0 +1,129 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-lg);
+  box-sizing: border-box;
+  text-align: center;
+  gap: var(--spacing-lg);
+}
+
+.title {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin-top: calc(-1 * var(--spacing-md)); /* Pulls subtitle closer to title */
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 1200px;
+  align-items: flex-start;
+}
+
+.planetContainer {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md-inset);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.resultsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  min-width: 300px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--spacing-lg);
+  background-color: var(--color-surface);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+
+.statCard {
+  text-align: center;
+}
+
+.statValue {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.statLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.feedback {
+  background-color: var(--color-surface);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.feedbackTitle {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.feedbackText {
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.button {
+  composes: button from global;
+}
+
+.buttonPrimary {
+  composes: buttonPrimary from global;
+}
+
+.buttonSecondary {
+  composes: buttonSecondary from global;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+    align-items: center;
+  }
+  .planetContainer {
+    width: 100%;
+    max-width: 400px;
+  }
+  .resultsContainer {
+    width: 100%;
+  }
+}

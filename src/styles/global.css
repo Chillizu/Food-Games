@@ -1,52 +1,77 @@
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
+  /* 基础调色板 (Palette) */
+  --palette-blue-500: #0a84ff;   /* 主色调 - 更鲜艳的蓝色 */
+  --palette-blue-400: #389dff;   /* 主色调悬浮 */
+  --palette-green-500: #30d158;  /* 成功/积极 */
+  --palette-yellow-500: #ffd60a; /* 警告/中性 */
+  --palette-red-500: #ff453a;    /* 错误/消极 */
+  --palette-gray-900: #1c1c1e;   /* 最深色 - 用于正文 */
+  --palette-gray-700: #3a3a3c;   /* 次深色 */
+  --palette-gray-500: #8e8e93;   /* 中性灰色 - 用于副标题 */
+  --palette-gray-300: #d1d1d6;   /* 边框/分割线 */
+  --palette-gray-200: #e5e5ea;   /* 悬浮背景 */
+  --palette-gray-100: #f2f2f7;   /* 表面/卡片背景 */
+  --palette-white: #ffffff;     /* 白色背景 */
+
+  /* 设计令牌 (Design Tokens) */
   /* 颜色 */
-  --color-primary: #007aff; /* 鲜艳的蓝色，用于主要操作 */
-  --color-secondary: #6c757d; /* 柔和的灰色，用于次要元素 */
-  --color-accent: #ff9500; /* 充满活力的橙色，用于强调 */
-  --color-success: #34c759; /* 清晰的绿色，用于成功状态 */
-  --color-danger: #ff3b30; /* 醒目的红色，用于危险或删除操作 */
-  --color-background: #ffffff; /* 纯白背景 */
-  --color-surface: #f2f2f7; /* 非常浅的灰色，用于卡片等表面 */
-  --color-text-primary: #1c1c1e; /* 近黑色，用于主要文本 */
-  --color-text-secondary: #8a8a8e; /* 中灰色，用于次要文本 */
-  --color-border: #d1d1d6; /* 浅灰色，用于边框 */
+  --color-primary: var(--palette-blue-500);
+  --color-primary-hover: var(--palette-blue-400);
+  --color-success: var(--palette-green-500);
+  --color-warning: var(--palette-yellow-500);
+  --color-error: var(--palette-red-500);
+
+  --color-text-primary: var(--palette-gray-900);
+  --color-text-secondary: var(--palette-gray-500);
+  --color-text-on-primary: var(--palette-white);
+
+  --color-background: var(--palette-white);
+  --color-surface: var(--palette-gray-100);
+  --color-surface-hover: var(--palette-gray-200);
+  --color-border: var(--palette-gray-300);
 
   /* 字体 */
-  --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-family-serif: 'Georgia', serif;
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-md: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 2rem;      /* 32px */
+  --font-size-4xl: 2.5rem;    /* 40px */
 
-  /* 字号 */
-  --font-size-xs: 0.75rem;  /* 12px */
-  --font-size-sm: 0.875rem; /* 14px */
-  --font-size-md: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem; /* 18px */
-  --font-size-xl: 1.5rem;   /* 24px */
-  --font-size-xxl: 2rem;    /* 32px */
+  /* 间距 (Spacing) - 遵循 4px 基线网格 */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
 
-  /* 间距 */
-  --spacing-xs: 0.25rem; /* 4px */
-  --spacing-sm: 0.5rem;  /* 8px */
-  --spacing-md: 1rem;    /* 16px */
-  --spacing-lg: 1.5rem;  /* 24px */
-  --spacing-xl: 2rem;    /* 32px */
-  --spacing-xxl: 3rem;   /* 48px */
-
-  /* 圆角 */
+  /* 圆角 (Border Radius) */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
   --radius-full: 9999px;
 
-  /* 阴影 */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  /* 阴影 (Shadows) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
 
-  /* 过渡 */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-medium: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* 过渡 (Transitions) */
+  --transition-fast: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 
 *,
 *::before,
@@ -69,4 +94,55 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Global Button Styles using composes */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-md);
+  font-weight: 600; /* Bolder buttons */
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.buttonPrimary {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  border-color: var(--color-primary);
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.buttonSecondary {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.buttonSecondary:hover:not(:disabled) {
+  background-color: var(--color-surface-hover);
+}
+
+.buttonLarge {
+  padding: var(--spacing-4) var(--spacing-6);
+  font-size: var(--font-size-lg);
 }
