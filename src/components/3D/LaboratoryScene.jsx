@@ -186,8 +186,10 @@ const LaboratoryScene = ({ children }) => {
     <div className="laboratory-scene">
       <Canvas
         camera={{ position: [0, 1, 4], fov: 50 }}
-        style={{ 
-          background: 'linear-gradient(to bottom, #1a1a2e, #16213e, #0f3460)' 
+        style={{
+          background: 'linear-gradient(to bottom, #1a1a2e, #16213e, #0f3460)',
+          width: '100%',
+          height: '100%'
         }}
       >
         <ambientLight intensity={0.4} />

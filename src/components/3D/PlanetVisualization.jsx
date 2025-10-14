@@ -328,7 +328,9 @@ const PlanetVisualization = ({ planetStatus }) => {
             'linear-gradient(to bottom, #334155, #475569)' :
             planetStatus.health === 'poor' ?
             'linear-gradient(to bottom, #475569, #64748b)' :
-            'linear-gradient(to bottom, #64748b, #94a3b8)'
+            'linear-gradient(to bottom, #64748b, #94a3b8)',
+          width: '100%',
+          height: '100%'
         }}
       >
         <ambientLight intensity={0.3} />

@@ -184,7 +184,11 @@ const CookingAnimation = ({ selectedFoods }) => {
       <div className="animation-container">
         <Canvas
           camera={{ position: [0, 0, 5], fov: 60 }}
-          style={{ background: 'linear-gradient(to bottom, #2c1810, #8b4513)' }}
+          style={{
+            background: 'linear-gradient(to bottom, #2c1810, #8b4513)',
+            width: '100%',
+            height: '100%'
+          }}
         >
         <ambientLight intensity={0.3} />
         <pointLight position={[0, 5, 0]} intensity={1} color="#ff6b35" />

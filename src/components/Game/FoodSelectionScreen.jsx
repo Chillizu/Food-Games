@@ -90,20 +90,20 @@ const FoodSelectionScreen = ({
           </div>
         </motion.div>
 
-        {/* 食材卡牌横向滚动区域 */}
+        {/* 食材卡牌网格平铺区域 */}
         <motion.div
-          className="food-scroll-container"
+          className="food-grid-container"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <div className="food-scroll-track">
+          <div className="food-grid-track">
             {foods.map((food, index) => (
               <motion.div
                 key={food.id}
-                className="food-card-horizontal"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
+                className="food-card-grid"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.1 * index }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
