@@ -1,79 +1,138 @@
 [
   {
-    "id": "recipe_1",
+    "id": "classic-salad",
     "name": "经典沙拉",
-    "icon": "🥗",
-    "ingredients": ["lettuce", "apple", "nuts"],
-    "bonusScore": 10
+    "ingredients": ["tomato", "lettuce", "cucumber"],
+    "bonusScore": 15,
+    "description": "一道清爽、健康的基础沙拉，富含维生素。",
+    "emoji": "🥗"
   },
   {
-    "id": "recipe_2",
-    "name": "蘑菇炒蛋",
-    "icon": "🍳",
-    "ingredients": ["mushroom", "egg"],
-    "bonusScore": 8
+    "id": "chicken-salad",
+    "name": "鸡肉沙拉",
+    "ingredients": ["chicken", "lettuce", "tomato", "corn"],
+    "bonusScore": 20,
+    "description": "在经典沙拉的基础上增加了优质蛋白质。",
+    "emoji": "🥗"
   },
   {
-    "id": "recipe_3",
-    "name": "鸡肉炒玉米",
-    "icon": "🍗",
-    "ingredients": ["chicken", "corn"],
-    "bonusScore": 12
+    "id": "beef-stew",
+    "name": "红烧牛肉",
+    "ingredients": ["beef", "potato", "carrot"],
+    "bonusScore": 10,
+    "description": "一道经典的炖菜，营养丰富但碳足迹较高。",
+    "emoji": "🍲"
   },
   {
-    "id": "recipe_4",
-    "name": "牛肉汉堡",
-    "icon": "🍔",
-    "ingredients": ["beef", "lettuce", "fast_food"],
-    "bonusScore": -5
+    "id": "fish-and-chips",
+    "name": "炸鱼薯条",
+    "ingredients": ["fish", "potato"],
+    "bonusScore": 5,
+    "description": "美味的快餐组合，但要注意油炸方式。",
+    "emoji": "🍟"
   },
   {
-    "id": "recipe_5",
-    "name": "未来蛋白棒",
-    "icon": " फ्यूचर",
-    "ingredients": ["insect", "nuts", "berries"],
-    "bonusScore": 20
+    "id": "insect-protein-bar",
+    "name": "昆虫蛋白棒",
+    "ingredients": ["insect-protein", "nuts"],
+    "bonusScore": 25,
+    "description": "面向未来的高效蛋白质来源，非常环保。",
+    "emoji": "🦗"
   },
   {
-    "id": "recipe_6",
-    "name": "人造肉三明治",
-    "icon": "🥪",
-    "ingredients": ["lab_meat", "lettuce", "avocado"],
-    "bonusScore": 18
+    "id": "lab-burger",
+    "name": "未来汉堡",
+    "ingredients": ["lab-meat", "lettuce", "tomato"],
+    "bonusScore": 30,
+    "description": "利用尖端科技制作的汉堡，兼顾美味与可持续性。",
+    "emoji": "🍔"
   },
   {
-    "id": "recipe_7",
-    "name": "海鲜炒饭",
-    "icon": "🍤",
-    "ingredients": ["rice", "shrimp", "egg"],
-    "bonusScore": 14
+    "id": "fruit-platter",
+    "name": "水果拼盘",
+    "ingredients": ["apple", "banana", "strawberry"],
+    "bonusScore": 18,
+    "description": "富含天然糖分和维生素的健康选择。",
+    "emoji": "🍓"
   },
   {
-    "id": "recipe_8",
-    "name": "土豆蘑菇汤",
-    "icon": "🥣",
-    "ingredients": ["potato", "mushroom"],
-    "bonusScore": 11
+    "id": "vegetarian-curry",
+    "name": "素食咖喱",
+    "ingredients": ["tofu", "potato", "carrot", "rice"],
+    "bonusScore": 22,
+    "description": "一道充满亚洲风味的美味素食主餐。",
+    "emoji": "🍛"
   },
   {
-    "id": "recipe_9",
-    "name": "鳄梨吐司",
-    "icon": "🥑",
-    "ingredients": ["avocado", "rice"],
-    "bonusScore": 15
+    "id": "farm-fresh-scramble",
+    "name": "农家炒蛋",
+    "ingredients": ["tomato", "egg"],
+    "bonusScore": 17,
+    "description": "简单、美味、家常，快速补充蛋白质。",
+    "emoji": "🍳"
   },
   {
-    "id": "recipe_10",
-    "name": "浆果麦片粥",
-    "icon": "🥣",
-    "ingredients": ["berries", "quinoa", "dairy"],
-    "bonusScore": 16
+    "id": "futuristic-salad",
+    "name": "未来主义沙拉",
+    "ingredients": ["lab-meat", "seaweed", "quinoa"],
+    "bonusScore": 35,
+    "description": "来自实验室和海洋的超级组合，极致环保。",
+    "emoji": "🥗"
   },
   {
-    "id": "recipe_11",
-    "name": "海藻豆腐汤",
-    "icon": "🍲",
-    "ingredients": ["seaweed", "tofu"],
-    "bonusScore": 13
+    "id": "superfood-bowl",
+    "name": "超级食品碗",
+    "ingredients": ["quinoa", "avocado", "beans", "nuts"],
+    "bonusScore": 28,
+    "description": "集所有超级食物于一碗，营养的终极形态。",
+    "emoji": "🥣"
+  },
+  {
+    "id": "surf-and-turf",
+    "name": "海陆双拼",
+    "ingredients": ["beef", "shrimp"],
+    "bonusScore": 8,
+    "description": "经典的奢华组合，但环境成本不菲。",
+    "emoji": "🥩"
+  },
+  {
+    "id": "mushroom-soup",
+    "name": "蘑菇浓汤",
+    "ingredients": ["mushroom", "potato", "dairy"],
+    "bonusScore": 16,
+    "description": "温暖香浓的菌菇汤，带来大地的慰藉。",
+    "emoji": "🥣"
+  },
+  {
+    "id": "nachos-supreme",
+    "name": "墨西哥玉米片",
+    "ingredients": ["corn", "beans", "avocado"],
+    "bonusScore": 20,
+    "description": "适合分享的派对小食，充满活力的拉丁风味。",
+    "emoji": "🧀"
+  },
+  {
+    "id": "grilled-cheese",
+    "name": "奶酪三明治",
+    "ingredients": ["bread", "cheese"],
+    "bonusScore": 12,
+    "description": "简单而满足的经典美味，碳水与脂肪的拥抱。",
+    "emoji": "🥪"
+  },
+  {
+    "id": "garlic-bread",
+    "name": "蒜香面包",
+    "ingredients": ["bread", "garlic", "olive-oil"],
+    "bonusScore": 14,
+    "description": "香气扑鼻的开胃小食，任何主餐的完美搭档。",
+    "emoji": "🥖"
+  },
+  {
+    "id": "basic-seasoning",
+    "name": "基础调味",
+    "ingredients": ["onion", "garlic"],
+    "bonusScore": 5,
+    "description": "大多数美味菜肴的起点。",
+    "emoji": "🧅"
   }
 ]

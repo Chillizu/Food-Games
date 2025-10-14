@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PlanetVisualization from '../3D/PlanetVisualization'
-import AchievementPopup from '../UI/AchievementPopup'
-import { getAchievements, getSDGMessage } from '../../utils/dataProcessing'
+import MealComposition from '../UI/MealComposition'
+import { getSDGMessage } from '../../utils/dataProcessing'
 
 const ResultScreen = ({
   selectedFoods,
@@ -12,37 +12,10 @@ const ResultScreen = ({
   unmatchedFoods,
   planetHistory,
   tips,
-  unlockedAchievements,
   onRestart,
   onNewGame
 }) => {
-  const [showAchievements, setShowAchievements] = useState(false)
-  const [displayedAchievements, setDisplayedAchievements] = useState([])
-  const [currentAchievementIndex, setCurrentAchievementIndex] = useState(0)
-
-  const achievements = getAchievements()
-
-  useEffect(() => {
-    if (unlockedAchievements && unlockedAchievements.length > 0) {
-      const newAchievements = unlockedAchievements.map(id =>
-        achievements.find(a => a.id === id)
-      ).filter(Boolean)
-      
-      setDisplayedAchievements(newAchievements)
-      setShowAchievements(true)
-    }
-  }, [unlockedAchievements, achievements])
-
   const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null;
-
-  const handleNextAchievement = () => {
-    if (currentAchievementIndex < displayedAchievements.length - 1) {
-      setCurrentAchievementIndex(currentAchievementIndex + 1)
-    } else {
-      setShowAchievements(false)
-      setCurrentAchievementIndex(0)
-    }
-  }
 
   const getScoreMessage = (score) => {
     if (score >= 80) return '优秀'
@@ -102,6 +75,24 @@ const ResultScreen = ({
               </ul>
             </div>
           )}
+          
+          {tips && tips.length > 0 && (
+            <div className="content-block">
+              <h2 className="content-block__title">💡 环保建议</h2>
+              <ul className="tips-list">
+                {tips.map((tip, index) => (
+                  <li key={index} className="tips-list__item">{tip}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          
+          {sdgMessage && (
+           <div className="content-block sdg-info-block">
+             <h2 className="content-block__title">{sdgMessage.icon} {sdgMessage.title}</h2>
+             <p>{sdgMessage.message}</p>
+           </div>
+          )}
         </motion.div>
 
         {/* Right Column */}
@@ -146,44 +137,13 @@ const ResultScreen = ({
             </div>
           </div>
 
-          {(foundRecipes.length > 0 || unmatchedFoods.length > 0) && (
-            <div className="content-block">
-              <h2 className="content-block__title">🍽️ 本次实验成果</h2>
-              <div className="meal-composition">
-                {foundRecipes.map(recipe => (
-                  <div key={recipe.id} className="composition-item recipe-item">
-                    <span className="composition-icon">{recipe.icon}</span>
-                    <span className="composition-name">{recipe.name}</span>
-                    <span className="composition-bonus">+{recipe.bonusScore}分</span>
-                  </div>
-                ))}
-                {unmatchedFoods.map(food => (
-                  <div key={food.id} className="composition-item food-item">
-                    <span className="composition-icon">{food.emoji}</span>
-                    <span className="composition-name">{food.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {tips && tips.length > 0 && (
-            <div className="content-block">
-              <h2 className="content-block__title">💡 环保建议</h2>
-              <ul className="tips-list">
-                {tips.map((tip, index) => (
-                  <li key={index} className="tips-list__item">{tip}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          
-          {sdgMessage && (
-           <div className="content-block sdg-info-block">
-             <h2 className="content-block__title">{sdgMessage.icon} {sdgMessage.title}</h2>
-             <p>{sdgMessage.message}</p>
-           </div>
-          )}
+          <div className="content-block">
+            <h2 className="content-block__title">🍽️ 本次实验成果</h2>
+            <MealComposition
+              foundRecipes={foundRecipes}
+              unmatchedFoods={unmatchedFoods}
+            />
+          </div>
         </motion.div>
       </div>
 
@@ -206,15 +166,6 @@ const ResultScreen = ({
         </motion.button>
       </motion.div>
 
-      <AnimatePresence>
-        {showAchievements && displayedAchievements.length > 0 && (
-          <AchievementPopup
-            achievement={displayedAchievements[currentAchievementIndex]}
-            onNext={handleNextAchievement}
-            isLast={currentAchievementIndex === displayedAchievements.length - 1}
-          />
-        )}
-      </AnimatePresence>
     </motion.div>
   )
 }

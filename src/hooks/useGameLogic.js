@@ -20,8 +20,9 @@ export const useGameLogic = () => {
   const [foundRecipes, setFoundRecipes] = useState([])
   const [unmatchedFoods, setUnmatchedFoods] = useState([])
   const [unlockedAchievements, setUnlockedAchievements] = useState([])
-  const [isCookbookOpen, setIsCookbookOpen] = useState(false)
-  const [unlockedRecipeIds, setUnlockedRecipeIds] = useState([])
+  const [isCookbookOpen, setIsCookbookOpen] = useState(false);
+  const [isAchievementGalleryOpen, setIsAchievementGalleryOpen] = useState(false);
+  const [unlockedRecipeIds, setUnlockedRecipeIds] = useState([]);
 
   // 从 localStorage 加载已解锁的图鉴
   useEffect(() => {
@@ -198,6 +199,9 @@ export const useGameLogic = () => {
   const openCookbook = useCallback(() => setIsCookbookOpen(true), []);
   const closeCookbook = useCallback(() => setIsCookbookOpen(false), []);
 
+  const openAchievementGallery = useCallback(() => setIsAchievementGalleryOpen(true), []);
+  const closeAchievementGallery = useCallback(() => setIsAchievementGalleryOpen(false), []);
+
   return {
     // 状态
     gameStage,
@@ -212,6 +216,7 @@ export const useGameLogic = () => {
     unlockedAchievements,
     isCookbookOpen,
     unlockedRecipeIds,
+    isAchievementGalleryOpen,
     
     // 操作
     toggleFoodSelection,
@@ -224,6 +229,8 @@ export const useGameLogic = () => {
     startNewGame,
     openCookbook,
     closeCookbook,
+    openAchievementGallery,
+    closeAchievementGallery,
     
     // 计算属性
     canStartCooking

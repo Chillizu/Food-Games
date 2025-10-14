@@ -174,6 +174,41 @@
       "emoji": "🦐",
       "carbonFootprint": 0.6, "waterUsage": 0.5, "landUsage": 0.3, "healthScore": 0.8,
       "category": "animal", "color": "#fb7185", "description": "常见的海鲜，蛋白质丰富"
+    },
+    {
+      "id": "bread",
+      "name": "面包",
+      "emoji": "🍞",
+      "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.3, "healthScore": 0.5,
+      "category": "grain_legume", "color": "#f59e0b", "description": "基础主食，由谷物制成"
+    },
+    {
+      "id": "cheese",
+      "name": "奶酪",
+      "emoji": "🧀",
+      "carbonFootprint": 0.6, "waterUsage": 0.7, "landUsage": 0.4, "healthScore": 0.5,
+      "category": "animal", "color": "#fde047", "description": "奶制品，风味浓郁"
+    },
+    {
+      "id": "onion",
+      "name": "洋葱",
+      "emoji": "🧅",
+      "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.1, "healthScore": 0.8,
+      "category": "vegetable", "color": "#a78bfa", "description": "基础调味蔬菜，用途广泛"
+    },
+    {
+      "id": "garlic",
+      "name": "大蒜",
+      "emoji": "🧄",
+      "carbonFootprint": 0.1, "waterUsage": 0.2, "landUsage": 0.1, "healthScore": 0.9,
+      "category": "vegetable", "color": "#a78bfa", "description": "强大的调味品，有益健康"
+    },
+    {
+      "id": "olive-oil",
+      "name": "橄榄油",
+      "emoji": "🫒",
+      "carbonFootprint": 0.3, "waterUsage": 0.5, "landUsage": 0.3, "healthScore": 0.9,
+      "category": "processed", "color": "#84cc16", "description": "健康的植物油，地中海饮食核心"
     }
   ],
   "categories": {

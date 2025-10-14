@@ -1,7 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import HeaderActions from '../UI/HeaderActions'
 
-const IntroScreen = ({ onStartGame, gameStats }) => {
+const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,6 +25,7 @@ const IntroScreen = ({ onStartGame, gameStats }) => {
       initial="hidden"
       animate="visible"
     >
+      <HeaderActions onCookbookClick={onOpenCookbook} onAchievementsClick={onOpenAchievements} />
       <div className="intro-screen__content">
         <motion.div className="content-block" variants={itemVariants}>
           <h1 className="intro-screen__title">未来食物实验室</h1>
