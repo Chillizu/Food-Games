@@ -5,6 +5,7 @@ import FoodSelectionScreen from './FoodSelectionScreen'
 import CookingScreen from './CookingScreen'
 import ResultScreen from './ResultScreen'
 import LoadingSpinner from '../UI/LoadingSpinner'
+import SelectedCards from '../Cards/SelectedCards'
 
 const GameContainer = () => {
   const {
@@ -32,7 +33,7 @@ const GameContainer = () => {
     switch (gameStage) {
       case 'intro':
         return (
-          <IntroScreen 
+          <IntroScreen
             onStartGame={startNewGame}
             gameStats={gameStats}
           />
@@ -79,10 +80,21 @@ const GameContainer = () => {
   }
 
   return (
-    <div className="game-container">
-      <Suspense fallback={<LoadingSpinner />}>
-        {renderCurrentScreen()}
-      </Suspense>
+    <div className="game-layout">
+      <main className="main-area">
+        <Suspense fallback={<LoadingSpinner />}>
+          {renderCurrentScreen()}
+        </Suspense>
+      </main>
+      
+      {(gameStage === 'selecting' || gameStage === 'cooking') && (
+        <aside className="hand-area">
+          <SelectedCards
+            selectedFoods={selectedFoods}
+            onDeselectFood={deselectFood}
+          />
+        </aside>
+      )}
     </div>
   )
 }
