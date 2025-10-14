@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import dailyChallengesData from '../data/dailyChallenges.json'
 import { calculateEnvironmentalImpact, calculatePlanetStatus, checkAchievements, identifyRecipes, generateTips } from '../utils/dataProcessing'
 
 export const useGameLogic = () => {
@@ -14,6 +15,9 @@ export const useGameLogic = () => {
     uniqueRecipes: 0,
     unlockedAchievements: []
   })
+  // 每日挑战状态
+  const [dailyChallenge, setDailyChallenge] = useState(null)
+  const [completedChallenges, setCompletedChallenges] = useState([])
   const [environmentalImpact, setEnvironmentalImpact] = useState(null)
   const [planetStatus, setPlanetStatus] = useState(null)
   const [tips, setTips] = useState([])
@@ -35,6 +39,70 @@ export const useGameLogic = () => {
       console.error("Failed to load recipes from localStorage", error);
     }
   }, []);
+
+  // 获取每日挑战
+  useEffect(() => {
+    // 简单实现：每天取第一个激活的挑战
+    // 实际应用中应该根据日期和用户ID来获取
+    const today = new Date().toDateString();
+    const savedChallenge = localStorage.getItem('dailyChallenge');
+    const savedDate = localStorage.getItem('dailyChallengeDate');
+
+    if (savedDate === today && savedChallenge) {
+      setDailyChallenge(JSON.parse(savedChallenge));
+    } else {
+      // 获取第一个激活的挑战
+      const activeChallenge = dailyChallengesData.challenges.find(challenge => challenge.isActive);
+      if (activeChallenge) {
+        setDailyChallenge(activeChallenge);
+        localStorage.setItem('dailyChallenge', JSON.stringify(activeChallenge));
+        localStorage.setItem('dailyChallengeDate', today);
+      }
+    }
+
+    // 加载已完成的挑战
+    try {
+      const savedCompleted = localStorage.getItem('completedChallenges');
+      if (savedCompleted) {
+        setCompletedChallenges(JSON.parse(savedCompleted));
+      }
+    } catch (error) {
+      console.error("Failed to load completed challenges", error);
+    }
+  }, []);
+
+  // 检查是否完成每日挑战
+  const checkDailyChallengeCompletion = useCallback(() => {
+    if (!dailyChallenge) return null;
+
+    const requiredIngredients = dailyChallenge.requiredIngredients.map(ing => ing.id);
+    const selectedIngredientIds = selectedFoods.map(food => food.id);
+
+    // 检查是否包含了所有必需的食材
+    const isCompleted = requiredIngredients.every(id => selectedIngredientIds.includes(id));
+
+    if (isCompleted && !completedChallenges.includes(dailyChallenge.id)) {
+      // 标记挑战为已完成
+      const newCompletedChallenges = [...completedChallenges, dailyChallenge.id];
+      setCompletedChallenges(newCompletedChallenges);
+      try {
+        localStorage.setItem('completedChallenges', JSON.stringify(newCompletedChallenges));
+      } catch (error) {
+        console.error("Failed to save completed challenges", error);
+      }
+
+      return {
+        isCompleted: true,
+        challenge: dailyChallenge,
+        reward: dailyChallenge.reward
+      };
+    }
+
+    return {
+      isCompleted: false,
+      challenge: dailyChallenge
+    };
+  }, [dailyChallenge, selectedFoods, completedChallenges]);
 
   // 切换食材选择状态（选择/取消选择）
   const toggleFoodSelection = useCallback((food) => {
@@ -145,8 +213,11 @@ export const useGameLogic = () => {
       setUnlockedAchievements(newAchievements)
     }
     
+    // 检查每日挑战完成情况
+    const challengeResult = checkDailyChallengeCompletion();
+    
     setGameStats(newStats)
-  }, [environmentalImpact, selectedFoods, gameStats])
+  }, [environmentalImpact, selectedFoods, gameStats, checkDailyChallengeCompletion])
 
   // 重新开始游戏
   const restartGame = useCallback(() => {
@@ -217,6 +288,9 @@ export const useGameLogic = () => {
     isCookbookOpen,
     unlockedRecipeIds,
     isAchievementGalleryOpen,
+    // 每日挑战状态
+    dailyChallenge,
+    completedChallenges,
     
     // 操作
     toggleFoodSelection,
