@@ -1,0 +1,109 @@
+{
+  "challenges": [
+    {
+      "id": "sdg2_zero_hunger_1",
+      "title": "零饥饿：一碗能量满满的豆类汤",
+      "description": "今天，请用豆类制作一道汤品。豆类是优质蛋白质的重要来源，有助于消除饥饿和营养不良。",
+      "sdg": "SDG 2",
+      "sdgTitle": "零饥饿",
+      "sdgIcon": "🌾",
+      "requiredIngredients": [
+        { "id": "tofu", "name": "豆腐" },
+        { "id": "beans", "name": "黄豆" },
+        { "id": "mushroom", "name": "蘑菇" }
+      ],
+      "bonusScore": 150,
+      "reward": {
+        "type": "knowledge",
+        "title": "营养小知识",
+        "content": "大豆蛋白是少数几种含有全部必需氨基酸的植物蛋白之一，是素食者获取优质蛋白的绝佳选择。"
+      },
+      "difficulty": "easy",
+      "isActive": true
+    },
+    {
+      "id": "sdg12_responsible_consumption_1",
+      "title": "负责任消费：本地食材的胜利",
+      "description": "选择至少3种本地食材来制作你的料理。减少食物里程，降低碳足迹！",
+      "sdg": "SDG 12",
+      "sdgTitle": "负责任的消费与生产",
+      "sdgIcon": "♻️",
+      "requiredIngredients": [
+        { "id": "local_vegetable", "name": "本地蔬菜" },
+        { "id": "local_fruit", "name": "本地水果" },
+        { "id": "local_grain", "name": "本地谷物" }
+      ],
+      "bonusScore": 200,
+      "reward": {
+        "type": "achievement",
+        "title": "本地英雄",
+        "description": "你选择了本地食材，减少了运输过程中的碳排放！"
+      },
+      "difficulty": "medium",
+      "isActive": true
+    },
+    {
+      "id": "sdg13_climate_action_1",
+      "title": "气候行动：低碳蛋白质挑战",
+      "description": "今天，请选择一种低碳水足迹的蛋白质来源。你的选择将直接影响气候变化。",
+      "sdg": "SDG 13",
+      "sdgTitle": "气候行动",
+      "sdgIcon": "🌍",
+      "requiredIngredients": [
+        { "id": "insect_protein", "name": "昆虫蛋白" },
+        { "id": "plant_based_meat", "name": "植物肉" },
+        { "id": "beans", "name": "豆类" }
+      ],
+      "bonusScore": 250,
+      "reward": {
+        "type": "knowledge",
+        "title": "气候小知识",
+        "content": "生产1公斤牛肉的碳排放约为生产1公斤豆类的20倍。选择植物性蛋白是减少个人碳足迹的有效方式。"
+      },
+      "difficulty": "medium",
+      "isActive": true
+    },
+    {
+      "id": "sdg2_zero_hunger_2",
+      "title": "零饥饿：全谷物能量餐",
+      "description": "用全谷物（如糙米、燕麦）作为主食，为身体提供持久能量，支持可持续发展目标2。",
+      "sdg": "SDG 2",
+      "sdgTitle": "零饥饿",
+      "sdgIcon": "🌾",
+      "requiredIngredients": [
+        { "id": "brown_rice", "name": "糙米" },
+        { "id": "oats", "name": "燕麦" },
+        { "id": "quinoa", "name": "藜麦" }
+      ],
+      "bonusScore": 150,
+      "reward": {
+        "type": "knowledge",
+        "title": "全谷物小知识",
+        "content": "全谷物富含膳食纤维、维生素和矿物质，有助于预防心血管疾病和2型糖尿病。"
+      },
+      "difficulty": "easy",
+      "isActive": false
+    },
+    {
+      "id": "sdg12_responsible_consumption_2",
+      "title": "负责任消费：零浪费厨房",
+      "description": "利用根茎类蔬菜（如胡萝卜、土豆）制作料理，减少食物浪费，实现负责任消费。",
+      "sdg": "SDG 12",
+      "sdgTitle": "负责任的消费与生产",
+      "sdgIcon": "♻️",
+      "requiredIngredients": [
+        { "id": "carrot", "name": "胡萝卜" },
+        { "id": "potato", "name": "土豆" },
+        { "id": "sweet_potato", "name": "红薯" }
+      ],
+      "bonusScore": 180,
+      "reward": {
+        "type": "achievement",
+        "title": "零浪费大师",
+        "description": "你充分利用了食材，减少了食物浪费，为可持续发展做出了贡献！"
+      },
+      "difficulty": "easy",
+      "isActive": false
+    }
+  ]
+}
