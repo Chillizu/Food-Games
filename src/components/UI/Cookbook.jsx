@@ -1,53 +1,51 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import allRecipes from '../../data/recipes.json';
-import { IconX } from '@tabler/icons-react';
-
-const backdrop = {
-  visible: { opacity: 1 },
-  hidden: { opacity: 0 },
-};
-
-const modal = {
-  hidden: { y: "-100vh", opacity: 0 },
-  visible: {
-    y: "0",
-    opacity: 1,
-    transition: { delay: 0.2, type: "spring", stiffness: 120 }
-  },
-};
+import { getRecipes } from '../../utils/dataProcessing';
+import { IconX, IconLock } from '@tabler/icons-react';
 
 const Cookbook = ({ show, onClose, unlockedRecipeIds }) => {
+  const allRecipes = getRecipes();
+
   return (
     <AnimatePresence>
       {show && (
         <motion.div
           className="cookbook-overlay"
-          variants={backdrop}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
         >
-          <motion.div className="cookbook-modal" variants={modal}>
+          <motion.div
+            className="cookbook-modal"
+            initial={{ y: "-100vh", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "100vh", opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+          >
             <div className="modal-header">
-              <h2 className="modal-title">我的食谱图鉴</h2>
-              <button onClick={onClose} className="close-button">
-                <IconX size={24} />
-              </button>
+              <h2 className="modal-title">食谱图鉴</h2>
+              <button className="close-button" onClick={onClose}><IconX size={28} /></button>
             </div>
+            
             <div className="cookbook-grid">
               {allRecipes.map(recipe => {
                 const isUnlocked = unlockedRecipeIds.includes(recipe.id);
                 return (
                   <div key={recipe.id} className={`cookbook-item ${isUnlocked ? 'unlocked' : 'locked'}`}>
-                    <div className="cookbook-item-image">
-                      <span role="img" aria-label={recipe.name}>{isUnlocked ? recipe.icon || '🍲' : '❓'}</span>
-                    </div>
-                    <h3 className="cookbook-item-name">{isUnlocked ? recipe.name : '未解锁'}</h3>
-                    {isUnlocked && (
-                      <p className="cookbook-item-ingredients">
-                        +{recipe.bonusScore}分
-                      </p>
+                    {isUnlocked ? (
+                      <>
+                        <div className="cookbook-item-image">{recipe.emoji}</div>
+                        <h3 className="cookbook-item-name">{recipe.name}</h3>
+                        <p className="cookbook-item-ingredients">{recipe.ingredients.join(' + ')}</p>
+                      </>
+                    ) : (
+                      <>
+                        <div className="cookbook-item-image"><IconLock size={40} /></div>
+                        <h3 className="cookbook-item-name">？？？</h3>
+                        <p className="cookbook-item-ingredients">未解锁</p>
+                      </>
                     )}
                   </div>
                 );

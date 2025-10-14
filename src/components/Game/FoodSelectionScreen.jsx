@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import FoodCard from '../Cards/FoodCard'
 import { getFoods, getFoodCategories } from '../../utils/dataProcessing'
-import { IconBook } from '@tabler/icons-react'
+import HeaderActions from '../UI/HeaderActions'
 
 const FoodSelectionScreen = ({
   selectedFoods,
@@ -10,7 +10,8 @@ const FoodSelectionScreen = ({
   onDeselectFood,
   onStartCooking,
   canStartCooking,
-  openCookbook
+  onOpenCookbook,
+  onOpenAchievements
 }) => {
   const [activeCategory, setActiveCategory] = useState('all')
   const foods = getFoods()
@@ -25,32 +26,25 @@ const FoodSelectionScreen = ({
       {/* Header */}
       <div className="screen-header">
         <div className="title-with-button">
-          <motion.h1
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            选择你的实验食材
-          </motion.h1>
-          <motion.button
-            className="button-icon"
-            onClick={openCookbook}
-            title="打开食谱图鉴"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            <IconBook size={32} />
-          </motion.button>
+          <div>
+            <motion.h1
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              选择你的实验食材
+            </motion.h1>
+            <motion.p
+              className="screen-subtitle"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              组合不同的食材，探索它们对环境和健康的影响。
+            </motion.p>
+          </div>
+          <HeaderActions onCookbookClick={onOpenCookbook} onAchievementsClick={onOpenAchievements} />
         </div>
-        <motion.p
-          className="screen-subtitle"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          组合不同的食材，探索它们对环境和健康的影响。
-        </motion.p>
       </div>
 
       {/* Category Filters */}
@@ -79,14 +73,24 @@ const FoodSelectionScreen = ({
 
       {/* Food Grid */}
       <div className="food-grid">
-        {filteredFoods.map((food) => (
-          <FoodCard
-            key={food.id}
-            food={food}
-            isSelected={selectedFoods.some(f => f.id === food.id)}
-            onSelect={() => onToggleFoodSelection(food)}
-          />
-        ))}
+        <AnimatePresence>
+          {filteredFoods.map((food) => (
+            <motion.div
+              key={food.id}
+              layout
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.3 }}
+            >
+              <FoodCard
+                food={food}
+                isSelected={selectedFoods.some(f => f.id === food.id)}
+                onSelect={() => onToggleFoodSelection(food)}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
 
       {/* Action Bar */}

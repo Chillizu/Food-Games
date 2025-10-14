@@ -8,6 +8,8 @@ import LoadingSpinner from '../UI/LoadingSpinner'
 import SelectedCards from '../Cards/SelectedCards'
 import AchievementPopup from '../UI/AchievementPopup'
 import Cookbook from '../UI/Cookbook'
+import AchievementGallery from '../UI/AchievementGallery'
+import { getAchievements } from '../../utils/dataProcessing'
 
 const GameContainer = () => {
   const {
@@ -31,6 +33,9 @@ const GameContainer = () => {
     unlockedRecipeIds,
     openCookbook,
     closeCookbook,
+    isAchievementGalleryOpen,
+    openAchievementGallery,
+    closeAchievementGallery,
     deselectFood,
   } = useGameLogic();
 
@@ -39,7 +44,16 @@ const GameContainer = () => {
 
   useEffect(() => {
     if (unlockedAchievements.length > 0) {
-      setAchievementQueue(prev => [...prev, ...unlockedAchievements]);
+      // 只有当队列为空时才设置新的成就，防止重复添加
+      setAchievementQueue(prevQueue => {
+        if (prevQueue.length === 0) {
+          return [...unlockedAchievements];
+        }
+        return prevQueue;
+      });
+    } else {
+      // 如果没有解锁的成就（例如游戏重启），则清空队列
+      setAchievementQueue([]);
     }
   }, [unlockedAchievements]);
 
@@ -65,6 +79,8 @@ const GameContainer = () => {
           <IntroScreen
             onStartGame={startNewGame}
             gameStats={gameStats}
+            onOpenCookbook={openCookbook}
+            onOpenAchievements={openAchievementGallery}
           />
         )
       
@@ -76,6 +92,8 @@ const GameContainer = () => {
             onDeselectFood={deselectFood}
             onStartCooking={startCooking}
             canStartCooking={canStartCooking}
+            onOpenCookbook={openCookbook}
+            onOpenAchievements={openAchievementGallery}
           />
         )
       
@@ -97,7 +115,6 @@ const GameContainer = () => {
             unmatchedFoods={unmatchedFoods}
             planetHistory={planetHistory || []}
             tips={tips}
-            unlockedAchievements={unlockedAchievements}
             onRestart={restartGame}
             onNewGame={startNewGame}
           />
@@ -137,6 +154,11 @@ const GameContainer = () => {
         show={isCookbookOpen}
         onClose={closeCookbook}
         unlockedRecipeIds={unlockedRecipeIds}
+      />
+      <AchievementGallery
+        show={isAchievementGalleryOpen}
+        onClose={closeAchievementGallery}
+        unlockedAchievementIds={gameStats.unlockedAchievements}
       />
     </>
   )
