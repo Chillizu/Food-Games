@@ -39,15 +39,15 @@
       "id": "pork",
       "name": "猪肉",
       "emoji": "🥩",
-      "carbonFootprint": 0.7, "waterUsage": 0.6, "landUsage": 0.5, "healthScore": 0.6,
-      "category": "animal", "color": "#f97316", "description": "常见肉类，中等环境影响"
+      "carbonFootprint": 1.2, "waterUsage": 0.9, "landUsage": 0.8, "healthScore": 0.6,
+      "category": "animal", "color": "#f97316", "description": "常见肉类，环境影响较大"
     },
     {
       "id": "beef",
       "name": "牛肉",
       "emoji": "🐄",
-      "carbonFootprint": 1.0, "waterUsage": 0.8, "landUsage": 0.9, "healthScore": 0.6,
-      "category": "animal", "color": "#dc2626", "description": "红肉，蛋白质丰富但环境影响大"
+      "carbonFootprint": 1.8, "waterUsage": 1.5, "landUsage": 1.7, "healthScore": 0.5,
+      "category": "animal", "color": "#dc2626", "description": "红肉，蛋白质丰富但环境影响极大"
     },
     {
       "id": "insect",
@@ -67,8 +67,8 @@
       "id": "fast_food",
       "name": "快餐",
       "emoji": "🍔",
-      "carbonFootprint": 0.8, "waterUsage": 0.7, "landUsage": 0.6, "healthScore": 0.3,
-      "category": "processed", "color": "#ef4444", "description": "方便快捷，但不够健康环保"
+      "carbonFootprint": 1.3, "waterUsage": 1.0, "landUsage": 0.9, "healthScore": 0.1,
+      "category": "processed", "color": "#ef4444", "description": "方便快捷，但极不健康且不环保"
     },
     {
       "id": "rice",
@@ -165,8 +165,8 @@
       "id": "lamb",
       "name": "羊肉",
       "emoji": "🐑",
-      "carbonFootprint": 0.9, "waterUsage": 0.7, "landUsage": 0.8, "healthScore": 0.6,
-      "category": "animal", "color": "#ea580c", "description": "另一种红肉，环境影响较大"
+      "carbonFootprint": 1.6, "waterUsage": 1.3, "landUsage": 1.5, "healthScore": 0.6,
+      "category": "animal", "color": "#ea580c", "description": "另一种红肉，环境影响很大"
     },
     {
       "id": "shrimp",
@@ -221,21 +221,21 @@
       "id": "chocolate",
       "name": "巧克力",
       "emoji": "🍫",
-      "carbonFootprint": 0.7, "waterUsage": 0.8, "landUsage": 0.5, "healthScore": 0.3,
+      "carbonFootprint": 0.9, "waterUsage": 1.4, "landUsage": 0.5, "healthScore": 0.3,
       "category": "processed", "color": "#ef4444", "description": "美味的享受，但生产过程对环境有较高要求。"
     },
     {
       "id": "algae",
       "name": "藻类",
       "emoji": "🦠",
-      "carbonFootprint": 0.1, "waterUsage": 0.1, "landUsage": 0.0, "healthScore": 0.9,
+      "carbonFootprint": 0.05, "waterUsage": 0.05, "landUsage": 0.0, "healthScore": 0.9,
       "category": "future", "color": "#8b5cf6", "description": "未来的超级食物，生长快速，无需土地，营养密度高。"
     },
     {
       "id": "coffee",
       "name": "咖啡",
       "emoji": "☕",
-      "carbonFootprint": 0.4, "waterUsage": 0.8, "landUsage": 0.3, "healthScore": 0.6,
+      "carbonFootprint": 0.4, "waterUsage": 1.2, "landUsage": 0.3, "healthScore": 0.6,
       "category": "processed", "color": "#ef4444", "description": "提神醒脑的全球性饮品，但水足迹较高。"
     },
     {

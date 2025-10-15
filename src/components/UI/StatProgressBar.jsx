@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const StatProgressBar = ({ label, icon, value, max, higherIsBetter = true }) => {
+const StatProgressBar = ({ label, icon, value, max, higherIsBetter = true, delay = 0 }) => {
   const percentage = max > 0 ? (value / max) * 100 : 0;
 
   const getStatusClass = () => {
@@ -19,7 +19,7 @@ const StatProgressBar = ({ label, icon, value, max, higherIsBetter = true }) => 
           className={`stat-progress-bar__fill ${getStatusClass()}`}
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay }}
         />
       </div>
       <span className="stat-progress-bar__value">{value}</span>

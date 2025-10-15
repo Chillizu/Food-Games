@@ -1,9 +1,11 @@
-import React, { useRef, useMemo, useState } from 'react'
+import React, { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, shaderMaterial, Points, PointMaterial } from '@react-three/drei'
 import { extend } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useSpring, animated } from '@react-spring/three'
+import InstancedTrees from './InstancedTrees'
+import FoodParticles from './FoodParticles'
 
 // 大气层辉光着色器
 const GlowShaderMaterial = shaderMaterial(
@@ -92,20 +94,20 @@ extend({ GlowShaderMaterial, PlanetSurfaceShaderMaterial });
 
 const AnimatedPlanetSurfaceMaterial = animated('planetSurfaceShaderMaterial');
 
-const Planet = ({ planetStatus, ...props }) => {
-  const meshRef = useRef()
+const Planet = ({ planetStatus, foods, ...props }) => {
+  const groupRef = useRef()
   const shaderRef = useRef()
 
   useFrame((state, delta) => {
     if (shaderRef.current) {
       shaderRef.current.uniforms.time.value += delta * 0.1;
     }
-    if (meshRef.current) {
+    if (groupRef.current) {
       const rotationSpeed = planetStatus.health === 'excellent' ? 0.15 :
                            planetStatus.health === 'good' ? 0.12 :
                            planetStatus.health === 'fair' ? 0.1 :
                            planetStatus.health === 'poor' ? 0.08 : 0.05
-      meshRef.current.rotation.y += delta * rotationSpeed
+      groupRef.current.rotation.y += delta * rotationSpeed
     }
   })
 
@@ -118,13 +120,25 @@ const Planet = ({ planetStatus, ...props }) => {
   }
   const targetColor = new THREE.Color(colors[planetStatus.health] || '#4ade80');
 
-  const { color } = useSpring({
+  const { color, scale } = useSpring({
     color: targetColor,
-    config: { duration: 1500 }
+    scale: [1, 1, 1],
+    from: { scale: [0, 0, 0] },
+    config: { duration: 1500, easing: easings.easeInOutQuart }
   })
 
+  const treeCount = useMemo(() => {
+    switch (planetStatus.health) {
+      case 'excellent': return 300;
+      case 'good': return 200;
+      case 'fair': return 100;
+      case 'poor': return 20;
+      default: return 5;
+    }
+  }, [planetStatus.health]);
+
   return (
-    <group {...props}>
+    <animated.group ref={groupRef} {...props} scale={scale}>
       <mesh>
         <sphereGeometry args={[1.05, 32, 32]} />
         <glowShaderMaterial
@@ -134,11 +148,13 @@ const Planet = ({ planetStatus, ...props }) => {
           transparent={true}
         />
       </mesh>
-      <mesh ref={meshRef}>
+      <mesh>
         <sphereGeometry args={[1, 32, 32]} />
         <AnimatedPlanetSurfaceMaterial ref={shaderRef} attach="material" planetColor={color} />
       </mesh>
-    </group>
+      <InstancedTrees planetStatus={planetStatus} count={treeCount} />
+      <FoodParticles foods={foods} />
+    </animated.group>
   )
 }
 
@@ -169,7 +185,7 @@ const Stars = () => {
   )
 }
 
-const PlanetVisualization = ({ planetStatus }) => {
+const PlanetVisualization = ({ planetStatus, selectedFoods }) => {
   return (
     <Canvas
       camera={{ position: [0, 0, 5], fov: 50 }}
@@ -177,7 +193,7 @@ const PlanetVisualization = ({ planetStatus }) => {
     >
         <ambientLight intensity={0.6} />
         <directionalLight position={[5, 5, 5]} intensity={0.8} />
-        <Planet planetStatus={planetStatus} position={[0, 0, 0]} />
+        <Planet planetStatus={planetStatus} foods={selectedFoods} position={[0, 0, 0]} />
         <Stars />
         <OrbitControls
           enablePan={false}

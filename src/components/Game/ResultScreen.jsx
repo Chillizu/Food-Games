@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PlanetVisualization from '../3D/PlanetVisualization'
@@ -6,6 +6,7 @@ import MealComposition from '../UI/MealComposition'
 import { getSDGMessage } from '../../utils/dataProcessing'
 import HeaderActions from '../UI/HeaderActions'
 import StatProgressBar from '../UI/StatProgressBar';
+import AnimatedScore from '../UI/AnimatedScore';
 
 const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
   const location = useLocation();
@@ -36,6 +37,12 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
     planetHistory,
     tips,
   } = resultData;
+
+  const selectedFoods = useMemo(() => {
+    if (!foundRecipes || !unmatchedFoods) return [];
+    const foodsFromRecipes = foundRecipes.flatMap(recipe => recipe.ingredients_details || []);
+    return [...foodsFromRecipes, ...unmatchedFoods];
+  }, [foundRecipes, unmatchedFoods]);
 
   const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null;
 
@@ -81,7 +88,7 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
           <div className="content-block">
             <h2 className="content-block__title">🌍 饮食星球状态</h2>
             <div className="result-screen__planet-container">
-              <PlanetVisualization planetStatus={planetStatus} />
+              <PlanetVisualization planetStatus={planetStatus} selectedFoods={selectedFoods} />
             </div>
             <div className="planet-status-info">
               <span className="planet-status-info__indicator" style={{backgroundColor: planetStatus.color}} />
@@ -126,7 +133,7 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
           <div className="content-block">
             <h2 className="content-block__title">📊 环境影响总览</h2>
             <div className="overall-score">
-              <div className="overall-score__value">{environmentalImpact.totalScore}</div>
+              <AnimatedScore score={environmentalImpact.totalScore} />
               <div className="overall-score__label">综合环保评分</div>
               <div className="overall-score__tag">{getScoreMessage(environmentalImpact.totalScore)}</div>
             </div>
@@ -135,28 +142,32 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
                 label="碳排放"
                 icon="🌍"
                 value={Math.round(environmentalImpact.carbonFootprint * 100)}
-                max={100}
+                max={200}
                 higherIsBetter={false}
+                delay={0.4}
               />
               <StatProgressBar
                 label="水资源消耗"
                 icon="💧"
                 value={Math.round(environmentalImpact.waterUsage * 100)}
-                max={100}
+                max={200}
                 higherIsBetter={false}
+                delay={0.5}
               />
               <StatProgressBar
                 label="土地占用"
                 icon="🌳"
                 value={Math.round(environmentalImpact.landUsage * 100)}
-                max={100}
+                max={200}
                 higherIsBetter={false}
+                delay={0.6}
               />
               <StatProgressBar
                 label="健康度"
                 icon="❤️"
                 value={Math.round(environmentalImpact.healthScore * 100)}
                 max={100}
+                delay={0.7}
               />
             </div>
           </div>

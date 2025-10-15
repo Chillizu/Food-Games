@@ -12,42 +12,72 @@ export function calculateEnvironmentalImpact(selectedFoods) {
       landUsage: 0,
       healthScore: 0,
       totalScore: 0
+    };
+  }
+
+  // --- 1. 计算各项指标的平均值 ---
+  const count = selectedFoods.length;
+  const averages = selectedFoods.reduce((acc, food) => {
+    acc.carbonFootprint += food.carbonFootprint;
+    acc.waterUsage += food.waterUsage;
+    acc.landUsage += food.landUsage;
+    acc.healthScore += food.healthScore;
+    return acc;
+  }, { carbonFootprint: 0, waterUsage: 0, landUsage: 0, healthScore: 0 });
+
+  for (let key in averages) {
+    averages[key] /= count;
+  }
+
+  // --- 2. 定义评分模型参数 ---
+  const baselines = {
+    carbon: 0.5, // 理想碳排放基准
+    water: 0.6,  // 理想水资源消耗基准
+    land: 0.4,   // 理想土地使用基准
+  };
+  const penaltyFactor = 60; // 超出基准线的惩罚乘数，越高惩罚越重
+  const weights = {
+    health: 0.4,
+    environment: 0.6,
+    carbon: 0.4,
+    water: 0.3,
+    land: 0.3,
+  };
+
+  // --- 3. 计算各分项得分 (0-100) ---
+
+  // 环境影响项的评分函数（扣分制）
+  const calculateImpactSubScore = (value, baseline) => {
+    const baselineScore = 80; // 达到基准线时的得分
+    if (value <= baseline) {
+      // 低于基准，得分在80-100之间
+      return 100 - (value / baseline) * (100 - baselineScore);
+    } else {
+      // 高于基准，从80分开始扣分
+      const penalty = (value - baseline) * penaltyFactor;
+      return baselineScore - penalty;
     }
-  }
+  };
 
-  const total = selectedFoods.reduce((acc, food) => ({
-    carbonFootprint: acc.carbonFootprint + food.carbonFootprint,
-    waterUsage: acc.waterUsage + food.waterUsage,
-    landUsage: acc.landUsage + food.landUsage,
-    healthScore: acc.healthScore + food.healthScore
-  }), {
-    carbonFootprint: 0,
-    waterUsage: 0,
-    landUsage: 0,
-    healthScore: 0
-  })
+  const healthScore = averages.healthScore * 100;
+  const carbonScore = calculateImpactSubScore(averages.carbonFootprint, baselines.carbon);
+  const waterScore = calculateImpactSubScore(averages.waterUsage, baselines.water);
+  const landScore = calculateImpactSubScore(averages.landUsage, baselines.land);
 
-  // 计算平均值
-  const count = selectedFoods.length
-  const averages = {
-    carbonFootprint: total.carbonFootprint / count,
-    waterUsage: total.waterUsage / count,
-    landUsage: total.landUsage / count,
-    healthScore: total.healthScore / count
-  }
+  // --- 4. 加权计算最终总分 ---
+  const environmentScore =
+    carbonScore * weights.carbon +
+    waterScore * weights.water +
+    landScore * weights.land;
 
-  // 计算综合分数 (0-100，越高越好)
-  const totalScore = Math.round(
-    (100 - averages.carbonFootprint * 50) * 0.3 +  // 碳排放权重30%
-    (100 - averages.waterUsage * 50) * 0.3 +     // 水资源权重30%
-    (100 - averages.landUsage * 50) * 0.2 +      // 土地占用权重20%
-    averages.healthScore * 100 * 0.2             // 健康度权重20%
-  )
+  const finalScore =
+    healthScore * weights.health +
+    environmentScore * weights.environment;
 
   return {
     ...averages,
-    totalScore: Math.max(0, Math.min(100, totalScore))
-  }
+    totalScore: Math.round(Math.max(0, Math.min(100, finalScore))),
+  };
 }
 
 // 计算星球状态
@@ -167,6 +197,7 @@ export function checkAchievements(selectedFoods, gameStats) {
 // 识别菜品组合
 export function identifyRecipes(selectedFoods) {
   const availableFoodIds = new Set(selectedFoods.map(food => food.id));
+  const foodMap = new Map(selectedFoods.map(food => [food.id, food]));
   const matchedRecipes = [];
   const remainingFoods = [...selectedFoods];
 
@@ -180,7 +211,12 @@ export function identifyRecipes(selectedFoods) {
     const canMake = [...requiredIngredients].every(id => availableFoodIds.has(id));
 
     if (canMake) {
-      matchedRecipes.push(recipe);
+      const recipeWithDetails = {
+        ...recipe,
+        ingredients_details: recipe.ingredients.map(id => foodMap.get(id)).filter(Boolean)
+      };
+      matchedRecipes.push(recipeWithDetails);
+      
       // 从可用食材中移除已用于该菜品的食材
       for (const id of requiredIngredients) {
         availableFoodIds.delete(id);
