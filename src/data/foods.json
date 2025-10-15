@@ -251,9 +251,72 @@
       "emoji": "🥛",
       "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.8,
       "category": "grain_legume", "color": "#f59e0b", "description": "植物性牛奶替代品，富含蛋白质。"
-    }
-  ],
-  "categories": {
+      },
+      {
+        "id": "tomato",
+        "name": "西红柿",
+        "emoji": "🍅",
+        "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.2, "healthScore": 0.9,
+        "category": "vegetable", "color": "#ef4444", "description": "用途广泛的蔬菜，富含番茄红素。"
+      },
+      {
+        "id": "cucumber",
+        "name": "黄瓜",
+        "emoji": "🥒",
+        "carbonFootprint": 0.1, "waterUsage": 0.2, "landUsage": 0.1, "healthScore": 0.7,
+        "category": "vegetable", "color": "#22c55e", "description": "清爽补水，热量极低。"
+      },
+      {
+        "id": "carrot",
+        "name": "胡萝卜",
+        "emoji": "🥕",
+        "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.2, "healthScore": 0.8,
+        "category": "vegetable", "color": "#f97316", "description": "富含β-胡萝卜素，对视力有益。"
+      },
+      {
+        "id": "banana",
+        "name": "香蕉",
+        "emoji": "🍌",
+        "carbonFootprint": 0.3, "waterUsage": 0.5, "landUsage": 0.3, "healthScore": 0.7,
+        "category": "fruit", "color": "#facc15", "description": "快速补充能量的便捷水果。"
+      },
+      {
+        "id": "strawberry",
+        "name": "草莓",
+        "emoji": "🍓",
+        "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.9,
+        "category": "fruit", "color": "#ec4899", "description": "富含维生素C的美味水果，与`berries`不同。"
+      },
+      {
+        "id": "oats",
+        "name": "燕麦",
+        "emoji": "🥣",
+        "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.2, "healthScore": 0.9,
+        "category": "grain_legume", "color": "#d97706", "description": "非常健康的谷物，富含纤维，有益心脏。"
+      },
+      {
+        "id": "bell-pepper",
+        "name": "彩椒",
+        "emoji": "🫑",
+        "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.8,
+        "category": "vegetable", "color": "#f97316", "description": "颜色鲜艳，富含维生素，适合生食或烹饪。"
+      },
+      {
+        "id": "spinach",
+        "name": "菠菜",
+        "emoji": "🥬",
+        "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.1, "healthScore": 0.9,
+        "category": "vegetable", "color": "#16a34a", "description": "营养密集的绿叶蔬菜，富含铁质。"
+      },
+      {
+        "id": "almond-milk",
+        "name": "杏仁奶",
+        "emoji": "🥛",
+        "carbonFootprint": 0.3, "waterUsage": 0.6, "landUsage": 0.3, "healthScore": 0.7,
+        "category": "processed", "color": "#f59e0b", "description": "流行的植物奶，但耗水量高于豆奶。"
+      }
+    ],
+    "categories": {
     "fruit": { "name": "水果", "color": "#f87171" },
     "vegetable": { "name": "蔬菜", "color": "#4ade80" },
     "grain_legume": { "name": "谷物豆类", "color": "#f59e0b" },

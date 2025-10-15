@@ -1,6 +1,6 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, shaderMaterial, Points, Point } from '@react-three/drei'
+import { OrbitControls, shaderMaterial, Points, PointMaterial } from '@react-three/drei'
 import { extend } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useSpring, animated } from '@react-spring/three'
@@ -90,6 +90,8 @@ const PlanetSurfaceShaderMaterial = shaderMaterial(
 
 extend({ GlowShaderMaterial, PlanetSurfaceShaderMaterial });
 
+const AnimatedPlanetSurfaceMaterial = animated('planetSurfaceShaderMaterial');
+
 const Planet = ({ planetStatus, ...props }) => {
   const meshRef = useRef()
   const shaderRef = useRef()
@@ -132,10 +134,10 @@ const Planet = ({ planetStatus, ...props }) => {
           transparent={true}
         />
       </mesh>
-      <animated.mesh ref={meshRef}>
+      <mesh ref={meshRef}>
         <sphereGeometry args={[1, 32, 32]} />
-        <animated.planetSurfaceShaderMaterial ref={shaderRef} planetColor={color} />
-      </animated.mesh>
+        <AnimatedPlanetSurfaceMaterial ref={shaderRef} attach="material" planetColor={color} />
+      </mesh>
     </group>
   )
 }
@@ -162,7 +164,7 @@ const Stars = () => {
 
   return (
     <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
-      <Point color="white" size={0.05} />
+      <PointMaterial transparent color="white" size={0.05} sizeAttenuation={true} depthWrite={false} />
     </Points>
   )
 }

@@ -262,5 +262,173 @@
     "bonusScore": 38,
     "description": "高效的未来营养奶昔，挑战你的味蕾。",
     "emoji": "🥤"
+  },
+  {
+    "id": "mediterranean-salad",
+    "name": "地中海沙拉",
+    "ingredients": ["lettuce", "cucumber", "tomato", "onion", "olive-oil"],
+    "bonusScore": 25,
+    "description": "一道经典的地中海风味沙拉，清新健康。",
+    "emoji": "🥗"
+  },
+  {
+    "id": "vegan-power-bowl",
+    "name": "素食能量碗",
+    "ingredients": ["spinach", "quinoa", "tofu", "avocado"],
+    "bonusScore": 30,
+    "description": "为纯素食者设计的营养大餐，能量满满。",
+    "emoji": "🥣"
+  },
+  {
+    "id": "future-breakfast",
+    "name": "未来早餐",
+    "ingredients": ["oats", "algae", "berries"],
+    "bonusScore": 32,
+    "description": "结合了传统与未来的高营养早餐。",
+    "emoji": "🥣"
+  },
+  {
+    "id": "beef-bell-pepper",
+    "name": "彩椒牛肉",
+    "ingredients": ["beef", "bell-pepper", "onion"],
+    "bonusScore": 15,
+    "description": "一道美味的家常菜，风味浓郁。",
+    "emoji": "🥘"
+  },
+  {
+    "id": "banana-oatmeal",
+    "name": "香蕉燕麦粥",
+    "ingredients": ["banana", "oats", "dairy"],
+    "bonusScore": 18,
+    "description": "简单又健康的早餐选择。",
+    "emoji": "🥣"
+  },
+  {
+    "id": "strawberry-smoothie",
+    "name": "草莓奶昔",
+    "ingredients": ["strawberry", "banana", "soy-milk"],
+    "bonusScore": 20,
+    "description": "清爽香甜的夏日饮品。",
+    "emoji": "🥤"
+  },
+  {
+    "id": "tofu-veggie-skewers",
+    "name": "蔬菜豆腐串",
+    "ingredients": ["tofu", "bell-pepper", "mushroom", "onion"],
+    "bonusScore": 22,
+    "description": "适合烧烤的素食选择，色彩鲜艳。",
+    "emoji": "🍢"
+  },
+  {
+    "id": "healthy-green-drink",
+    "name": "健康绿饮",
+    "ingredients": ["spinach", "cucumber", "apple", "algae"],
+    "bonusScore": 35,
+    "description": "一杯浓缩的绿色能量，排毒养颜。",
+    "emoji": "🥤"
+  },
+  {
+    "id": "spicy-lentil-chili",
+    "name": "香辣扁豆酱",
+    "ingredients": ["lentils", "tomato", "onion", "beans"],
+    "bonusScore": 24,
+    "description": "浓郁的素食辣酱，可搭配米饭或面包。",
+    "emoji": "🌶️"
+  },
+  {
+    "id": "fish-roasted-veg",
+    "name": "烤鱼配蔬菜",
+    "ingredients": ["fish", "carrot", "bell-pepper", "potato"],
+    "bonusScore": 26,
+    "description": "一顿均衡的晚餐，有鱼有蔬菜。",
+    "emoji": "🐟"
+  },
+  {
+    "id": "almond-latte",
+    "name": "杏仁拿铁",
+    "ingredients": ["almond-milk", "coffee"],
+    "bonusScore": 13,
+    "description": "带有坚果风味的咖啡饮品。",
+    "emoji": "☕"
+  },
+  {
+    "id": "spinach-omelette",
+    "name": "菠菜煎蛋卷",
+    "ingredients": ["spinach", "egg", "cheese"],
+    "bonusScore": 19,
+    "description": "富含铁和蛋白质的健康早餐。",
+    "emoji": "🍳"
+  },
+  {
+    "id": "cucumber-salad",
+    "name": "凉拌黄瓜",
+    "ingredients": ["cucumber", "garlic", "olive-oil"],
+    "bonusScore": 15,
+    "description": "清爽开胃的夏日小菜。",
+    "emoji": "🥒"
+  },
+  {
+    "id": "chicken-stir-fry",
+    "name": "蔬菜炒鸡肉",
+    "ingredients": ["chicken", "bell-pepper", "onion", "spinach"],
+    "bonusScore": 21,
+    "description": "快手又营养均衡的家常菜。",
+    "emoji": "炒"
+  },
+  {
+    "id": "quinoa-salad",
+    "name": "藜麦沙拉",
+    "ingredients": ["quinoa", "cucumber", "tomato", "bell-pepper"],
+    "bonusScore": 28,
+    "description": "超级食物沙拉，轻食爱好者的最爱。",
+    "emoji": "🥗"
+  },
+  {
+    "id": "beef-and-broccoli-ish",
+    "name": "牛肉炒时蔬",
+    "ingredients": ["beef", "spinach", "garlic"],
+    "bonusScore": 14,
+    "description": "经典搭配的变种，用菠菜代替西兰花。",
+    "emoji": "🥦"
+  },
+  {
+    "id": "potato-au-gratin",
+    "name": "芝士焗土豆",
+    "ingredients": ["potato", "cheese", "dairy", "garlic"],
+    "bonusScore": 12,
+    "description": "浓郁的法式家常菜，满满的幸福感。",
+    "emoji": "🥔"
+  },
+  {
+    "id": "lab-meat-tacos",
+    "name": "人造肉塔可",
+    "ingredients": ["lab_meat", "corn", "avocado", "bell-pepper"],
+    "bonusScore": 33,
+    "description": "用人造肉制作的墨西哥塔可，环保又新潮。",
+    "emoji": "🌮"
+  },
+  {
+    "id": "insect-stir-fry",
+    "name": "昆虫小炒",
+    "ingredients": ["insect", "onion", "garlic", "bell-pepper"],
+    "bonusScore": 28,
+    "description": "挑战传统，一盘高蛋白的环保小炒。",
+    "emoji": "🪲"
+  },
+  {
+    "id": "chocolate-fondue",
+    "name": "巧克力火锅",
+    "ingredients": ["chocolate", "strawberry", "banana"],
+    "bonusScore": 10,
+    "description": "适合分享的甜蜜甜点，但热量较高。",
+    "emoji": "🍓"
+  },
+  {
+    "id": "tea-egg",
+    "name": "茶叶蛋",
+    "ingredients": ["tea", "egg"],
+    "bonusScore": 16,
+    "description": "具有独特茶香的传统风味小吃。",
+    "emoji": "🥚"
   }
 ]

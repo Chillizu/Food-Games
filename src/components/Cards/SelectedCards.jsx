@@ -1,10 +1,11 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getHighlightStyle } from '../../utils/styleUtils';
+import StatProgressBar from '../UI/StatProgressBar';
 
-const SelectedCards = ({ selectedFoods, onDeselectFood, highlightedFoods, selectionStats }) => {
+const SelectedCards = ({ selectedFoods, onDeselectFood, highlightedFoods, selectionStats, isLocked = false }) => {
   return (
-    <div className="hand-area__container">
+    <div className={`hand-area__container ${isLocked ? 'is-locked' : ''}`}>
       <div className="hand-area__header">
         <h2 className="hand-area__title">已选实验品</h2>
         <span className="hand-area__counter">{selectedFoods.length} / 9</span>
@@ -15,9 +16,10 @@ const SelectedCards = ({ selectedFoods, onDeselectFood, highlightedFoods, select
           {selectedFoods.length === 0 ? (
             <motion.div
               className="hand-area__empty-state"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              exit={{ opacity: 0, y: 5 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
             >
               <div className="empty-state__icon">🧪</div>
               <p className="empty-state__text">从主区域选择食材</p>
@@ -34,10 +36,10 @@ const SelectedCards = ({ selectedFoods, onDeselectFood, highlightedFoods, select
                   className="hand-card"
                   style={style}
                   layout
-                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: -50, scale: 0.8 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
                 >
                   <div className="hand-card__emoji">{food.emoji}</div>
                   <div className="hand-card__details">
@@ -57,8 +59,8 @@ const SelectedCards = ({ selectedFoods, onDeselectFood, highlightedFoods, select
                   <motion.button
                     className="hand-card__remove-btn"
                     onClick={() => onDeselectFood(food.id)}
-                    whileHover={{ scale: 1.1, backgroundColor: 'var(--danger-color)', color: '#fff' }}
-                    whileTap={{ scale: 0.9 }}
+                    whileHover={!isLocked ? { backgroundColor: 'var(--danger-color)', color: '#fff' } : {}}
+                    disabled={isLocked}
                   >
                     ✕
                   </motion.button>
@@ -72,24 +74,32 @@ const SelectedCards = ({ selectedFoods, onDeselectFood, highlightedFoods, select
       {selectedFoods.length > 0 && selectionStats && (
         <motion.div
           className="selection-stats"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.3, delay: 0.1, ease: 'easeOut' }}
         >
           <h3 className="stats-title">当前选择总览</h3>
-          <div className="stats-grid">
-            <div className="stat-item">
-              <span className="stat-icon" title="总碳排放">🌍</span>
-              <span className="stat-value">{Math.round(selectionStats.carbonFootprint * 100)}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-icon" title="总水资源消耗">💧</span>
-              <span className="stat-value">{Math.round(selectionStats.waterUsage * 100)}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-icon" title="平均健康指数">❤️</span>
-              <span className="stat-value">{Math.round(selectionStats.healthScore * 100)}</span>
-            </div>
+          <div className="stats-progress-bars">
+            <StatProgressBar
+              label="总碳排放"
+              icon="🌍"
+              value={Math.round(selectionStats.carbonFootprint * 100)}
+              max={100}
+              higherIsBetter={false}
+            />
+            <StatProgressBar
+              label="总水资源消耗"
+              icon="💧"
+              value={Math.round(selectionStats.waterUsage * 100)}
+              max={100}
+              higherIsBetter={false}
+            />
+            <StatProgressBar
+              label="平均健康指数"
+              icon="❤️"
+              value={Math.round(selectionStats.healthScore * 100)}
+              max={100}
+            />
           </div>
         </motion.div>
       )}

@@ -1,23 +1,37 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React from 'react'
+import { useLocation, Navigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import PlanetVisualization from '../3D/PlanetVisualization'
 import MealComposition from '../UI/MealComposition'
 import { getSDGMessage } from '../../utils/dataProcessing'
 import HeaderActions from '../UI/HeaderActions'
+import StatProgressBar from '../UI/StatProgressBar';
 
-const ResultScreen = ({
-  selectedFoods,
-  environmentalImpact,
-  planetStatus,
-  foundRecipes,
-  unmatchedFoods,
-  planetHistory,
-  tips,
-  onRestart,
-  onNewGame,
-  onOpenCookbook,
-  onOpenAchievements
-}) => {
+const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
+  const location = useLocation();
+  const resultData = location.state;
+
+  if (!resultData) {
+    return (
+      <div className="content-block" style={{ textAlign: 'center', margin: 'auto' }}>
+        <h2>没有可用的结果</h2>
+        <p>请先开始一个新的实验来查看结果。</p>
+        <button className="button button--primary" onClick={onNewGame} style={{ marginTop: '1rem' }}>
+          返回主界面
+        </button>
+      </div>
+    );
+  }
+
+  const {
+    environmentalImpact,
+    planetStatus,
+    foundRecipes,
+    unmatchedFoods,
+    planetHistory,
+    tips,
+  } = resultData;
+
   const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null;
 
   const getScoreMessage = (score) => {
@@ -30,12 +44,15 @@ const ResultScreen = ({
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.07, ease: 'easeOut', duration: 0.3 }
+    }
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { ease: 'easeOut', duration: 0.3 } }
   }
 
   return (
@@ -108,36 +125,34 @@ const ResultScreen = ({
               <div className="overall-score__label">综合环保评分</div>
               <div className="overall-score__tag">{getScoreMessage(environmentalImpact.totalScore)}</div>
             </div>
-            <div className="impact-bars">
-              {/* Impact Bars Here */}
-              <div className="impact-bar-item">
-                <span className="impact-bar-item__label">碳排放</span>
-                <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${100 - environmentalImpact.carbonFootprint * 100}%` }} />
-                </div>
-                <span className="impact-bar-item__value">{Math.round(100 - environmentalImpact.carbonFootprint * 100)}</span>
-              </div>
-              <div className="impact-bar-item">
-                <span className="impact-bar-item__label">水资源</span>
-                <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${100 - environmentalImpact.waterUsage * 100}%` }} />
-                </div>
-                <span className="impact-bar-item__value">{Math.round(100 - environmentalImpact.waterUsage * 100)}</span>
-              </div>
-              <div className="impact-bar-item">
-                <span className="impact-bar-item__label">土地占用</span>
-                <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${100 - environmentalImpact.landUsage * 100}%` }} />
-                </div>
-                <span className="impact-bar-item__value">{Math.round(100 - environmentalImpact.landUsage * 100)}</span>
-              </div>
-              <div className="impact-bar-item">
-                <span className="impact-bar-item__label">健康度</span>
-                <div className="impact-bar-item__bar">
-                  <motion.div className="impact-bar-item__fill" initial={{ width: 0 }} animate={{ width: `${environmentalImpact.healthScore * 100}%` }} />
-                </div>
-                <span className="impact-bar-item__value">{Math.round(environmentalImpact.healthScore * 100)}</span>
-              </div>
+            <div className="stats-progress-bars">
+               <StatProgressBar
+                label="碳排放"
+                icon="🌍"
+                value={Math.round(environmentalImpact.carbonFootprint * 100)}
+                max={100}
+                higherIsBetter={false}
+              />
+              <StatProgressBar
+                label="水资源消耗"
+                icon="💧"
+                value={Math.round(environmentalImpact.waterUsage * 100)}
+                max={100}
+                higherIsBetter={false}
+              />
+              <StatProgressBar
+                label="土地占用"
+                icon="🌳"
+                value={Math.round(environmentalImpact.landUsage * 100)}
+                max={100}
+                higherIsBetter={false}
+              />
+              <StatProgressBar
+                label="健康度"
+                icon="❤️"
+                value={Math.round(environmentalImpact.healthScore * 100)}
+                max={100}
+              />
             </div>
           </div>
 
@@ -152,22 +167,18 @@ const ResultScreen = ({
       </div>
 
       <motion.div className="result-screen__actions" variants={itemVariants}>
-        <motion.button
+        <button
           className="button button--primary button--large"
           onClick={onNewGame}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
         >
           🚀 开始新实验
-        </motion.button>
-        <motion.button
+        </button>
+        <button
           className="button button--secondary button--large"
           onClick={onNewGame}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
         >
           ↩️ 返回主界面
-        </motion.button>
+        </button>
       </motion.div>
 
     </motion.div>
