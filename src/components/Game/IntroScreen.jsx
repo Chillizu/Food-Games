@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { IconBook, IconAward, IconChevronRight } from '@tabler/icons-react';
-import FloatingEmojis from '../UI/FloatingEmojis';
+import { Canvas } from '@react-three/fiber';
+import { IconBook, IconAward } from '@tabler/icons-react';
+import { PlanetScene } from '../3D/PlanetVisualization';
 import foodData from '../../data/foods.json';
 
 const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements, unlockedRecipeIds }) => {
-  const foodEmojis = foodData.foods.map(food => food.emoji);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -57,7 +57,12 @@ const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievement
       {/* Right Column */}
       <div className="intro-right-panel">
         <motion.div variants={itemVariants} className="intro-planet-container">
-          <FloatingEmojis emojis={foodEmojis} />
+          <Canvas style={{ width: '120%', height: '120%' }}>
+            <PlanetScene
+              planetStatus={{ health: 'excellent' }}
+              selectedFoods={[]}
+            />
+          </Canvas>
         </motion.div>
         
         <div className="intro-cards-container">

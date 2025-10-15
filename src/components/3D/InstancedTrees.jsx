@@ -55,7 +55,7 @@ const InstancedTrees = ({ planetStatus, count }) => {
   return (
     <instancedMesh ref={meshRef} args={[null, null, count]}>
       <coneGeometry args={[0.5, 1, 4]} />
-      <meshStandardMaterial vertexColors />
+      <meshStandardMaterial />
     </instancedMesh>
   );
 };

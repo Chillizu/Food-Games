@@ -8,13 +8,14 @@ import HeaderActions from '../UI/HeaderActions'
 import StatProgressBar from '../UI/StatProgressBar';
 import AnimatedScore from '../UI/AnimatedScore';
 
-const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
+const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGame }) => {
   const location = useLocation();
-  const navigate = useNavigate();
   const resultData = location.state;
 
   const handleGoHome = () => {
-    navigate('/');
+    if (onResetGame) {
+      onResetGame();
+    }
   };
 
   if (!resultData) {
@@ -22,7 +23,7 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
       <div className="content-block" style={{ textAlign: 'center', margin: 'auto' }}>
         <h2>没有可用的结果</h2>
         <p>请先开始一个新的实验来查看结果。</p>
-        <button className="button button--primary" onClick={handleGoHome} style={{ marginTop: '1rem' }}>
+        <button className="button button--primary" onClick={onResetGame} style={{ marginTop: '1rem' }}>
           返回主界面
         </button>
       </div>

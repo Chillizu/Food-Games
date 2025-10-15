@@ -8,6 +8,7 @@ import CookingScreen from './components/Game/CookingScreen'
 import ResultScreen from './components/Game/ResultScreen'
 import LoadingSpinner from './components/UI/LoadingSpinner'
 import SelectedCards from './components/Cards/SelectedCards'
+import SelectionStatsPanel from './components/UI/SelectionStatsPanel'
 import AchievementPopup from './components/UI/AchievementPopup'
 import Cookbook from './components/UI/Cookbook'
 import AchievementGallery from './components/UI/AchievementGallery'
@@ -112,10 +113,10 @@ function App() {
               />
               <Route path="/result" element={
                 <ResultScreen
-                  onRestart={gameLogic.restartGame}
                   onNewGame={gameLogic.startNewGame}
                   onOpenCookbook={gameLogic.openCookbook}
                   onOpenAchievements={gameLogic.openAchievementGallery}
+                  onResetGame={gameLogic.resetGame}
                 />}
               />
             </Routes>
@@ -128,9 +129,9 @@ function App() {
               selectedFoods={gameLogic.selectedFoods}
               onDeselectFood={gameLogic.deselectFood}
               highlightedFoods={gameLogic.highlightedFoods}
-              selectionStats={gameLogic.selectionStats}
               isLocked={gameLogic.gameStage === 'cooking'}
             />
+            <SelectionStatsPanel selectionStats={gameLogic.selectionStats} />
           </aside>
         )}
       </div>

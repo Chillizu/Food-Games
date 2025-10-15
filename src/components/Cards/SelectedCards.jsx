@@ -70,39 +70,6 @@ const SelectedCards = ({ selectedFoods, onDeselectFood, highlightedFoods, select
           )}
         </AnimatePresence>
       </div>
-
-      {selectedFoods.length > 0 && selectionStats && (
-        <motion.div
-          className="selection-stats"
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.1, ease: 'easeOut' }}
-        >
-          <h3 className="stats-title">当前选择总览</h3>
-          <div className="stats-progress-bars">
-            <StatProgressBar
-              label="总碳排放"
-              icon="🌍"
-              value={Math.round(selectionStats.carbonFootprint * 100)}
-              max={100}
-              higherIsBetter={false}
-            />
-            <StatProgressBar
-              label="总水资源消耗"
-              icon="💧"
-              value={Math.round(selectionStats.waterUsage * 100)}
-              max={100}
-              higherIsBetter={false}
-            />
-            <StatProgressBar
-              label="平均健康指数"
-              icon="❤️"
-              value={Math.round(selectionStats.healthScore * 100)}
-              max={100}
-            />
-          </div>
-        </motion.div>
-      )}
     </div>
   )
 }

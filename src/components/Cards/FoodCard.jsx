@@ -28,7 +28,7 @@ const FoodCard = ({ food, isSelected, onSelect }) => {
           <span className="food-card__emoji">{food.emoji}</span>
           <h3 className="food-card__name">{food.name}</h3>
         </div>
-        <p className="food-card__description">{food.description}</p>
+        <p className="food-card__description" title={food.description}>{food.description}</p>
         <div className="food-card__footer">
           <div className="food-card__stats">
             <div className="stat-item" title={`碳排放: ${food.carbonFootprint}`}>

@@ -1,9 +1,9 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, shaderMaterial, Points, PointMaterial } from '@react-three/drei'
 import { extend } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useSpring, animated } from '@react-spring/three'
+import { useSpring, animated, easings } from '@react-spring/three'
 import InstancedTrees from './InstancedTrees'
 import FoodParticles from './FoodParticles'
 
@@ -185,25 +185,33 @@ const Stars = () => {
   )
 }
 
+export const PlanetScene = ({ planetStatus, selectedFoods }) => {
+  return (
+    <>
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[5, 5, 5]} intensity={0.8} />
+      <Planet planetStatus={planetStatus} foods={selectedFoods} position={[0, 0, 0]} />
+      <Stars />
+      <OrbitControls
+        enablePan={false}
+        enableZoom={false}
+        enableRotate={true}
+        autoRotate
+        autoRotateSpeed={0.5}
+      />
+    </>
+  );
+};
+
 const PlanetVisualization = ({ planetStatus, selectedFoods }) => {
   return (
     <Canvas
       camera={{ position: [0, 0, 5], fov: 50 }}
       style={{ background: '#1a2a3a', width: '100%', height: '100%' }}
     >
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[5, 5, 5]} intensity={0.8} />
-        <Planet planetStatus={planetStatus} foods={selectedFoods} position={[0, 0, 0]} />
-        <Stars />
-        <OrbitControls
-          enablePan={false}
-          enableZoom={false}
-          enableRotate={true}
-          autoRotate
-          autoRotateSpeed={0.5}
-        />
-      </Canvas>
+      <PlanetScene planetStatus={planetStatus} selectedFoods={selectedFoods} />
+    </Canvas>
   )
 }
 
-export default PlanetVisualization
+export default PlanetVisualization;
