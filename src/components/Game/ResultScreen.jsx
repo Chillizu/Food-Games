@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation, Navigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PlanetVisualization from '../3D/PlanetVisualization'
 import MealComposition from '../UI/MealComposition'
@@ -9,14 +9,19 @@ import StatProgressBar from '../UI/StatProgressBar';
 
 const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const resultData = location.state;
+
+  const handleGoHome = () => {
+    navigate('/');
+  };
 
   if (!resultData) {
     return (
       <div className="content-block" style={{ textAlign: 'center', margin: 'auto' }}>
         <h2>没有可用的结果</h2>
         <p>请先开始一个新的实验来查看结果。</p>
-        <button className="button button--primary" onClick={onNewGame} style={{ marginTop: '1rem' }}>
+        <button className="button button--primary" onClick={handleGoHome} style={{ marginTop: '1rem' }}>
           返回主界面
         </button>
       </div>
@@ -175,7 +180,7 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements }) => {
         </button>
         <button
           className="button button--secondary button--large"
-          onClick={onNewGame}
+          onClick={handleGoHome}
         >
           ↩️ 返回主界面
         </button>
