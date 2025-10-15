@@ -2,9 +2,20 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import HeaderActions from '../UI/HeaderActions'
 import Encyclopedia from '../UI/Encyclopedia'
+import AIAssistant from '../UI/AIAssistant'
 import styles from './IntroScreen.module.css'
 
-const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements, dailyChallenge, onOpenEncyclopedia, collectedFoods, onCloseEncyclopedia }) => {
+const IntroScreen = ({
+  onStartGame,
+  gameStats,
+  onOpenCookbook,
+  onOpenAchievements,
+  dailyChallenge,
+  onOpenEncyclopedia,
+  collectedFoods,
+  onCloseEncyclopedia,
+  showAIAssistant = true
+}) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -108,6 +119,14 @@ const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievement
     {/* 食材图鉴模态框 */}
     {onOpenEncyclopedia && (
       <Encyclopedia onClose={onCloseEncyclopedia} />
+    )}
+
+    {/* AI助手 */}
+    {showAIAssistant && (
+      <AIAssistant
+        currentScreen="intro"
+        onClose={() => {}}
+      />
     )}
   )
 }

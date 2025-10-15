@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import FoodCard from '../Cards/FoodCard'
 import { getFoods, getFoodCategories } from '../../utils/dataProcessing'
 import HeaderActions from '../UI/HeaderActions'
+import AIAssistant from '../UI/AIAssistant'
 import styles from './FoodSelectionScreen.module.css'
 
 const FoodSelectionScreen = ({
@@ -135,6 +136,14 @@ const FoodSelectionScreen = ({
           </motion.button>
         </div>
       </motion.div>
+      
+      {/* AI助手 */}
+      <AIAssistant
+        currentScreen="selection"
+        selectedFoods={selectedFoods}
+        dailyChallenge={dailyChallenge}
+        onClose={() => {}}
+      />
     </div>
   )
 }

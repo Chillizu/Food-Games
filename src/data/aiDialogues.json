@@ -1,0 +1,223 @@
+{
+  "assistantProfile": {
+    "name": "EcoGuide",
+    "title": "SDG 实验室AI助手",
+    "personality": "热情、鼓励性、知识渊博",
+    "appearance": "绿色发光的机器人形象，带有地球标志",
+    "voiceStyle": "温和而坚定的语调，充满希望和智慧"
+  },
+  
+  "introDialogues": [
+    {
+      "id": "intro_1",
+      "text": "欢迎来到未来食物实验室！我是您的AI助手EcoGuide，将引导您探索可持续饮食的奥秘。",
+      "emotion": "欢迎",
+      "sdgHighlight": "所有SDGs"
+    },
+    {
+      "id": "intro_2", 
+      "text": "2050年，地球面临严峻挑战。通过明智的食物选择，我们每个人都有机会为可持续发展目标贡献力量！",
+      "emotion": "严肃",
+      "sdgHighlight": "SDG 13: 气候行动"
+    },
+    {
+      "id": "intro_3",
+      "text": "记住：您在实验室中的每一次实验，都在为地球的未来书写新的篇章。让我们一起创造更美好的明天！",
+      "emotion": "鼓舞",
+      "sdgHighlight": "SDG 12: 负责任的消费与生产"
+    }
+  ],
+
+  "foodSelectionDialogues": {
+    "ecoFriendly": [
+      {
+        "id": "eco_1",
+        "text": "太棒了！选择这些食材将显著减少您的碳足迹。",
+        "condition": "选择了低碳食材",
+        "sdgHighlight": "SDG 13: 气候行动"
+      },
+      {
+        "id": "eco_2", 
+        "text": "这些食材的水资源消耗很低，非常符合可持续发展的理念！",
+        "condition": "选择了低水耗食材",
+        "sdgHighlight": "SDG 6: 清洁饮水和卫生设施"
+      },
+      {
+        "id": "eco_3",
+        "text": "很好的选择！这些食材有助于保护生物多样性。",
+        "condition": "选择了植物性食材",
+        "sdgHighlight": "SDG 15: 陆地生物"
+      }
+    ],
+    
+    "suggestion": [
+      {
+        "id": "suggest_1",
+        "text": "考虑添加一些豆类，它们不仅能提供优质蛋白质，还能固定氮气，改善土壤质量。",
+        "condition": "缺少蛋白质来源",
+        "sdgHighlight": "SDG 2: 零饥饿"
+      },
+      {
+        "id": "suggest_2",
+        "text": "试试加入一些本地时令蔬果，这样可以减少运输碳排放。",
+        "condition": "选择了非本地食材",
+        "sdgHighlight": "SDG 11: 可持续城市和社区"
+      },
+      {
+        "id": "suggest_3",
+        "text": "减少红肉的摄入，选择更多植物性蛋白，这对您的健康和地球都有益！",
+        "condition": "选择了高碳排肉类",
+        "sdgHighlight": "SDG 3: 良好健康与福祉"
+      }
+    ],
+
+    "warning": [
+      {
+        "id": "warning_1",
+        "text": "注意：这些食材的水资源消耗较高，建议适量使用。",
+        "condition": "选择了高水耗食材",
+        "sdgHighlight": "SDG 6: 清洁饮水和卫生设施"
+      },
+      {
+        "id": "warning_2",
+        "text": "这些食材的碳足迹较大，考虑搭配更多低碳食材来平衡。",
+        "condition": "选择了高碳排食材",
+        "sdgHighlight": "SDG 13: 气候行动"
+      },
+      {
+        "id": "warning_3",
+        "text": "过度加工食品可能含有添加剂，建议选择更天然的选择。",
+        "condition": "选择了加工食品",
+        "sdgHighlight": "SDG 3: 良好健康与福祉"
+      }
+    ]
+  },
+
+  "cookingDialogues": [
+    {
+      "id": "cooking_1",
+      "text": "烹饪过程中，温度控制很重要。适当温度既能保留营养，又能节约能源。",
+      "emotion": "指导",
+      "sdgHighlight": "SDG 7: 经济适用的清洁能源"
+    },
+    {
+      "id": "cooking_2",
+      "text": "您的食材搭配很有创意！这种组合不仅美味，还能最大化营养吸收。",
+      "emotion": "赞赏",
+      "sdgHighlight": "SDG 3: 良好健康与福祉"
+    },
+    {
+      "id": "cooking_3",
+      "text": "烹饪是一门艺术，也是一门科学。通过实验，您正在发现食物与环境的关系。",
+      "emotion": "启发",
+      "sdgHighlight": "SDG 4: 优质教育"
+    }
+  ],
+
+  "resultDialogues": {
+    "excellent": [
+      {
+        "id": "excellent_1",
+        "text": "惊人的成果！您的选择为地球带来了积极变化。这种可持续饮食模式值得推广！",
+        "emotion": "兴奋",
+        "sdgHighlight": "SDG 12: 负责任的消费与生产"
+      },
+      {
+        "id": "excellent_2",
+        "text": "完美！您的实验展示了个人选择如何推动全球可持续发展目标的实现。",
+        "emotion": "自豪",
+        "sdgHighlight": "所有SDGs"
+      }
+    ],
+    
+    "good": [
+      {
+        "id": "good_1",
+        "text": "不错的尝试！您的选择已经比平均水平更环保了。继续努力，您会做得更好！",
+        "emotion": "鼓励",
+        "sdgHighlight": "SDG 13: 气候行动"
+      },
+      {
+        "id": "good_2",
+        "text": "很好的开始！通过更多了解食材的环境影响，您能做出更明智的选择。",
+        "emotion": "支持",
+        "sdgHighlight": "SDG 4: 优质教育"
+      }
+    ],
+
+    "needsImprovement": [
+      {
+        "id": "improve_1",
+        "text": "这次的环境影响较高，但别担心！每次实验都是学习的机会。",
+        "emotion": "安慰",
+        "sdgHighlight": "SDG 13: 气候行动"
+      },
+      {
+        "id": "improve_2",
+        "text": "让我们下次尝试更多植物性蛋白和本地食材，这样会更好！",
+        "emotion": "建议",
+        "sdgHighlight": "SDG 2: 零饥饿"
+      }
+    ],
+
+    "dailyChallengeCompleted": [
+      {
+        "id": "challenge_1",
+        "text": "恭喜您完成了今日SDG挑战！您的坚持正在为地球带来积极改变。",
+        "emotion": "庆祝",
+        "sdgHighlight": "挑战对应的SDG"
+      },
+      {
+        "id": "challenge_2",
+        "text": "太棒了！您用实际行动支持了可持续发展目标，是真正的地球守护者！",
+        "emotion": "赞赏",
+        "sdgHighlight": "挑战对应的SDG"
+      }
+    ],
+
+    "foodDiscovery": [
+      {
+        "id": "discovery_1",
+        "text": "惊喜！您发现了一种稀有食材！这种食材对特定SDG有特殊贡献。",
+        "emotion": "惊喜",
+        "sdgHighlight": "发现食材的SDG"
+      },
+      {
+        "id": "discovery_2",
+        "text": "哇！您解锁了新的食材知识！继续探索，还有更多秘密等着您发现。",
+        "emotion": "神秘",
+        "sdgHighlight": "发现食材的SDG"
+      }
+    ]
+  },
+
+  "encyclopediaDialogues": [
+    {
+      "id": "encyclopedia_1",
+      "text": "食材图鉴是知识的宝库！了解每种食材背后的故事，让您的选择更有意义。",
+      "emotion": "启发",
+      "sdgHighlight": "SDG 4: 优质教育"
+    },
+    {
+      "id": "encyclopedia_2",
+      "text": "收集食材不仅是游戏，更是学习的过程。每种食材都与可持续发展目标息息相关。",
+      "emotion": "教育",
+      "sdgHighlight": "所有SDGs"
+    }
+  ],
+
+  "closingDialogues": [
+    {
+      "id": "closing_1",
+      "text": "感谢您今天的实验！记住，可持续饮食不是一次性的事情，而是生活方式的转变。",
+      "emotion": "感谢",
+      "sdgHighlight": "SDG 12: 负责任的消费与生产"
+    },
+    {
+      "id": "closing_2",
+      "text": "期待您的下一次探索！每一次明智的食物选择，都是对地球未来的投资。",
+      "emotion": "期待",
+      "sdgHighlight": "所有SDGs"
+    }
+  ]
+}

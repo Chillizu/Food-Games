@@ -4,6 +4,7 @@ import PlanetVisualization from '../3D/PlanetVisualization'
 import MealComposition from '../UI/MealComposition'
 import { getSDGMessage } from '../../utils/dataProcessing'
 import foodReactionsData from '../../data/foodReactions.json'
+import AIAssistant from '../UI/AIAssistant'
 import styles from './ResultScreen.module.css'
 
 const StatCard = ({ label, value }) => (
@@ -241,6 +242,16 @@ const ResultScreen = ({
           🔄 重新制作
         </button>
       </motion.div>
+
+      {/* AI助手 */}
+      <AIAssistant
+        currentScreen="result"
+        selectedFoods={selectedFoods}
+        cookingResult={environmentalImpact}
+        dailyChallenge={dailyChallenge}
+        discoveredFoods={[]}
+        onClose={() => {}}
+      />
     </motion.div>
   )
 }

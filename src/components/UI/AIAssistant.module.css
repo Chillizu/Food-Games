@@ -1,0 +1,363 @@
+.aiAssistant {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+  max-width: 350px;
+}
+
+/* AI助手头像 */
+.avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.avatarIcon {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+  animation: avatarGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes avatarGlow {
+  from {
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+  }
+  to {
+    box-shadow: 0 4px 25px rgba(34, 197, 94, 0.6);
+  }
+}
+
+.avatarGlow {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.5;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+}
+
+.avatarFace {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarEyes {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.eyeLeft,
+.eyeRight {
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: blink 3s infinite;
+}
+
+@keyframes blink {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+.avatarMouth {
+  width: 12px;
+  height: 6px;
+  border-bottom: 2px solid #22c55e;
+  border-radius: 0 0 12px 12px;
+}
+
+.avatarName {
+  font-size: 12px;
+  font-weight: 600;
+  color: #22c55e;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 对话框 */
+.dialogueBox {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  position: relative;
+  min-width: 280px;
+  max-width: 320px;
+  border: 2px solid #e5e7eb;
+}
+
+.dialogueBox::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
+}
+
+.dialogueHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.emotionEmoji {
+  font-size: 18px;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.dialogueTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.sdgBadge {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.dialogueContent {
+  min-height: 40px;
+}
+
+.typingText {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1f2937;
+  word-wrap: break-word;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 16px;
+  background: #22c55e;
+  animation: blink 1s infinite;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+}
+
+.closeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: #f3f4f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #e5e7eb;
+  color: #374151;
+  transform: scale(1.1);
+}
+
+.closeButton:active {
+  transform: scale(0.95);
+}
+
+/* 状态指示器 */
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+.statusText {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .aiAssistant {
+    bottom: 10px;
+    right: 10px;
+    max-width: 300px;
+  }
+  
+  .avatarIcon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .dialogueBox {
+    min-width: 240px;
+    max-width: 280px;
+    padding: 12px;
+  }
+  
+  .dialogueBox::before {
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aiAssistant {
+    bottom: 80px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+  
+  .dialogueBox {
+    min-width: auto;
+    max-width: none;
+  }
+}
+
+/* 动画效果 */
+.dialogueBox {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 主题适配 */
+@media (prefers-color-scheme: dark) {
+  .dialogueBox {
+    background: #1f2937;
+    border-color: #374151;
+    color: #f9fafb;
+  }
+  
+  .dialogueBox::before {
+    border-top-color: #1f2937;
+  }
+  
+  .dialogueHeader {
+    border-bottom-color: #374151;
+  }
+  
+  .dialogueTitle {
+    color: #f9fafb;
+  }
+  
+  .typingText {
+    color: #f9fafb;
+  }
+  
+  .closeButton {
+    background: #374151;
+    color: #9ca3af;
+  }
+  
+  .closeButton:hover {
+    background: #4b5563;
+    color: #f9fafb;
+  }
+  
+  .statusIndicator {
+    background: rgba(31, 41, 55, 0.9);
+  }
+  
+  .statusText {
+    color: #9ca3af;
+  }
+}

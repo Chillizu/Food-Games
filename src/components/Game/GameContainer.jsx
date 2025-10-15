@@ -98,6 +98,7 @@ const GameContainer = () => {
             onOpenEncyclopedia={openEncyclopedia}
             collectedFoods={collectedFoods}
             onCloseEncyclopedia={closeEncyclopedia}
+            showAIAssistant={true}
           />
         )
       
