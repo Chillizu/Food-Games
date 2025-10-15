@@ -1,9 +1,10 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import HeaderActions from '../UI/HeaderActions'
+import Encyclopedia from '../UI/Encyclopedia'
 import styles from './IntroScreen.module.css'
 
-const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements, dailyChallenge }) => {
+const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements, dailyChallenge, onOpenEncyclopedia, collectedFoods, onCloseEncyclopedia }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -78,6 +79,19 @@ const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievement
           </motion.div>
         )}
 
+        <motion.div className={styles.contentBlock} variants={itemVariants}>
+          <h2 className={styles.contentBlockTitle}>📚 食材图鉴</h2>
+          <p>探索所有食材的详细信息，了解它们对环境和健康的影响。收集稀有食材，解锁更多知识！</p>
+          <motion.button
+            className={styles.encyclopediaButton}
+            onClick={onOpenEncyclopedia}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            📖 查看食材图鉴 ({collectedFoods.length} / {require('../../data/foods.json').foods.length})
+          </motion.button>
+        </motion.div>
+
         <motion.div variants={itemVariants}>
           <motion.button
             className={styles.startButton}
@@ -90,6 +104,11 @@ const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievement
         </motion.div>
       </div>
     </motion.div>
+
+    {/* 食材图鉴模态框 */}
+    {onOpenEncyclopedia && (
+      <Encyclopedia onClose={onCloseEncyclopedia} />
+    )}
   )
 }
 

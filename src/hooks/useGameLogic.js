@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import dailyChallengesData from '../data/dailyChallenges.json'
 import foodReactionsData from '../data/foodReactions.json'
+import foodsData from '../data/foods.json'
 import { calculateEnvironmentalImpact, calculatePlanetStatus, checkAchievements, identifyRecipes, generateTips } from '../utils/dataProcessing'
 
 export const useGameLogic = () => {
@@ -29,16 +30,29 @@ export const useGameLogic = () => {
   const [isAchievementGalleryOpen, setIsAchievementGalleryOpen] = useState(false);
   const [unlockedRecipeIds, setUnlockedRecipeIds] = useState([]);
   const [foundReactions, setFoundReactions] = useState([]);
+  const [collectedFoods, setCollectedFoods] = useState([]);
 
-  // 从 localStorage 加载已解锁的图鉴
+  // 从 localStorage 加载已解锁的图鉴和已收集的食材
   useEffect(() => {
     try {
       const savedRecipes = localStorage.getItem('unlockedRecipeIds');
       if (savedRecipes) {
         setUnlockedRecipeIds(JSON.parse(savedRecipes));
       }
+      
+      const savedCollectedFoods = localStorage.getItem('collectedFoods');
+      if (savedCollectedFoods) {
+        setCollectedFoods(JSON.parse(savedCollectedFoods));
+      } else {
+        // 默认解锁所有普通食材
+        const initialCollected = foodsData.foods
+          .filter(food => food.rarity === 'common')
+          .map(food => food.id);
+        setCollectedFoods(initialCollected);
+        localStorage.setItem('collectedFoods', JSON.stringify(initialCollected));
+      }
     } catch (error) {
-      console.error("Failed to load recipes from localStorage", error);
+      console.error("Failed to load game data from localStorage", error);
     }
   }, []);
 
@@ -248,8 +262,14 @@ export const useGameLogic = () => {
     // 检查每日挑战完成情况
     const challengeResult = checkDailyChallengeCompletion();
     
+    // 触发随机发现机制
+    const discoveredFood = triggerRandomDiscovery();
+    if (discoveredFood) {
+      discoverFood(discoveredFood.id);
+    }
+    
     setGameStats(newStats)
-  }, [environmentalImpact, selectedFoods, gameStats, checkDailyChallengeCompletion])
+  }, [environmentalImpact, selectedFoods, gameStats, checkDailyChallengeCompletion, triggerRandomDiscovery, discoverFood])
 
   // 重新开始游戏
   const restartGame = useCallback(() => {
@@ -324,6 +344,7 @@ export const useGameLogic = () => {
     unlockedRecipeIds,
     isAchievementGalleryOpen,
     foundReactions,
+    collectedFoods,
     // 每日挑战状态
     dailyChallenge,
     completedChallenges,
@@ -341,6 +362,8 @@ export const useGameLogic = () => {
     closeCookbook,
     openAchievementGallery,
     closeAchievementGallery,
+    discoverFood,
+    triggerRandomDiscovery,
     
     // 计算属性
     canStartCooking

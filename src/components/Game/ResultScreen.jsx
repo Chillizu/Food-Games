@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import PlanetVisualization from '../3D/PlanetVisualization'
 import MealComposition from '../UI/MealComposition'
 import { getSDGMessage } from '../../utils/dataProcessing'
+import foodReactionsData from '../../data/foodReactions.json'
 import styles from './ResultScreen.module.css'
 
 const StatCard = ({ label, value }) => (
@@ -20,7 +21,9 @@ const ResultScreen = ({
   tips,
   onRestart,
   onNewGame,
-  dailyChallenge
+  dailyChallenge,
+  foundReactions,
+  selectedFoods
 }) => {
   const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null
 
@@ -30,6 +33,61 @@ const ResultScreen = ({
     if (score >= 40) return '一般'
     if (score >= 20) return '需改进'
     return '较差'
+  }
+
+  // 获取反应的类别和颜色
+  const getReactionCategory = (reactionId) => {
+    for (const [categoryKey, category] of Object.entries(foodReactionsData.reactionCategories)) {
+      if (category.reactions.includes(reactionId)) {
+        return {
+          key: categoryKey,
+          name: category.name,
+          color: categoryKey === 'environmental' ? '#10b981' :
+                 categoryKey === 'health' ? '#22c55e' : '#8b5cf6'
+        }
+      }
+    }
+    return { key: 'unknown', name: '未知', color: '#6b7280' }
+  }
+
+  // 渲染反应项
+  const renderReactionItem = (reaction) => {
+    const category = getReactionCategory(reaction.id)
+    
+    return (
+      <div key={reaction.id} className={`${styles.reactionItem} reaction-${category.key}`}>
+        <div className={styles.reactionHeader}>
+          <div
+            className={styles.reactionIcon}
+            style={{ backgroundColor: `${category.color}20`, color: category.color }}
+          >
+            {category.name.charAt(0)}
+          </div>
+          <div>
+            <div className={styles.reactionName}>{reaction.name}</div>
+            <div className={styles.reactionDescription}>{reaction.description}</div>
+          </div>
+        </div>
+        
+        <div className={styles.reactionEffects}>
+          {/* SDG 协同效应 */}
+          {Object.entries(reaction.sdgSynergy).map(([sdg, level]) => (
+            <div key={sdg} className={`${styles.effectBadge} ${styles.sdgBadge}`}>
+              <span>{sdg}</span>
+              <span>★{level}</span>
+            </div>
+          ))}
+          
+          {/* 加成效果 */}
+          {Object.entries(reaction.bonusEffects).map(([effect, value]) => (
+            <div key={effect} className={`${styles.effectBadge} ${styles.bonusBadge}`}>
+              <span>{effect}</span>
+              <span>+{Math.round(value * 100)}%</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
   }
 
   // 检查每日挑战是否完成
@@ -136,6 +194,26 @@ const ResultScreen = ({
                  <p>{dailyChallengeResult.challenge.reward.content}</p>
                </div>
              )}
+           </div>
+          )}
+
+          {/* SDG 化学反应总结 */}
+          {foundReactions && foundReactions.length > 0 ? (
+           <div className={styles.reactionsSection}>
+             <h3 className={styles.reactionsTitle}>
+               🧪 SDG 化学反应总结
+             </h3>
+             <div className={styles.reactionsList}>
+               {foundReactions.map(renderReactionItem)}
+             </div>
+           </div>
+          ) : (
+           <div className={styles.feedback}>
+             <h3 className={styles.feedbackTitle}>🧪 SDG 化学反应</h3>
+             <p className={styles.feedbackText}>
+               本次实验中没有触发特殊的 SDG 化学反应。
+               尝试组合不同的食材，发现更多可持续发展的协同效应！
+             </p>
            </div>
           )}
 

@@ -5,210 +5,330 @@
       "name": "生菜",
       "emoji": "🥬",
       "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.1, "healthScore": 0.9,
-      "category": "vegetable", "color": "#4ade80", "description": "新鲜蔬菜，营养丰富，环境友好"
+      "category": "vegetable", "color": "#4ade80", "description": "新鲜蔬菜，营养丰富，环境友好",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "生菜的含水量高达95%，是补水的好选择！",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12", "SDG13"]
     },
     {
       "id": "apple",
       "name": "苹果",
       "emoji": "🍎",
       "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.8,
-      "category": "fruit", "color": "#f87171", "description": "天然水果，维生素丰富"
+      "category": "fruit", "color": "#f87171", "description": "天然水果，维生素丰富",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "一天一个苹果，医生远离我！苹果富含膳食纤维和抗氧化物。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12"]
     },
     {
       "id": "tofu",
       "name": "豆腐",
       "emoji": "🧈",
       "carbonFootprint": 0.4, "waterUsage": 0.5, "landUsage": 0.3, "healthScore": 0.7,
-      "category": "grain_legume", "color": "#fbbf24", "description": "优质植物蛋白，传统豆制品"
+      "category": "grain_legume", "color": "#fbbf24", "description": "优质植物蛋白，传统豆制品",
+      "rarity": "uncommon",
+      "unlockCondition": "完成3次素食实验",
+      "funFact": "豆腐起源于中国汉代，已有2000多年历史，是东方饮食智慧的结晶！",
+      "sdgGoals": ["SDG2", "SDG12", "SDG13"]
     },
     {
       "id": "chicken",
       "name": "鸡肉",
       "emoji": "🍗",
       "carbonFootprint": 0.6, "waterUsage": 0.5, "landUsage": 0.4, "healthScore": 0.7,
-      "category": "animal", "color": "#fbbf24", "description": "白肉蛋白，相对环保"
+      "category": "animal", "color": "#fbbf24", "description": "白肉蛋白，相对环保",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "鸡肉是世界上最受欢迎的肉类之一，相比红肉，对环境的影响较小。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12", "SDG14"]
     },
     {
       "id": "fish",
       "name": "鱼类",
       "emoji": "🐟",
       "carbonFootprint": 0.5, "waterUsage": 0.6, "landUsage": 0.2, "healthScore": 0.8,
-      "category": "animal", "color": "#60a5fa", "description": "海鲜蛋白，Omega-3丰富"
+      "category": "animal", "color": "#60a5fa", "description": "海鲜蛋白，Omega-3丰富",
+      "rarity": "uncommon",
+      "unlockCondition": "完成5次海洋主题实验",
+      "funFact": "鱼类是大脑的黄金食物！Omega-3脂肪酸有助于提高记忆力和认知功能。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG14"]
     },
     {
       "id": "pork",
       "name": "猪肉",
       "emoji": "🥩",
       "carbonFootprint": 0.7, "waterUsage": 0.6, "landUsage": 0.5, "healthScore": 0.6,
-      "category": "animal", "color": "#f97316", "description": "常见肉类，中等环境影响"
+      "category": "animal", "color": "#f97316", "description": "常见肉类，中等环境影响",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "猪肉是全球消费量最大的肉类，但生产过程会产生大量温室气体。",
+      "sdgGoals": ["SDG2", "SDG12", "SDG13"]
     },
     {
       "id": "beef",
       "name": "牛肉",
       "emoji": "🐄",
       "carbonFootprint": 1.0, "waterUsage": 0.8, "landUsage": 0.9, "healthScore": 0.6,
-      "category": "animal", "color": "#dc2626", "description": "红肉，蛋白质丰富但环境影响大"
+      "category": "animal", "color": "#dc2626", "description": "红肉，蛋白质丰富但环境影响大",
+      "rarity": "rare",
+      "unlockCondition": "完成10次肉类实验",
+      "funFact": "养牛业产生了全球约14.5%的温室气体，比整个交通运输业还要多！",
+      "sdgGoals": ["SDG2", "SDG12", "SDG13", "SDG15"]
     },
     {
       "id": "insect",
       "name": "昆虫蛋白",
       "emoji": "🪲",
       "carbonFootprint": 0.1, "waterUsage": 0.2, "landUsage": 0.1, "healthScore": 0.7,
-      "category": "future", "color": "#8b5cf6", "description": "未来食物，高效环保蛋白质"
+      "category": "future", "color": "#8b5cf6", "description": "未来食物，高效环保蛋白质",
+      "rarity": "legendary",
+      "unlockCondition": "解锁所有其他食材",
+      "funFact": "蟋蟀的蛋白质含量是牛肉的2倍，而只需要1/6的饲料和1/2000的水！",
+      "sdgGoals": ["SDG2", "SDG12", "SDG13", "SDG14", "SDG15"]
     },
     {
       "id": "lab_meat",
       "name": "人工肉",
       "emoji": "🧪",
       "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.1, "healthScore": 0.6,
-      "category": "future", "color": "#a78bfa", "description": "实验室培育，科技感十足"
+      "category": "future", "color": "#a78bfa", "description": "实验室培育，科技感十足",
+      "rarity": "legendary",
+      "unlockCondition": "完成20次实验且平均分达到80分以上",
+      "funFact": "第一块实验室培育的汉堡在2013年成本高达33万美元，现在已大幅下降！",
+      "sdgGoals": ["SDG2", "SDG9", "SDG11", "SDG12", "SDG13"]
     },
     {
       "id": "fast_food",
       "name": "快餐",
       "emoji": "🍔",
       "carbonFootprint": 0.8, "waterUsage": 0.7, "landUsage": 0.6, "healthScore": 0.3,
-      "category": "processed", "color": "#ef4444", "description": "方便快捷，但不够健康环保"
+      "category": "processed", "color": "#ef4444", "description": "方便快捷，但不够健康环保",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "快餐文化起源于美国，现在全球每天有数亿人选择快餐，但环境影响巨大。",
+      "sdgGoals": ["SDG3", "SDG11", "SDG12", "SDG13"]
     },
     {
       "id": "rice",
       "name": "大米",
       "emoji": "🍚",
       "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.3, "healthScore": 0.7,
-      "category": "grain_legume", "color": "#f59e0b", "description": "主食来源，能量充足"
+      "category": "grain_legume", "color": "#f59e0b", "description": "主食来源，能量充足",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "大米养活了世界一半以上的人口！但水稻种植会产生甲烷，这是一种强效温室气体。",
+      "sdgGoals": ["SDG2", "SDG1", "SDG12", "SDG13"]
     },
     {
       "id": "nuts",
       "name": "坚果",
       "emoji": "🥜",
       "carbonFootprint": 0.4, "waterUsage": 0.5, "landUsage": 0.4, "healthScore": 0.8,
-      "category": "grain_legume", "color": "#d97706", "description": "健康零食，营养丰富"
+      "category": "grain_legume", "color": "#d97706", "description": "健康零食，营养丰富",
+      "rarity": "uncommon",
+      "unlockCondition": "完成8次健康饮食实验",
+      "funFact": "杏仁需要约1.9升水才能生产1克，虽然比牛肉少很多，但仍需适量食用！",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12", "SDG15"]
     },
     {
       "id": "seaweed",
       "name": "海藻",
       "emoji": "🌿",
       "carbonFootprint": 0.1, "waterUsage": 0.2, "landUsage": 0.05, "healthScore": 0.9,
-      "category": "vegetable", "color": "#059669", "description": "海洋蔬菜，环保高效，碘含量丰富"
+      "category": "vegetable", "color": "#059669", "description": "海洋蔬菜，环保高效，碘含量丰富",
+      "rarity": "rare",
+      "unlockCondition": "完成3次海洋主题实验",
+      "funFact": "海藻生长速度极快，每天可增长30-60%，是地球上最可持续的食物来源之一！",
+      "sdgGoals": ["SDG2", "SDG3", "SDG14", "SDG15"]
     },
     {
       "id": "mushroom",
       "name": "蘑菇",
       "emoji": "🍄",
       "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.1, "healthScore": 0.8,
-      "category": "vegetable", "color": "#8b5cf6", "description": "菌类蛋白，生长快速，环境友好"
+      "category": "vegetable", "color": "#8b5cf6", "description": "菌类蛋白，生长快速，环境友好",
+      "rarity": "uncommon",
+      "unlockCondition": "完成5次素食实验",
+      "funFact": "蘑菇是唯一含有维生素D的蔬菜！它们在几天内就能长成，是真正的超级食物。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12", "SDG15"]
     },
     {
       "id": "beans",
       "name": "豆类",
       "emoji": "🫘",
       "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.9,
-      "category": "grain_legume", "color": "#f59e0b", "description": "优质植物蛋白，固氮改良土壤"
+      "category": "grain_legume", "color": "#f59e0b", "description": "优质植物蛋白，固氮改良土壤",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "豆类可以固定空气中的氮气，减少对化肥的需求，是天然的土壤改良剂！",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12", "SDG13", "SDG15"]
     },
     {
       "id": "egg",
       "name": "鸡蛋",
       "emoji": "🥚",
       "carbonFootprint": 0.4, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.8,
-      "category": "animal", "color": "#fbbf24", "description": "完全蛋白，营养丰富的传统食材"
+      "category": "animal", "color": "#fbbf24", "description": "完全蛋白，营养丰富的传统食材",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "一个鸡蛋含有人体所需的几乎所有营养素，被称为'完美的食物'！",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12"]
     },
     {
       "id": "dairy",
       "name": "奶制品",
       "emoji": "🥛",
       "carbonFootprint": 0.5, "waterUsage": 0.6, "landUsage": 0.3, "healthScore": 0.7,
-      "category": "animal", "color": "#fde047", "description": "钙质来源，但环境影响中等"
+      "category": "animal", "color": "#fde047", "description": "钙质来源，但环境影响中等",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "生产1升牛奶需要约1000升水！选择植物奶可以大幅减少水资源消耗。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG6", "SDG12", "SDG13"]
     },
     {
       "id": "plant_meat",
       "name": "植物肉",
       "emoji": "🌱",
       "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.1, "healthScore": 0.6,
-      "category": "future", "color": "#4ade80", "description": "现代科技肉替代品，环保健康"
+      "category": "future", "color": "#4ade80", "description": "现代科技肉替代品，环保健康",
+      "rarity": "rare",
+      "unlockCondition": "完成15次实验且平均分达到75分以上",
+      "funFact": "植物肉比传统牛肉使用95%更少的土地和74%更少的温室气体！",
+      "sdgGoals": ["SDG2", "SDG3", "SDG9", "SDG11", "SDG12", "SDG13"]
     },
     {
       "id": "quinoa",
       "name": "藜麦",
       "emoji": "🌾",
       "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.25, "healthScore": 0.9,
-      "category": "grain_legume", "color": "#f59e0b", "description": "超级食物，完全蛋白，营养均衡"
+      "category": "grain_legume", "color": "#f59e0b", "description": "超级食物，完全蛋白，营养均衡",
+      "rarity": "rare",
+      "unlockCondition": "完成12次健康饮食实验",
+      "funFact": "藜麦是唯一含有全部9种必需氨基酸的植物性食物，被联合国宣布为'超级作物'！",
+      "sdgGoals": ["SDG2", "SDG3", "SDG1", "SDG12", "SDG15"]
     },
     {
       "id": "avocado",
       "name": "鳄梨",
       "emoji": "🥑",
       "carbonFootprint": 0.4, "waterUsage": 0.6, "landUsage": 0.3, "healthScore": 0.9,
-      "category": "fruit", "color": "#84cc16", "description": "超级水果，富含健康脂肪"
+      "category": "fruit", "color": "#84cc16", "description": "超级水果，富含健康脂肪",
+      "rarity": "uncommon",
+      "unlockCondition": "完成10次健康饮食实验",
+      "funFact": "一个鳄梨需要约200升水才能成熟！虽然营养丰富，但也要考虑其环境影响。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG6", "SDG12", "SDG13"]
     },
     {
       "id": "berries",
       "name": "浆果",
       "emoji": "🍓",
       "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.9,
-      "category": "fruit", "color": "#ec4899", "description": "抗氧化物丰富，美味健康"
+      "category": "fruit", "color": "#ec4899", "description": "抗氧化物丰富，美味健康",
+      "rarity": "uncommon",
+      "unlockCondition": "完成8次抗氧化饮食实验",
+      "funFact": "蓝莓被称为'大脑浆果'，研究表明它们可以改善记忆力和认知功能！",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12"]
     },
     {
       "id": "potato",
       "name": "土豆",
       "emoji": "🥔",
       "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.1, "healthScore": 0.7,
-      "category": "vegetable", "color": "#eab308", "description": "全球主食，能量的重要来源"
+      "category": "vegetable", "color": "#eab308", "description": "全球主食，能量的重要来源",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "土豆是世界上第四大主食作物，仅次于小麦、大米和玉米！它们可以养活更多的人口。",
+      "sdgGoals": ["SDG2", "SDG1", "SDG12", "SDG13"]
     },
     {
       "id": "corn",
       "name": "玉米",
       "emoji": "🌽",
       "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.7,
-      "category": "grain_legume", "color": "#facc15", "description": "用途广泛的谷物，能量来源"
+      "category": "grain_legume", "color": "#facc15", "description": "用途广泛的谷物，能量来源",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "玉米是世界上种植最广泛的作物之一，除了食用，还可以用于生物燃料和工业原料！",
+      "sdgGoals": ["SDG2", "SDG7", "SDG9", "SDG12"]
     },
     {
       "id": "lamb",
       "name": "羊肉",
       "emoji": "🐑",
       "carbonFootprint": 0.9, "waterUsage": 0.7, "landUsage": 0.8, "healthScore": 0.6,
-      "category": "animal", "color": "#ea580c", "description": "另一种红肉，环境影响较大"
+      "category": "animal", "color": "#ea580c", "description": "另一种红肉，环境影响较大",
+      "rarity": "uncommon",
+      "unlockCondition": "完成15次肉类实验",
+      "funFact": "羊肉的碳足迹是鸡肉的3倍，是植物蛋白的6倍！选择羊肉时要考虑环境影响。",
+      "sdgGoals": ["SDG2", "SDG12", "SDG13", "SDG15"]
     },
     {
       "id": "shrimp",
       "name": "虾",
       "emoji": "🦐",
       "carbonFootprint": 0.6, "waterUsage": 0.5, "landUsage": 0.3, "healthScore": 0.8,
-      "category": "animal", "color": "#fb7185", "description": "常见的海鲜，蛋白质丰富"
+      "category": "animal", "color": "#fb7185", "description": "常见的海鲜，蛋白质丰富",
+      "rarity": "uncommon",
+      "unlockCondition": "完成7次海鲜实验",
+      "funFact": "虾养殖常常破坏红树林生态系统，这些生态系统是重要的碳汇和海洋生物的家园。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG14", "SDG15"]
     },
     {
       "id": "bread",
       "name": "面包",
       "emoji": "🍞",
       "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.3, "healthScore": 0.5,
-      "category": "grain_legume", "color": "#f59e0b", "description": "基础主食，由谷物制成"
+      "category": "grain_legume", "color": "#f59e0b", "description": "基础主食，由谷物制成",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "面包是人类最古老的加工食品之一，历史可追溯到1万年前！它是文明的重要标志。",
+      "sdgGoals": ["SDG2", "SDG11", "SDG12"]
     },
     {
       "id": "cheese",
       "name": "奶酪",
       "emoji": "🧀",
       "carbonFootprint": 0.6, "waterUsage": 0.7, "landUsage": 0.4, "healthScore": 0.5,
-      "category": "animal", "color": "#fde047", "description": "奶制品，风味浓郁"
+      "category": "animal", "color": "#fde047", "description": "奶制品，风味浓郁",
+      "rarity": "uncommon",
+      "unlockCondition": "完成10次奶制品实验",
+      "funFact": "生产1公斤奶酪需要约10升牛奶！奶酪虽然美味，但环境影响不容忽视。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12", "SDG13"]
     },
     {
       "id": "onion",
       "name": "洋葱",
       "emoji": "🧅",
       "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.1, "healthScore": 0.8,
-      "category": "vegetable", "color": "#a78bfa", "description": "基础调味蔬菜，用途广泛"
+      "category": "vegetable", "color": "#a78bfa", "description": "基础调味蔬菜，用途广泛",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "洋葱含有槲皮素等抗氧化物，具有抗炎和抗菌作用！它们是厨房的万能调味品。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12"]
     },
     {
       "id": "garlic",
       "name": "大蒜",
       "emoji": "🧄",
       "carbonFootprint": 0.1, "waterUsage": 0.2, "landUsage": 0.1, "healthScore": 0.9,
-      "category": "vegetable", "color": "#a78bfa", "description": "强大的调味品，有益健康"
+      "category": "vegetable", "color": "#a78bfa", "description": "强大的调味品，有益健康",
+      "rarity": "common",
+      "unlockCondition": "初始解锁",
+      "funFact": "大蒜中的大蒜素具有抗菌和抗病毒作用！古埃及人认为大蒜可以增强体力，给金字塔工人食用。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12"]
     },
     {
       "id": "olive-oil",
       "name": "橄榄油",
       "emoji": "🫒",
       "carbonFootprint": 0.3, "waterUsage": 0.5, "landUsage": 0.3, "healthScore": 0.9,
-      "category": "processed", "color": "#84cc16", "description": "健康的植物油，地中海饮食核心"
+      "category": "processed", "color": "#84cc16", "description": "健康的植物油，地中海饮食核心",
+      "rarity": "rare",
+      "unlockCondition": "完成18次地中海饮食实验",
+      "funFact": "橄榄油富含单不饱和脂肪酸，有助于心血管健康！地中海饮食模式被公认为世界上最健康的饮食之一。",
+      "sdgGoals": ["SDG2", "SDG3", "SDG12", "SDG15"]
     }
   ],
   "categories": {

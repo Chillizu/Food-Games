@@ -9,6 +9,7 @@ import SelectedCards from '../Cards/SelectedCards'
 import AchievementPopup from '../UI/AchievementPopup'
 import Cookbook from '../UI/Cookbook'
 import AchievementGallery from '../UI/AchievementGallery'
+import Encyclopedia from '../UI/Encyclopedia'
 import { getAchievements } from '../../utils/dataProcessing'
 
 const GameContainer = () => {
@@ -38,7 +39,18 @@ const GameContainer = () => {
     closeAchievementGallery,
     deselectFood,
     dailyChallenge,
+    foundReactions,
+    collectedFoods,
+    discoverFood,
+    triggerRandomDiscovery,
   } = useGameLogic();
+
+  // 图鉴状态
+  const [isEncyclopediaOpen, setIsEncyclopediaOpen] = useState(false);
+
+  // 图鉴控制函数
+  const openEncyclopedia = () => setIsEncyclopediaOpen(true);
+  const closeEncyclopedia = () => setIsEncyclopediaOpen(false);
 
   const [achievementQueue, setAchievementQueue] = useState([]);
   const [currentAchievement, setCurrentAchievement] = useState(null);
@@ -83,6 +95,9 @@ const GameContainer = () => {
             onOpenCookbook={openCookbook}
             onOpenAchievements={openAchievementGallery}
             dailyChallenge={dailyChallenge}
+            onOpenEncyclopedia={openEncyclopedia}
+            collectedFoods={collectedFoods}
+            onCloseEncyclopedia={closeEncyclopedia}
           />
         )
       
@@ -121,6 +136,7 @@ const GameContainer = () => {
             onRestart={restartGame}
             onNewGame={startNewGame}
             dailyChallenge={dailyChallenge}
+            foundReactions={foundReactions}
           />
         )
       
@@ -163,6 +179,9 @@ const GameContainer = () => {
         show={isAchievementGalleryOpen}
         onClose={closeAchievementGallery}
         unlockedAchievementIds={gameStats.unlockedAchievements}
+      />
+      <Encyclopedia
+        onClose={closeEncyclopedia}
       />
     </>
   )
