@@ -1,0 +1,221 @@
+{
+  "reactions": [
+    {
+      "id": "sdg2_13_combo",
+      "name": "零碳蛋白质",
+      "description": "植物蛋白与低碳食材的完美结合，为地球减负",
+      "requiredIngredients": ["豆腐", "西兰花", "胡萝卜"],
+      "sdgSynergy": {
+        "SDG2": 2,
+        "SDG13": 2
+      },
+      "bonusEffects": {
+        "carbonReduction": 0.4,
+        "waterEfficiency": 0.3,
+        "nutritionScore": 1.5
+      },
+      "unlockMessage": "解锁「零碳蛋白质」组合！大幅减少碳足迹，提升营养价值",
+      "visualEffect": "greenGlow"
+    },
+    {
+      "id": "sdg12_6_combo",
+      "name": "循环美食",
+      "description": "利用剩余食材创造美味，减少食物浪费",
+      "requiredIngredients": ["土豆", "洋葱", "蘑菇"],
+      "sdgSynergy": {
+        "SDG12": 2,
+        "SDG6": 1
+      },
+      "bonusEffects": {
+        "wasteReduction": 0.5,
+        "waterConservation": 0.2,
+        "resourceEfficiency": 0.4
+      },
+      "unlockMessage": "解锁「循环美食」组合！减少食物浪费，节约水资源",
+      "visualEffect": "blueGlow"
+    },
+    {
+      "id": "sdg3_15_combo",
+      "name": "森林疗愈餐",
+      "description": "森林食材组合，促进身心健康与生态保护",
+      "requiredIngredients": ["坚果", "浆果", "菠菜"],
+      "sdgSynergy": {
+        "SDG3": 2,
+        "SDG15": 2
+      },
+      "bonusEffects": {
+        "healthScore": 1.8,
+        "biodiversity": 0.3,
+        "mentalWellbeing": 0.4
+      },
+      "unlockMessage": "解锁「森林疗愈餐」组合！提升健康水平，保护生物多样性",
+      "visualEffect": "forestGlow"
+    },
+    {
+      "id": "sdg14_2_combo",
+      "name": "海洋宝藏",
+      "description": "海洋食材与植物蛋白的可持续组合",
+      "requiredIngredients": ["三文鱼", "藜麦", "海藻"],
+      "sdgSynergy": {
+        "SDG14": 2,
+        "SDG2": 1
+      },
+      "bonusEffects": {
+        "oceanHealth": 0.4,
+        "proteinQuality": 1.3,
+        "omega3Boost": 0.5
+      },
+      "unlockMessage": "解锁「海洋宝藏」组合！促进海洋健康，提供优质蛋白质",
+      "visualEffect": "oceanGlow"
+    },
+    {
+      "id": "sdg7_11_combo",
+      "name": "清洁能源餐",
+      "description": "低碳食材与本地食材的节能组合",
+      "requiredIngredients": ["鸡肉", "南瓜", "红薯"],
+      "sdgSynergy": {
+        "SDG7": 2,
+        "SDG11": 1
+      },
+      "bonusEffects": {
+        "energyEfficiency": 0.3,
+        "localSupport": 0.2,
+        "carbonFootprint": 0.25
+      },
+      "unlockMessage": "解锁「清洁能源餐」组合！提高能源效率，支持本地农业",
+      "visualEffect": "yellowGlow"
+    },
+    {
+      "id": "sdg5_8_combo",
+      "name": "性别平等营养餐",
+      "description": "均衡营养组合，促进性别平等与体面工作",
+      "requiredIngredients": ["鸡蛋", "豆类", "全谷物"],
+      "sdgSynergy": {
+        "SDG5": 1,
+        "SDG8": 1
+      },
+      "bonusEffects": {
+        "nutritionBalance": 0.4,
+        "genderEquality": 0.2,
+        "fairLabor": 0.2
+      },
+      "unlockMessage": "解锁「性别平等营养餐」组合！促进营养均衡与公平劳动",
+      "visualEffect": "purpleGlow"
+    },
+    {
+      "id": "sdg4_16_combo",
+      "name": "和平教育餐",
+      "description": "传统食材与现代营养的和平结合",
+      "requiredIngredients": ["大米", "豆腐", "蔬菜"],
+      "sdgSynergy": {
+        "SDG4": 1,
+        "SDG16": 1
+      },
+      "bonusEffects": {
+        "educationValue": 0.3,
+        "peaceBuilding": 0.2,
+        "culturalHeritage": 0.3
+      },
+      "unlockMessage": "解锁「和平教育餐」组合！促进教育与文化传承",
+      "visualEffect": "whiteGlow"
+    },
+    {
+      "id": "sdg1_10_combo",
+      "name": "消除贫困套餐",
+      "description": "经济实惠的营养组合，助力消除贫困",
+      "requiredIngredients": ["豆类", "玉米", "南瓜"],
+      "sdgSynergy": {
+        "SDG1": 1,
+        "SDG10": 1
+      },
+      "bonusEffects": {
+        "affordability": 0.4,
+        "povertyReduction": 0.3,
+        "economicInclusion": 0.2
+      },
+      "unlockMessage": "解锁「消除贫困套餐」组合！提供经济实惠的营养解决方案",
+      "visualEffect": "goldGlow"
+    },
+    {
+      "id": "sdg9_17_combo",
+      "name": "创新合作餐",
+      "description": "创新食材与传统工艺的完美融合",
+      "requiredIngredients": ["人工肉", "蘑菇", "香料"],
+      "sdgSynergy": {
+        "SDG9": 2,
+        "SDG17": 1
+      },
+      "bonusEffects": {
+        "innovationScore": 0.5,
+        "partnershipEffectiveness": 0.3,
+        "technologyTransfer": 0.2
+      },
+      "unlockMessage": "解锁「创新合作餐」组合！推动技术创新与国际合作",
+      "visualEffect": "techGlow"
+    }
+  ],
+  "reactionCategories": {
+    "environmental": {
+      "name": "环境友好组合",
+      "description": "减少环境影响，保护生态系统的食材组合",
+      "reactions": ["sdg2_13_combo", "sdg12_6_combo", "sdg14_2_combo", "sdg7_11_combo"]
+    },
+    "health": {
+      "name": "健康营养组合",
+      "description": "促进身心健康，提供全面营养的食材组合",
+      "reactions": ["sdg3_15_combo", "sdg5_8_combo", "sdg1_10_combo"]
+    },
+    "social": {
+      "name": "社会影响组合",
+      "description": "促进社会公平，推动可持续发展的食材组合",
+      "reactions": ["sdg4_16_combo", "sdg9_17_combo"]
+    }
+  },
+  "visualEffects": {
+    "greenGlow": {
+      "color": "#4ade80",
+      "animation": "pulse",
+      "particles": "leaf"
+    },
+    "blueGlow": {
+      "color": "#60a5fa",
+      "animation": "wave",
+      "particles": "water"
+    },
+    "forestGlow": {
+      "color": "#22c55e",
+      "animation": "rustle",
+      "particles": "leaf"
+    },
+    "oceanGlow": {
+      "color": "#0ea5e9",
+      "animation": "flow",
+      "particles": "bubble"
+    },
+    "yellowGlow": {
+      "color": "#facc15",
+      "animation": "sparkle",
+      "particles": "energy"
+    },
+    "purpleGlow": {
+      "color": "#a855f7",
+      "animation": "glow",
+      "particles": "star"
+    },
+    "whiteGlow": {
+      "color": "#f8fafc",
+      "animation": "peace",
+      "particles": "dove"
+    },
+    "goldGlow": {
+      "color": "#fbbf24",
+      "animation": "shine",
+      "particles": "coin"
+    },
+    "techGlow": {
+      "color": "#3b82f6",
+      "animation": "digital",
+      "particles": "pixel"
+    }
+  }
+}

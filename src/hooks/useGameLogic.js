@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
 import dailyChallengesData from '../data/dailyChallenges.json'
+import foodReactionsData from '../data/foodReactions.json'
 import { calculateEnvironmentalImpact, calculatePlanetStatus, checkAchievements, identifyRecipes, generateTips } from '../utils/dataProcessing'
 
 export const useGameLogic = () => {
@@ -27,6 +28,7 @@ export const useGameLogic = () => {
   const [isCookbookOpen, setIsCookbookOpen] = useState(false);
   const [isAchievementGalleryOpen, setIsAchievementGalleryOpen] = useState(false);
   const [unlockedRecipeIds, setUnlockedRecipeIds] = useState([]);
+  const [foundReactions, setFoundReactions] = useState([]);
 
   // 从 localStorage 加载已解锁的图鉴
   useEffect(() => {
@@ -116,6 +118,26 @@ export const useGameLogic = () => {
     });
   }, []);
 
+  // 检测食材组合
+  const detectFoodReactions = useCallback((selectedFoods) => {
+    const foundReactions = [];
+    const selectedFoodIds = selectedFoods.map(food => food.id);
+    
+    // 检查每个反应
+    foodReactionsData.reactions.forEach(reaction => {
+      const requiredIngredientIds = reaction.requiredIngredients.map(ing => ing.id);
+      
+      // 检查是否包含了所有必需的食材
+      const hasAllIngredients = requiredIngredientIds.every(id => selectedFoodIds.includes(id));
+      
+      if (hasAllIngredients) {
+        foundReactions.push(reaction);
+      }
+    });
+    
+    return foundReactions;
+  }, []);
+  
   // 为了保持向后兼容，保留旧的函数名，但指向新逻辑
   const selectFood = toggleFoodSelection;
   const deselectFood = (foodId) => {
@@ -127,6 +149,10 @@ export const useGameLogic = () => {
     if (selectedFoods.length < 2) return
     
     setGameStage('cooking')
+    
+    // 检测食材组合
+    const reactions = detectFoodReactions(selectedFoods);
+    setFoundReactions(reactions);
     
     // 计算环境影响
     const impact = calculateEnvironmentalImpact(selectedFoods);
@@ -149,10 +175,15 @@ export const useGameLogic = () => {
         return updatedIds;
       });
     }
-
-    // 计算总分（基础分 + 菜品加分）
+    
+    // 计算组合加成
+    const reactionBonus = reactions.reduce((sum, reaction) => {
+      return sum + (Object.values(reaction.bonusEffects).reduce((a, b) => a + b, 0) * 10);
+    }, 0);
+    
+    // 计算总分（基础分 + 菜品加分 + 组合加成）
     const recipeBonus = foundRecipes.reduce((sum, recipe) => sum + recipe.bonusScore, 0);
-    const finalScore = impact.totalScore + recipeBonus;
+    const finalScore = impact.totalScore + recipeBonus + reactionBonus;
     
     const finalImpact = { ...impact, totalScore: finalScore };
     setEnvironmentalImpact(finalImpact);
@@ -166,13 +197,14 @@ export const useGameLogic = () => {
       timestamp: Date.now(),
       score: finalImpact.totalScore,
       status: status,
-      foods: [...selectedFoods]
+      foods: [...selectedFoods],
+      reactions: reactions
     }]);
     
     // 生成提示
     const newTips = generateTips(finalImpact);
     setTips(newTips);
-  }, [selectedFoods])
+  }, [selectedFoods, detectFoodReactions])
 
   // 完成烹饪，显示结果
   const completeCooking = useCallback(() => {
@@ -229,6 +261,7 @@ export const useGameLogic = () => {
     setUnlockedAchievements([])
     setFoundRecipes([])
     setUnmatchedFoods([])
+    setFoundReactions([])
   }, [])
 
   // 重置整个游戏
@@ -249,6 +282,7 @@ export const useGameLogic = () => {
     setUnlockedAchievements([])
     setFoundRecipes([])
     setUnmatchedFoods([])
+    setFoundReactions([])
   }, [])
 
   // 开始新游戏
@@ -261,6 +295,7 @@ export const useGameLogic = () => {
     setUnlockedAchievements([])
     setFoundRecipes([])
     setUnmatchedFoods([])
+    setFoundReactions([])
   }, [])
 
   // 检查是否可以开始烹饪
@@ -288,6 +323,7 @@ export const useGameLogic = () => {
     isCookbookOpen,
     unlockedRecipeIds,
     isAchievementGalleryOpen,
+    foundReactions,
     // 每日挑战状态
     dailyChallenge,
     completedChallenges,
