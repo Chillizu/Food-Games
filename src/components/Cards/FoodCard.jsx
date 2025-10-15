@@ -1,9 +1,9 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { IconLeaf, IconDroplet, IconWorld, IconHeart } from '@tabler/icons-react'
+import { IconLeaf, IconDroplet, IconWorld, IconHeart, IconStar } from '@tabler/icons-react'
 import styles from './FoodCard.module.css'
 
-const FoodCard = ({ food, isSelected, onSelect }) => {
+const FoodCard = ({ food, isSelected, onSelect, isChallengeIngredient, dailyChallenge }) => {
   const cardVariants = {
     initial: { opacity: 0, y: 20, scale: 0.95 },
     animate: { opacity: 1, y: 0, scale: 1 },
@@ -11,7 +11,23 @@ const FoodCard = ({ food, isSelected, onSelect }) => {
     tap: { scale: 0.97 }
   }
 
-  const cardClasses = `${styles.card} ${isSelected ? styles.selected : ''}`
+  // 获取 SDG 颜色
+  const getSdgColor = () => {
+    if (!dailyChallenge) return 'var(--color-primary)'
+    
+    switch (dailyChallenge.sdg) {
+      case 'SDG 2':
+        return '#f59e0b' // 黄色 - 零饥饿
+      case 'SDG 12':
+        return '#10b981' // 绿色 - 负责任消费
+      case 'SDG 13':
+        return '#3b82f6' // 蓝色 - 气候行动
+      default:
+        return 'var(--color-primary)'
+    }
+  }
+
+  const cardClasses = `${styles.card} ${isSelected ? styles.selected : ''} ${isChallengeIngredient ? styles.challengeIngredient : ''}`
 
   return (
     <motion.div
@@ -30,6 +46,15 @@ const FoodCard = ({ food, isSelected, onSelect }) => {
         <div className={styles.header}>
           <div className={styles.emoji}>{food.emoji}</div>
           <h3 className={styles.name}>{food.name}</h3>
+          {isChallengeIngredient && dailyChallenge && (
+            <div
+              className={styles.challengeBadge}
+              style={{ borderColor: getSdgColor() }}
+              title={`挑战所需: ${dailyChallenge.sdgTitle}`}
+            >
+              <IconStar size={14} style={{ color: getSdgColor() }} />
+            </div>
+          )}
         </div>
         <p className={styles.description}>{food.description}</p>
         <div className={styles.footer}>

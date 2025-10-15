@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import HeaderActions from '../UI/HeaderActions'
 import styles from './IntroScreen.module.css'
 
-const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements }) => {
+const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements, dailyChallenge }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -46,6 +46,17 @@ const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievement
             <li>努力解锁环保成就，培养一个绿色的饮食星球。</li>
           </ul>
         </motion.div>
+
+        {dailyChallenge && (
+          <motion.div className={styles.contentBlock} variants={itemVariants}>
+            <h2 className={styles.contentBlockTitle}>🎯 今日 SDG 挑战</h2>
+            <div className={styles.contentBlock}>
+              <p><strong>{dailyChallenge.title}</strong></p>
+              <p>{dailyChallenge.description}</p>
+              <p><small>SDG: {dailyChallenge.sdg} | 奖励: +{dailyChallenge.bonusScore} 分</small></p>
+            </div>
+          </motion.div>
+        )}
 
         {gameStats.totalMeals > 0 && (
           <motion.div className={styles.contentBlock} variants={itemVariants}>

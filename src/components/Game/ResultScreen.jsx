@@ -19,7 +19,8 @@ const ResultScreen = ({
   unmatchedFoods,
   tips,
   onRestart,
-  onNewGame
+  onNewGame,
+  dailyChallenge
 }) => {
   const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null
 
@@ -30,6 +31,25 @@ const ResultScreen = ({
     if (score >= 20) return '需改进'
     return '较差'
   }
+
+  // 检查每日挑战是否完成
+  const checkDailyChallengeCompletion = () => {
+    if (!dailyChallenge || !environmentalImpact || !selectedFoods) return null
+    
+    const selectedFoodIds = selectedFoods.map(food => food.id)
+    const requiredIngredientIds = dailyChallenge.requiredIngredients.map(ingredient => ingredient.id)
+    
+    // 检查是否包含了所有必需的食材
+    const isCompleted = requiredIngredientIds.every(id => selectedFoodIds.includes(id))
+    
+    return {
+      isCompleted,
+      challenge: dailyChallenge,
+      bonusScore: isCompleted ? dailyChallenge.bonusScore : 0
+    }
+  }
+
+  const dailyChallengeResult = checkDailyChallengeCompletion()
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -86,6 +106,36 @@ const ResultScreen = ({
            <div className={styles.feedback}>
              <h3 className={styles.feedbackTitle}>{sdgMessage.icon} {sdgMessage.title}</h3>
              <p className={styles.feedbackText}>{sdgMessage.message}</p>
+           </div>
+          )}
+
+          {/* 每日挑战结果 */}
+          {dailyChallengeResult && (
+           <div className={`${styles.feedback} ${dailyChallengeResult.isCompleted ? styles.challengeCompleted : styles.challengeIncomplete}`}>
+             <h3 className={styles.feedbackTitle}>
+               {dailyChallengeResult.challenge.sdgIcon} 今日 SDG 挑战
+             </h3>
+             <p className={styles.feedbackText}>
+               {dailyChallengeResult.isCompleted ? (
+                 <>
+                   🎉 恭喜！你完成了「{dailyChallengeResult.challenge.title}」挑战！
+                   <br />
+                   <span className={styles.bonusScore}>+{dailyChallengeResult.bonusScore} 分奖励</span>
+                 </>
+               ) : (
+                 <>
+                   很遗憾，你未能完成「{dailyChallengeResult.challenge.title}」挑战。
+                   <br />
+                   继续努力，为 {dailyChallengeResult.challenge.sgdTitle} 做出贡献！
+                 </>
+               )}
+             </p>
+             {dailyChallengeResult.isCompleted && dailyChallengeResult.challenge.reward && (
+               <div className={styles.challengeReward}>
+                 <h4>🏆 {dailyChallengeResult.challenge.reward.title}</h4>
+                 <p>{dailyChallengeResult.challenge.reward.content}</p>
+               </div>
+             )}
            </div>
           )}
 

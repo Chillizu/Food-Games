@@ -127,3 +127,46 @@
     width: 100%;
   }
 }
+
+/* 每日挑战样式 */
+.challengeCompleted {
+  border-left: 4px solid var(--color-success);
+  background-color: var(--color-success-light);
+}
+
+.challengeIncomplete {
+  border-left: 4px solid var(--color-warning);
+  background-color: var(--color-warning-light);
+}
+
+.bonusScore {
+  display: inline-block;
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--color-success);
+  color: white;
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+.challengeReward {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-success);
+}
+
+.challengeReward h4 {
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--color-success);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.challengeReward p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}

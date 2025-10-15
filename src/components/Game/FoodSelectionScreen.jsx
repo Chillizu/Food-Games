@@ -12,7 +12,8 @@ const FoodSelectionScreen = ({
   onStartCooking,
   canStartCooking,
   onOpenCookbook,
-  onOpenAchievements
+  onOpenAchievements,
+  dailyChallenge
 }) => {
   const [activeCategory, setActiveCategory] = useState('all')
   const foods = getFoods()
@@ -21,6 +22,12 @@ const FoodSelectionScreen = ({
   const filteredFoods = activeCategory === 'all'
     ? foods
     : foods.filter(food => food.category === activeCategory)
+
+  // 判断食材是否是挑战所需食材
+  const isChallengeIngredient = (foodId) => {
+    if (!dailyChallenge || !dailyChallenge.requiredIngredients) return false
+    return dailyChallenge.requiredIngredients.some(ingredient => ingredient.id === foodId)
+  }
 
   return (
     <div className={styles.screen}>
@@ -87,6 +94,8 @@ const FoodSelectionScreen = ({
                 food={food}
                 isSelected={selectedFoods.some(f => f.id === food.id)}
                 onSelect={() => onToggleFoodSelection(food)}
+                isChallengeIngredient={isChallengeIngredient(food.id)}
+                dailyChallenge={dailyChallenge}
               />
             </motion.div>
           ))}

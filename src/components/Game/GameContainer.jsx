@@ -37,6 +37,7 @@ const GameContainer = () => {
     openAchievementGallery,
     closeAchievementGallery,
     deselectFood,
+    dailyChallenge,
   } = useGameLogic();
 
   const [achievementQueue, setAchievementQueue] = useState([]);
@@ -81,6 +82,7 @@ const GameContainer = () => {
             gameStats={gameStats}
             onOpenCookbook={openCookbook}
             onOpenAchievements={openAchievementGallery}
+            dailyChallenge={dailyChallenge}
           />
         )
       
@@ -94,6 +96,7 @@ const GameContainer = () => {
             canStartCooking={canStartCooking}
             onOpenCookbook={openCookbook}
             onOpenAchievements={openAchievementGallery}
+            dailyChallenge={dailyChallenge}
           />
         )
       
@@ -117,11 +120,12 @@ const GameContainer = () => {
             tips={tips}
             onRestart={restartGame}
             onNewGame={startNewGame}
+            dailyChallenge={dailyChallenge}
           />
         )
       
       default:
-        return <IntroScreen onStartGame={startNewGame} />
+        return <IntroScreen onStartGame={startNewGame} dailyChallenge={dailyChallenge} />
     }
   }
 

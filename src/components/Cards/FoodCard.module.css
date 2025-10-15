@@ -54,6 +54,7 @@
   display: flex;
   align-items: flex-start;
   margin-bottom: var(--spacing-4);
+  position: relative;
 }
 
 .emoji {
@@ -126,4 +127,64 @@
 .selectIndicator.visible {
   transform: scale(1);
   opacity: 1;
+}
+
+.challengeIngredient {
+  border: 2px solid;
+  box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.2), var(--shadow-lg);
+  position: relative;
+  overflow: visible;
+}
+
+.challengeIngredient::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(45deg, transparent, rgba(10, 132, 255, 0.1), transparent);
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--transition-slow);
+}
+
+.challengeIngredient:hover::before {
+  opacity: 1;
+  animation: shimmer 2s infinite;
+}
+
+.challengeIngredient:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.3), var(--shadow-xl);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.challengeBadge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-background);
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-slow);
+}
+
+.challengeIngredient:hover .challengeBadge {
+  transform: scale(1.1);
 }
