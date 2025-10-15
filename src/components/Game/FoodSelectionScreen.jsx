@@ -96,6 +96,7 @@ const FoodSelectionScreen = ({
                 onSelect={() => onToggleFoodSelection(food)}
                 isChallengeIngredient={isChallengeIngredient(food.id)}
                 dailyChallenge={dailyChallenge}
+                selectedFoods={selectedFoods}
               />
             </motion.div>
           ))}
