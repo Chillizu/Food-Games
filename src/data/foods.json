@@ -209,6 +209,48 @@
       "emoji": "🫒",
       "carbonFootprint": 0.3, "waterUsage": 0.5, "landUsage": 0.3, "healthScore": 0.9,
       "category": "processed", "color": "#84cc16", "description": "健康的植物油，地中海饮食核心"
+    },
+    {
+      "id": "lentils",
+      "name": "小扁豆",
+      "emoji": "🥣",
+      "carbonFootprint": 0.2, "waterUsage": 0.3, "landUsage": 0.2, "healthScore": 0.9,
+      "category": "grain_legume", "color": "#f59e0b", "description": "营养丰富的豆类，优秀的植物蛋白来源，非常环保。"
+    },
+    {
+      "id": "chocolate",
+      "name": "巧克力",
+      "emoji": "🍫",
+      "carbonFootprint": 0.7, "waterUsage": 0.8, "landUsage": 0.5, "healthScore": 0.3,
+      "category": "processed", "color": "#ef4444", "description": "美味的享受，但生产过程对环境有较高要求。"
+    },
+    {
+      "id": "algae",
+      "name": "藻类",
+      "emoji": "🦠",
+      "carbonFootprint": 0.1, "waterUsage": 0.1, "landUsage": 0.0, "healthScore": 0.9,
+      "category": "future", "color": "#8b5cf6", "description": "未来的超级食物，生长快速，无需土地，营养密度高。"
+    },
+    {
+      "id": "coffee",
+      "name": "咖啡",
+      "emoji": "☕",
+      "carbonFootprint": 0.4, "waterUsage": 0.8, "landUsage": 0.3, "healthScore": 0.6,
+      "category": "processed", "color": "#ef4444", "description": "提神醒脑的全球性饮品，但水足迹较高。"
+    },
+    {
+      "id": "tea",
+      "name": "茶叶",
+      "emoji": "🍵",
+      "carbonFootprint": 0.2, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.8,
+      "category": "vegetable", "color": "#4ade80", "description": "历史悠久的健康饮品，种类繁多。"
+    },
+    {
+      "id": "soy-milk",
+      "name": "豆浆",
+      "emoji": "🥛",
+      "carbonFootprint": 0.3, "waterUsage": 0.4, "landUsage": 0.2, "healthScore": 0.8,
+      "category": "grain_legume", "color": "#f59e0b", "description": "植物性牛奶替代品，富含蛋白质。"
     }
   ],
   "categories": {

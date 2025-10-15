@@ -43,7 +43,6 @@ const FoodSelectionScreen = ({
               组合不同的食材，探索它们对环境和健康的影响。
             </motion.p>
           </div>
-          <HeaderActions onCookbookClick={onOpenCookbook} onAchievementsClick={onOpenAchievements} />
         </div>
       </div>
 

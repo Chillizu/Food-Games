@@ -134,5 +134,133 @@
     "bonusScore": 5,
     "description": "大多数美味菜肴的起点。",
     "emoji": "🧅"
+  },
+  {
+    "id": "lentil-soup",
+    "name": "扁豆汤",
+    "ingredients": ["lentils", "onion", "garlic"],
+    "bonusScore": 20,
+    "description": "温暖健康的植物性汤品，富含蛋白质和纤维。",
+    "emoji": "🥣"
+  },
+  {
+    "id": "chocolate-avocado-mousse",
+    "name": "巧克力鳄梨慕斯",
+    "ingredients": ["chocolate", "avocado", "nuts"],
+    "bonusScore": 15,
+    "description": "一道令人惊讶的健康甜点，口感丝滑浓郁。",
+    "emoji": "🍮"
+  },
+  {
+    "id": "algae-smoothie",
+    "name": "藻类冰沙",
+    "ingredients": ["algae", "apple", "berries"],
+    "bonusScore": 30,
+    "description": "充满未来感的营养冰沙，为你的一天注入活力。",
+    "emoji": "🥤"
+  },
+  {
+    "id": "morning-boost",
+    "name": "提神醒脑",
+    "ingredients": ["coffee", "soy-milk"],
+    "bonusScore": 10,
+    "description": "经典的早晨饮品组合，为你的一天提供能量。",
+    "emoji": "☕"
+  },
+  {
+    "id": "zen-garden",
+    "name": "禅意花园",
+    "ingredients": ["tea", "nuts", "berries"],
+    "bonusScore": 25,
+    "description": "一份宁静健康的下午茶，帮助你放松身心。",
+    "emoji": "🍵"
+  },
+  {
+    "id": "soy-latte",
+    "name": "豆奶拿铁",
+    "ingredients": ["soy-milk", "coffee"],
+    "bonusScore": 12,
+    "description": "植物性牛奶与咖啡的完美结合。",
+    "emoji": "☕"
+  },
+  {
+    "id": "pork-rice-bowl",
+    "name": "猪肉饭",
+    "ingredients": ["pork", "rice", "onion"],
+    "bonusScore": 15,
+    "description": "一份简单而令人满足的家常便饭，能量满满。",
+    "emoji": "🍚"
+  },
+  {
+    "id": "tofu-scramble",
+    "name": "豆腐炒饭",
+    "ingredients": ["tofu", "rice", "mushroom"],
+    "bonusScore": 20,
+    "description": "纯素版的炒蛋，风味十足，蛋白质丰富。",
+    "emoji": "🍛"
+  },
+  {
+    "id": "chicken-corn-soup",
+    "name": "鸡肉玉米汤",
+    "ingredients": ["chicken", "corn", "potato"],
+    "bonusScore": 18,
+    "description": "一碗暖心暖胃的浓汤，适合任何季节。",
+    "emoji": "🥣"
+  },
+  {
+    "id": "fish-tacos",
+    "name": "鱼肉塔可",
+    "ingredients": ["fish", "corn", "avocado"],
+    "bonusScore": 22,
+    "description": "清新爽口的墨西哥风味，健康又美味。",
+    "emoji": "🌮"
+  },
+  {
+    "id": "plant-based-burger",
+    "name": "植物肉汉堡",
+    "ingredients": ["plant_meat", "bread", "lettuce"],
+    "bonusScore": 25,
+    "description": "可持续的美味汉堡，未来的选择。",
+    "emoji": "🍔"
+  },
+  {
+    "id": "lamb-skewers",
+    "name": "羊肉串",
+    "ingredients": ["lamb", "onion", "garlic"],
+    "bonusScore": 10,
+    "description": "经典的烧烤美食，风味浓郁。",
+    "emoji": "🍢"
+  },
+  {
+    "id": "shrimp-avocado-salad",
+    "name": "虾仁牛油果沙拉",
+    "ingredients": ["shrimp", "avocado", "lettuce"],
+    "bonusScore": 24,
+    "description": "一道清淡而奢华的沙拉，富含健康脂肪。",
+    "emoji": "🥗"
+  },
+  {
+    "id": "cheese-mushroom-omelette",
+    "name": "奶酪蘑菇煎蛋",
+    "ingredients": ["cheese", "mushroom", "egg"],
+    "bonusScore": 16,
+    "description": "经典的早餐选择，营养丰富。",
+    "emoji": "🍳"
+  },
+  {
+    "id": "seaweed-rice-rolls",
+    "name": "海苔饭团",
+    "ingredients": ["seaweed", "rice"],
+    "bonusScore": 15,
+    "description": "简单健康的零食，充满海洋的气息。",
+    "emoji": "🍙"
+  },
+  {
+    "id": "future-food-shake",
+    "name": "未来食物奶昔",
+    "ingredients": ["algae", "insect", "soy-milk"],
+    "bonusScore": 38,
+    "description": "高效的未来营养奶昔，挑战你的味蕾。",
+    "emoji": "🥤"
   }
 ]

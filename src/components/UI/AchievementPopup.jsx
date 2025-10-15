@@ -82,7 +82,7 @@ const AchievementPopup = ({ achievement, onNext, isLast }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            {isLast ? '开始新实验' : '下一个成就 →'}
+            {isLast ? '完成' : '下一个成就 →'}
           </motion.button>
 
           {/* 装饰性粒子效果 */}

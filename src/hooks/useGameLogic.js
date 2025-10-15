@@ -1,10 +1,11 @@
-import { useState, useCallback, useEffect } from 'react'
-import { calculateEnvironmentalImpact, calculatePlanetStatus, checkAchievements, identifyRecipes, generateTips } from '../utils/dataProcessing'
+import { useState, useCallback, useEffect, useMemo } from 'react'
+import { calculateEnvironmentalImpact, calculatePlanetStatus, checkAchievements, identifyRecipes, generateTips, getAllRecipes } from '../utils/dataProcessing'
 
 export const useGameLogic = () => {
   // 游戏状态
   const [gameStage, setGameStage] = useState('intro') // intro, selecting, cooking, result
   const [selectedFoods, setSelectedFoods] = useState([])
+  const [highlightedFoods, setHighlightedFoods] = useState({});
   const [planetHistory, setPlanetHistory] = useState([])
   const [gameStats, setGameStats] = useState({
     totalMeals: 0,
@@ -24,6 +25,61 @@ export const useGameLogic = () => {
   const [isAchievementGalleryOpen, setIsAchievementGalleryOpen] = useState(false);
   const [unlockedRecipeIds, setUnlockedRecipeIds] = useState([]);
 
+  const recipes = useMemo(() => getAllRecipes(), []);
+
+  // 计算当前选择总览
+  const selectionStats = useMemo(() => {
+    if (selectedFoods.length === 0) {
+      return {
+        carbonFootprint: 0,
+        waterUsage: 0,
+        healthScore: 0,
+      };
+    }
+
+    const totals = selectedFoods.reduce((acc, food) => {
+      acc.carbonFootprint += food.carbonFootprint;
+      acc.waterUsage += food.waterUsage;
+      acc.healthScore += food.healthScore;
+      return acc;
+    }, {
+      carbonFootprint: 0,
+      waterUsage: 0,
+      healthScore: 0,
+    });
+
+    // 平均健康分
+    totals.healthScore = totals.healthScore / selectedFoods.length;
+
+    return totals;
+  }, [selectedFoods]);
+
+  // 更新高亮食物的逻辑
+  const updateHighlightedFoods = useCallback((currentSelectedFoods) => {
+    const highlights = {};
+    const selectedIds = new Set(currentSelectedFoods.map(f => f.id));
+
+    // 找出所有已选择食物可以组成的完整食谱
+    const completableRecipes = recipes.filter(recipe =>
+      recipe.ingredients.every(id => selectedIds.has(id))
+    );
+
+    // 只有当存在一个或多个完整食谱时，才进行高亮
+    if (completableRecipes.length > 0) {
+      for (const recipe of completableRecipes) {
+        for (const ingredientId of recipe.ingredients) {
+          if (!highlights[ingredientId]) {
+            highlights[ingredientId] = { count: 0, colors: [], isComplete: true };
+          }
+          highlights[ingredientId].count++;
+          highlights[ingredientId].colors.push(recipe.color || 'var(--primary-color)');
+        }
+      }
+    }
+    
+    setHighlightedFoods(highlights);
+  }, [recipes]);
+
   // 从 localStorage 加载已解锁的图鉴
   useEffect(() => {
     try {
@@ -38,15 +94,13 @@ export const useGameLogic = () => {
 
   // 切换食材选择状态（选择/取消选择）
   const toggleFoodSelection = useCallback((food) => {
-    setSelectedFoods(prev => {
-      const isSelected = prev.some(item => item.id === food.id);
-      if (isSelected) {
-        return prev.filter(item => item.id !== food.id);
-      } else {
-        return [...prev, food];
-      }
-    });
-  }, []);
+    const newSelectedFoods = selectedFoods.some(item => item.id === food.id)
+      ? selectedFoods.filter(item => item.id !== food.id)
+      : [...selectedFoods, food];
+    
+    setSelectedFoods(newSelectedFoods);
+    updateHighlightedFoods(newSelectedFoods);
+  }, [selectedFoods, updateHighlightedFoods]);
 
   // 为了保持向后兼容，保留旧的函数名，但指向新逻辑
   const selectFood = toggleFoodSelection;
@@ -217,6 +271,7 @@ export const useGameLogic = () => {
     isCookbookOpen,
     unlockedRecipeIds,
     isAchievementGalleryOpen,
+    highlightedFoods,
     
     // 操作
     toggleFoodSelection,
@@ -233,6 +288,7 @@ export const useGameLogic = () => {
     closeAchievementGallery,
     
     // 计算属性
-    canStartCooking
+    canStartCooking,
+    selectionStats,
   }
 }

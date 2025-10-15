@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAchievements } from '../../utils/dataProcessing';
+import { IconX } from '@tabler/icons-react';
 
 const AchievementGallery = ({ show, onClose, unlockedAchievementIds }) => {
   const allAchievements = getAchievements();
@@ -35,7 +36,7 @@ const AchievementGallery = ({ show, onClose, unlockedAchievementIds }) => {
           >
             <div className="modal-header">
               <h2 className="modal-title">🏆 成就殿堂</h2>
-              <button className="close-button" onClick={onClose}>&times;</button>
+              <button className="close-button" onClick={onClose}><IconX size={28} /></button>
             </div>
             <div className="achievement-gallery-grid">
               {allAchievements.map(achievement => (

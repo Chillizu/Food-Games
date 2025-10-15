@@ -10,46 +10,47 @@ const Cookbook = ({ show, onClose, unlockedRecipeIds }) => {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="cookbook-overlay"
+          className="achievement-gallery-overlay"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
         >
           <motion.div
-            className="cookbook-modal"
+            className="achievement-gallery-modal"
             initial={{ y: "-100vh", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "100vh", opacity: 0 }}
             transition={{ type: 'spring', stiffness: 120, damping: 20 }}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h2 className="modal-title">食谱图鉴</h2>
+              <h2 className="modal-title">📚 食谱图鉴</h2>
               <button className="close-button" onClick={onClose}><IconX size={28} /></button>
             </div>
             
-            <div className="cookbook-grid">
+            <div className="achievement-gallery-grid">
               {allRecipes.map(recipe => {
                 const isUnlocked = unlockedRecipeIds.includes(recipe.id);
                 return (
-                  <div key={recipe.id} className={`cookbook-item ${isUnlocked ? 'unlocked' : 'locked'}`}>
+                  <div key={recipe.id} className={`achievement-gallery-item ${isUnlocked ? 'unlocked' : 'locked'}`} title={isUnlocked ? recipe.description : '未解锁'}>
                     {isUnlocked ? (
                       <>
-                        <div className="cookbook-item-image">{recipe.emoji}</div>
-                        <h3 className="cookbook-item-name">{recipe.name}</h3>
-                        <p className="cookbook-item-ingredients">{recipe.ingredients.join(' + ')}</p>
+                        <div className="achievement-gallery-icon">{recipe.emoji}</div>
+                        <div className="achievement-gallery-name">{recipe.name}</div>
                       </>
                     ) : (
                       <>
-                        <div className="cookbook-item-image"><IconLock size={40} /></div>
-                        <h3 className="cookbook-item-name">？？？</h3>
-                        <p className="cookbook-item-ingredients">未解锁</p>
+                        <div className="achievement-gallery-icon"><IconLock size={40} /></div>
+                        <div className="achievement-gallery-name">？？？</div>
                       </>
                     )}
                   </div>
                 );
               })}
+            </div>
+             <div className="modal-footer">
+              已解锁: {unlockedRecipeIds.length} / {allRecipes.length}
             </div>
           </motion.div>
         </motion.div>

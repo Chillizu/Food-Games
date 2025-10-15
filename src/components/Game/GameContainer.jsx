@@ -37,6 +37,8 @@ const GameContainer = () => {
     openAchievementGallery,
     closeAchievementGallery,
     deselectFood,
+    highlightedFoods,
+    selectionStats,
   } = useGameLogic();
 
   const [achievementQueue, setAchievementQueue] = useState([]);
@@ -81,6 +83,7 @@ const GameContainer = () => {
             gameStats={gameStats}
             onOpenCookbook={openCookbook}
             onOpenAchievements={openAchievementGallery}
+            unlockedRecipeIds={unlockedRecipeIds}
           />
         )
       
@@ -92,8 +95,6 @@ const GameContainer = () => {
             onDeselectFood={deselectFood}
             onStartCooking={startCooking}
             canStartCooking={canStartCooking}
-            onOpenCookbook={openCookbook}
-            onOpenAchievements={openAchievementGallery}
           />
         )
       
@@ -117,6 +118,8 @@ const GameContainer = () => {
             tips={tips}
             onRestart={restartGame}
             onNewGame={startNewGame}
+            onOpenCookbook={openCookbook}
+            onOpenAchievements={openAchievementGallery}
           />
         )
       
@@ -139,6 +142,8 @@ const GameContainer = () => {
             <SelectedCards
               selectedFoods={selectedFoods}
               onDeselectFood={deselectFood}
+              highlightedFoods={highlightedFoods}
+              selectionStats={selectionStats}
             />
           </aside>
         )}

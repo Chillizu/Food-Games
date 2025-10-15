@@ -217,6 +217,15 @@ export function getRecipes() {
   return recipesData
 }
 
+// 获取所有食谱，并为每个食谱添加一个随机颜色用于高亮
+export function getAllRecipes() {
+  const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FED766', '#2AB7CA', '#F0CF65', '#D1E65F'];
+  return recipesData.map((recipe, index) => ({
+    ...recipe,
+    color: colors[index % colors.length],
+  }));
+}
+
 // 生成游戏提示
 export function generateTips(environmentalImpact) {
   const tips = []
