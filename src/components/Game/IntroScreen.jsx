@@ -1,84 +1,101 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import HeaderActions from '../UI/HeaderActions'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { IconBook, IconAward, IconChevronRight } from '@tabler/icons-react';
+import FloatingEmojis from '../UI/FloatingEmojis';
+import foodData from '../../data/foods.json';
 
-const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements }) => {
+const IntroScreen = ({ onStartGame, gameStats, onOpenCookbook, onOpenAchievements, unlockedRecipeIds }) => {
+  const foodEmojis = foodData.foods.map(food => food.emoji);
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
-    }
-  }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  }
+    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } },
+  };
+
+  const cardHoverEffect = {
+    hover: {
+      scale: 1.05,
+      boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+      transition: { type: 'spring', stiffness: 300 }
+    }
+  };
 
   return (
-    <motion.div
-      className="intro-screen"
+    <motion.div 
+      className="intro-screen-reimagined"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <HeaderActions onCookbookClick={onOpenCookbook} onAchievementsClick={onOpenAchievements} />
-      <div className="intro-screen__content">
-        <motion.div className="content-block" variants={itemVariants}>
-          <h1 className="intro-screen__title">未来食物实验室</h1>
-          <p className="intro-screen__subtitle">探索可持续饮食，塑造更美好的地球。</p>
+      {/* Left Column */}
+      <div className="intro-left-panel">
+        <motion.div variants={itemVariants} className="intro-header">
+          <h1 className="intro-title">未来食物实验室</h1>
+          <p className="intro-subtitle">你的选择，决定星球的命运</p>
+        </motion.div>
+        
+        <motion.div variants={itemVariants} className="intro-description">
+          <p>欢迎来到2050年。地球资源日益紧张，人类的未来悬于一线。作为“未来食物实验室”的顶尖研究员，你的任务是通过精心设计每一餐，探索可持续的饮食方案，为我们的星球寻找一条绿色、健康的未来之路。</p>
         </motion.div>
 
-        <motion.div className="content-block" variants={itemVariants}>
-          <h2 className="content-block__title">🌍 故事背景</h2>
-          <p>2050年，地球资源紧张。作为“未来食物实验室”的研究员，你的每次选择都将决定我们星球的未来。</p>
-        </motion.div>
-
-        <motion.div className="content-block" variants={itemVariants}>
-          <h2 className="content-block__title">🎮 游戏目标</h2>
-          <ul>
-            <li>选择不同食材进行组合实验。</li>
-            <li>观察并学习每种选择对环境的影响。</li>
-            <li>努力解锁环保成就，培养一个绿色的饮食星球。</li>
-          </ul>
-        </motion.div>
-
-        {gameStats.totalMeals > 0 && (
-          <motion.div className="content-block" variants={itemVariants}>
-            <h2 className="content-block__title">🏆 过往成就</h2>
-            <div className="stats-grid">
-              <div className="stat-item">
-                <span className="stat-number">{gameStats.totalMeals}</span>
-                <span className="stat-label">完成实验</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">{gameStats.unlockedAchievements.length}</span>
-                <span className="stat-label">解锁成就</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">{gameStats.ecoStreak}</span>
-                <span className="stat-label">环保连击</span>
-              </div>
-            </div>
-          </motion.div>
-        )}
-
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} className="intro-start-button-container">
           <motion.button
-            className="button button--primary button--large"
+            className="button button--primary button--large button--pulse"
             onClick={onStartGame}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            🚀 开始新的实验
+            🚀 进入实验室
           </motion.button>
         </motion.div>
       </div>
-    </motion.div>
-  )
-}
 
-export default IntroScreen
+      {/* Right Column */}
+      <div className="intro-right-panel">
+        <motion.div variants={itemVariants} className="intro-planet-container">
+          <FloatingEmojis emojis={foodEmojis} />
+        </motion.div>
+        
+        <div className="intro-cards-container">
+          <motion.div
+            className="intro-info-card"
+            variants={itemVariants}
+            whileHover="hover"
+            onClick={onOpenCookbook}
+          >
+            <div className="intro-card-header">
+              <IconBook size={24} className="intro-card-icon" />
+              <h3 className="intro-card-title">食谱图鉴</h3>
+            </div>
+            <div className="intro-card-progress">
+              <p className="intro-card-value">{unlockedRecipeIds.length}</p>
+              <p className="intro-card-label">已解锁</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="intro-info-card"
+            variants={itemVariants}
+            whileHover="hover"
+            onClick={onOpenAchievements}
+          >
+            <div className="intro-card-header">
+              <IconAward size={24} className="intro-card-icon" />
+              <h3 className="intro-card-title">成就殿堂</h3>
+            </div>
+            <div className="intro-card-progress">
+              <p className="intro-card-value">{gameStats.unlockedAchievements.length}</p>
+              <p className="intro-card-label">已达成</p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default IntroScreen;

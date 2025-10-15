@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import CookingAnimation from '../3D/CookingAnimation'
+import { Canvas } from '@react-three/fiber'
+import FunCookingAnimation from '../3D/FunCookingAnimation'
 
 const CookingScreen = ({ selectedFoods, onCompleteCooking }) => {
   const [cookingProgress, setCookingProgress] = useState(0)
   const [currentStep, setCurrentStep] = useState(0)
 
   const cookingSteps = [
-    { text: '正在准备实验器材...', duration: 1500 },
-    { text: '混合食材样本...', duration: 2000 },
-    { text: '进行热力分析...', duration: 2000 },
-    { text: '数据合成与模拟...', duration: 1500 },
-    { text: '生成最终报告...', duration: 1000 }
+    { text: '分析食材成分...', duration: 1000 },
+    { text: '进行模拟实验...', duration: 2000 },
+    { text: '生成报告...', duration: 1000 }
   ]
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const CookingScreen = ({ selectedFoods, onCompleteCooking }) => {
 
     const runStep = (stepIndex) => {
       if (stepIndex >= cookingSteps.length) {
-        setTimeout(() => onCompleteCooking(), 1200)
+        setTimeout(() => onCompleteCooking(), 500)
         return
       }
 
@@ -55,7 +54,11 @@ const CookingScreen = ({ selectedFoods, onCompleteCooking }) => {
         </div>
 
         <div className="cooking-screen__animation-container">
-          <CookingAnimation selectedFoods={selectedFoods} />
+          <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} />
+            <FunCookingAnimation selectedFoods={selectedFoods} />
+          </Canvas>
         </div>
 
         <div className="cooking-screen__progress-wrapper">

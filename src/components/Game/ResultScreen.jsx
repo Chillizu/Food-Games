@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import PlanetVisualization from '../3D/PlanetVisualization'
 import MealComposition from '../UI/MealComposition'
 import { getSDGMessage } from '../../utils/dataProcessing'
+import HeaderActions from '../UI/HeaderActions'
 
 const ResultScreen = ({
   selectedFoods,
@@ -13,7 +14,9 @@ const ResultScreen = ({
   planetHistory,
   tips,
   onRestart,
-  onNewGame
+  onNewGame,
+  onOpenCookbook,
+  onOpenAchievements
 }) => {
   const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null;
 
@@ -42,6 +45,7 @@ const ResultScreen = ({
       initial="hidden"
       animate="visible"
     >
+      <HeaderActions onCookbookClick={onOpenCookbook} onAchievementsClick={onOpenAchievements} />
       <div className="screen-header">
         <motion.h1 variants={itemVariants}>实验结果分析</motion.h1>
         <motion.p className="screen-subtitle" variants={itemVariants}>
@@ -88,7 +92,7 @@ const ResultScreen = ({
           )}
           
           {sdgMessage && (
-           <div className="content-block sdg-info-block">
+           <div className="content-block">
              <h2 className="content-block__title">{sdgMessage.icon} {sdgMessage.title}</h2>
              <p>{sdgMessage.message}</p>
            </div>
@@ -158,11 +162,11 @@ const ResultScreen = ({
         </motion.button>
         <motion.button
           className="button button--secondary button--large"
-          onClick={onRestart}
+          onClick={onNewGame}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          🔄 重新制作
+          ↩️ 返回主界面
         </motion.button>
       </motion.div>
 
