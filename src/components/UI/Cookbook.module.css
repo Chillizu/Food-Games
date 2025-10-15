@@ -1,0 +1,188 @@
+/* 遮罩层 */
+.cookbook-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: var(--spacing-md);
+}
+
+/* 模态框 */
+.cookbook-modal {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-xl);
+  max-width: 900px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 头部 */
+.modal-header {
+  padding: var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: var(--font-size-xxxl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  background-color: var(--color-background-hover);
+  color: var(--color-text-primary);
+}
+
+/* 食谱网格 */
+.cookbook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+}
+
+/* 食谱卡片 */
+.cookbook-item {
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-border);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.cookbook-item.unlocked {
+  border-color: var(--color-primary);
+}
+
+.cookbook-item.unlocked:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.cookbook-item.locked {
+  opacity: 0.7;
+  cursor: not-allowed;
+  border-color: var(--color-text-secondary);
+}
+
+/* 卡片内容 */
+.cookbook-item-image {
+  font-size: var(--font-size-xxxl);
+  line-height: 1;
+}
+
+.cookbook-item-name {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.cookbook-item-ingredients {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* 卡片元信息 */
+.cookbook-item-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--spacing-xs);
+}
+
+.cookbook-item-rarity {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: white;
+}
+
+.cookbook-item-rarity.locked {
+  background-color: var(--color-text-secondary);
+}
+
+.cookbook-item-score {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-success);
+  background-color: var(--color-success-light);
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .cookbook-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+  
+  .modal-header {
+    padding: var(--spacing-lg);
+  }
+  
+  .modal-title {
+    font-size: var(--font-size-xxl);
+  }
+}
+
+/* 滚动条样式 */
+.cookbook-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cookbook-modal::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+.cookbook-modal::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+.cookbook-modal::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
