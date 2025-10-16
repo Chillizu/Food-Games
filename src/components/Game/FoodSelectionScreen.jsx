@@ -10,6 +10,7 @@ const FoodSelectionScreen = ({
   onDeselectFood,
   onStartCooking,
   canStartCooking,
+  selectionStats,
   onOpenCookbook,
   onOpenAchievements
 }) => {

@@ -1,16 +1,30 @@
-import React, { useMemo } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import React, { useMemo, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import PlanetVisualization from '../3D/PlanetVisualization'
+import { Canvas } from '@react-three/fiber'
+import { PlanetScene } from '../3D/PlanetVisualization'
 import MealComposition from '../UI/MealComposition'
 import { getSDGMessage } from '../../utils/dataProcessing'
 import HeaderActions from '../UI/HeaderActions'
-import StatProgressBar from '../UI/StatProgressBar';
+import ModernProgressBar from '../UI/ModernProgressBar';
 import AnimatedScore from '../UI/AnimatedScore';
 
 const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGame }) => {
   const location = useLocation();
-  const resultData = location.state;
+  const [resultData, setResultData] = useState(location.state);
+
+  useEffect(() => {
+    if (!resultData) {
+      try {
+        const storedData = sessionStorage.getItem('lastResultData');
+        if (storedData) {
+          setResultData(JSON.parse(storedData));
+        }
+      } catch (error) {
+        console.error("Failed to load result from sessionStorage", error);
+      }
+    }
+  }, [resultData]);
 
   const handleGoHome = () => {
     if (onResetGame) {
@@ -89,7 +103,12 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGa
           <div className="content-block">
             <h2 className="content-block__title">🌍 饮食星球状态</h2>
             <div className="result-screen__planet-container">
-              <PlanetVisualization planetStatus={planetStatus} selectedFoods={selectedFoods} />
+              <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+                <PlanetScene
+                  planetStatus={planetStatus}
+                  selectedFoods={selectedFoods}
+                />
+              </Canvas>
             </div>
             <div className="planet-status-info">
               <span className="planet-status-info__indicator" style={{backgroundColor: planetStatus.color}} />
@@ -139,35 +158,32 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGa
               <div className="overall-score__tag">{getScoreMessage(environmentalImpact.totalScore)}</div>
             </div>
             <div className="stats-progress-bars">
-               <StatProgressBar
+              <ModernProgressBar
                 label="碳排放"
-                icon="🌍"
-                value={Math.round(environmentalImpact.carbonFootprint * 100)}
-                max={200}
-                higherIsBetter={false}
+                icon="💨"
+                value={environmentalImpact.carbonFootprint}
+                max={1.5}
                 delay={0.4}
               />
-              <StatProgressBar
+              <ModernProgressBar
                 label="水资源消耗"
                 icon="💧"
-                value={Math.round(environmentalImpact.waterUsage * 100)}
-                max={200}
-                higherIsBetter={false}
+                value={environmentalImpact.waterUsage}
+                max={1.5}
                 delay={0.5}
               />
-              <StatProgressBar
+              <ModernProgressBar
                 label="土地占用"
                 icon="🌳"
-                value={Math.round(environmentalImpact.landUsage * 100)}
-                max={200}
-                higherIsBetter={false}
+                value={environmentalImpact.landUsage}
+                max={1.5}
                 delay={0.6}
               />
-              <StatProgressBar
+              <ModernProgressBar
                 label="健康度"
                 icon="❤️"
-                value={Math.round(environmentalImpact.healthScore * 100)}
-                max={100}
+                value={environmentalImpact.healthScore}
+                max={1}
                 delay={0.7}
               />
             </div>
