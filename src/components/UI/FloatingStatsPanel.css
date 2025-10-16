@@ -1,0 +1,30 @@
+.floating-stats-panel {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(300px, 80vw, 600px);
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  z-index: 1000;
+  color: var(--text-color);
+}
+
+.panel-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
