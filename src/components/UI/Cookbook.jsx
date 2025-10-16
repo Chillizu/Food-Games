@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getRecipes, getFoods } from '../../utils/dataProcessing';
 import { IconX, IconLock, IconToolsKitchen2, IconLeaf } from '@tabler/icons-react';
@@ -8,12 +8,22 @@ const Cookbook = ({ show, onClose, unlockedRecipeIds }) => {
   const allRecipes = useMemo(() => getRecipes(), []);
   const allFoods = useMemo(() => getFoods().sort((a, b) => a.name.localeCompare(b.name, 'zh-Hans')), []);
 
-  const StatItem = ({ label, value }) => (
-    <li className="food-dex-stat-item">
-      <span>{label}</span>
-      <span className="food-dex-stat-value">{value.toFixed(2)}</span>
-    </li>
-  );
+  // Control body scroll when modal is open
+  useEffect(() => {
+    if (show) {
+      // Add modal-open class to body to prevent scrolling
+      document.body.classList.add('modal-open');
+    } else {
+      // Remove modal-open class from body to restore scrolling
+      document.body.classList.remove('modal-open');
+    }
+
+    // Cleanup function to remove class when component unmounts
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [show]);
+
 
   return (
     <AnimatePresence>
@@ -72,34 +82,32 @@ const Cookbook = ({ show, onClose, unlockedRecipeIds }) => {
               )}
 
               {activeTab === 'foods' && (
-                <div className="food-grid">
+                <div className="cookbook-food-grid">
                   {allFoods.map(food => (
-                    <div key={food.id} className="food-card">
-                      <div className="food-card__content">
-                        <div className="food-card__header">
-                          <span className="food-card__emoji">{food.emoji}</span>
-                          <h3 className="food-card__name">{food.name}</h3>
+                    <div key={food.id} className="cookbook-food-card" title={food.description}>
+                      <div className="cookbook-food-emoji">{food.emoji}</div>
+                      <h3 className="cookbook-food-name">{food.name}</h3>
+                      <p className="cookbook-food-description">{food.description}</p>
+                      <div className="cookbook-food-stats">
+                        <div className="cookbook-food-stat" title={`碳排放: ${food.carbonFootprint}`}>
+                          <span className="cookbook-food-stat-icon">🌱</span>
+                          <span className="cookbook-food-stat-value">{Math.round(food.carbonFootprint * 100)}</span>
+                          <span className="cookbook-food-stat-label">碳排</span>
                         </div>
-                        <p className="food-card__description" title={food.description}>{food.description}</p>
-                        <div className="food-card__footer">
-                          <div className="food-card__stats">
-                            <div className="stat-item" title={`碳排放: ${food.carbonFootprint}`}>
-                              <span>🌱</span>
-                              <span>{Math.round(food.carbonFootprint * 100)}</span>
-                            </div>
-                            <div className="stat-item" title={`水消耗: ${food.waterUsage}`}>
-                              <span>💧</span>
-                              <span>{Math.round(food.waterUsage * 100)}</span>
-                            </div>
-                            <div className="stat-item" title={`土地占用: ${food.landUsage}`}>
-                              <span>🌍</span>
-                              <span>{Math.round(food.landUsage * 100)}</span>
-                            </div>
-                            <div className="stat-item" title={`健康指数: ${food.healthScore}`}>
-                              <span>❤️</span>
-                              <span>{Math.round(food.healthScore * 100)}</span>
-                            </div>
-                          </div>
+                        <div className="cookbook-food-stat" title={`水消耗: ${food.waterUsage}`}>
+                          <span className="cookbook-food-stat-icon">💧</span>
+                          <span className="cookbook-food-stat-value">{Math.round(food.waterUsage * 100)}</span>
+                          <span className="cookbook-food-stat-label">水耗</span>
+                        </div>
+                        <div className="cookbook-food-stat" title={`土地占用: ${food.landUsage}`}>
+                          <span className="cookbook-food-stat-icon">🌍</span>
+                          <span className="cookbook-food-stat-value">{Math.round(food.landUsage * 100)}</span>
+                          <span className="cookbook-food-stat-label">土地</span>
+                        </div>
+                        <div className="cookbook-food-stat" title={`健康指数: ${food.healthScore}`}>
+                          <span className="cookbook-food-stat-icon">❤️</span>
+                          <span className="cookbook-food-stat-value">{Math.round(food.healthScore * 100)}</span>
+                          <span className="cookbook-food-stat-label">健康</span>
                         </div>
                       </div>
                     </div>

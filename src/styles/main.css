@@ -1085,9 +1085,15 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Change to flex-start for better scrolling */
   z-index: 1000;
   backdrop-filter: blur(8px);
+  overflow-y: auto; /* Allow vertical scrolling */
+  padding: 2rem 0;
+}
+
+.achievement-gallery-overlay::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
 }
 
 .achievement-gallery-modal {
@@ -1096,12 +1102,18 @@ body {
   padding: 2rem;
   width: 90%;
   max-width: 900px;
-  max-height: 80vh;
+  max-height: calc(100vh - 4rem); /* Account for padding */
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-large);
   position: relative;
+  margin: auto; /* Center vertically */
   overflow: hidden; /* Prevent content overflow */
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
 }
 
 .achievement-gallery-grid {
@@ -1291,33 +1303,53 @@ body {
   font-weight: 700;
 }
 
-/* Modal Close Button Styles */
+/* Modal Close Button Styles - COMPLETELY REWRITTEN */
 .close-button {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  background-color: var(--surface-color);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary-color);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-round);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease-in-out;
-  box-shadow: none;
-  z-index: 10;
+  position: absolute !important;
+  top: 1.25rem !important;
+  right: 1.25rem !important;
+  background-color: var(--surface-color) !important;
+  border: 2px solid var(--border-color) !important;
+  color: var(--text-secondary-color) !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: var(--radius-round) !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: var(--shadow-small) !important;
+  z-index: 1000 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-weight: normal !important;
+  text-decoration: none !important;
+  outline: none !important;
 }
 
 .close-button:hover {
-  background-color: var(--danger-color);
-  border-color: var(--danger-color);
-  color: white;
-  transform: rotate(90deg) scale(1.1);
-  box-shadow: var(--shadow-medium);
+  background-color: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+  color: white !important;
+  transform: rotate(90deg) scale(1.1) !important;
+  box-shadow: var(--shadow-medium) !important;
+}
+
+.close-button:active {
+  transform: rotate(90deg) scale(0.95) !important;
+}
+
+/* Ensure close button works in all modal contexts */
+.achievement-gallery-modal .close-button,
+.cookbook-modal .close-button,
+.modal .close-button {
+  position: absolute !important;
+  top: 1.25rem !important;
+  right: 1.25rem !important;
+  z-index: 1000 !important;
 }
 
 /* Selection Stats */
@@ -1455,7 +1487,7 @@ body {
   border-bottom-color: var(--primary-color);
 }
 
-/* Food Dex Styles */
+/* Food Dex Styles - Simplified Card Style */
 .food-dex-list {
   display: flex;
   flex-direction: column;
@@ -1513,6 +1545,92 @@ body {
 .food-dex-stat-value {
   font-weight: 600;
   color: var(--text-color);
+}
+
+/* Simplified Food Cards for Cookbook */
+.cookbook-food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.cookbook-food-card {
+  background-color: var(--surface-color);
+  border-radius: var(--radius-medium);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-small);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.cookbook-food-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--primary-color);
+}
+
+.cookbook-food-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.cookbook-food-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.cookbook-food-description {
+  font-size: 0.8rem;
+  color: var(--text-secondary-color);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.cookbook-food-stats {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.cookbook-food-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cookbook-food-stat-icon {
+  font-size: 1rem;
+}
+
+.cookbook-food-stat-value {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.cookbook-food-stat-label {
+  font-size: 0.65rem;
+  color: var(--text-secondary-color);
 }
 /* Hide scrollbar for .hand-area__cards-list */
 .hand-area__cards-list::-webkit-scrollbar {

@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAchievements } from '../../utils/dataProcessing';
 import { IconX } from '@tabler/icons-react';
 
 const AchievementGallery = ({ show, onClose, unlockedAchievementIds }) => {
   const allAchievements = getAchievements();
+
+  // Control body scroll when modal is open
+  useEffect(() => {
+    if (show) {
+      // Add modal-open class to body to prevent scrolling
+      document.body.classList.add('modal-open');
+    } else {
+      // Remove modal-open class from body to restore scrolling
+      document.body.classList.remove('modal-open');
+    }
+
+    // Cleanup function to remove class when component unmounts
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [show]);
 
   const isUnlocked = (achievementId) => unlockedAchievementIds.includes(achievementId);
 
