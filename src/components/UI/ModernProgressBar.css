@@ -10,7 +10,7 @@
   align-items: center;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  color: var(--text-color-light);
+  color: var(--text-secondary-color);
 }
 
 .progress-bar-icon {
@@ -32,14 +32,14 @@
 .progress-bar-track {
   width: 100%;
   height: 8px;
-  background-color: var(--ui-background-dark);
+  background-color: var(--border-color);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progress-bar-filler {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-color-light), var(--accent-color));
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   border-radius: 4px;
 }
 

@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     if (!currentAchievement && achievementQueue.length > 0) {
-      const nextAchievementId = achievementQueue;
+      const nextAchievementId = achievementQueue[0];
       const allAchievements = getAchievements();
       const nextAchievement = allAchievements.find(a => a.id === nextAchievementId);
       setCurrentAchievement(nextAchievement);

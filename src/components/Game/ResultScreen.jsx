@@ -44,13 +44,27 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGa
     );
   }
 
+  // 确保environmentalImpact存在且有必要的属性
+  if (!resultData.environmentalImpact) {
+    console.error('Result data missing environmentalImpact:', resultData);
+    return (
+      <div className="content-block" style={{ textAlign: 'center', margin: 'auto' }}>
+        <h2>数据不完整</h2>
+        <p>实验结果数据不完整，请重新开始实验。</p>
+        <button className="button button--primary" onClick={onResetGame} style={{ marginTop: '1rem' }}>
+          返回主界面
+        </button>
+      </div>
+    );
+  }
+
   const {
     environmentalImpact,
     planetStatus: dataPlanetStatus,
-    foundRecipes,
-    unmatchedFoods,
-    planetHistory,
-    tips,
+    foundRecipes = [],
+    unmatchedFoods = [],
+    planetHistory = [],
+    tips = [],
   } = resultData;
 
   const planetStatus = dataPlanetStatus || initialPlanetStatus;
@@ -165,28 +179,28 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGa
               <ModernProgressBar
                 label="碳排放"
                 icon="💨"
-                value={environmentalImpact.carbonFootprint}
+                value={environmentalImpact.carbonFootprint || 0}
                 max={1.5}
                 delay={0.4}
               />
               <ModernProgressBar
                 label="水资源消耗"
                 icon="💧"
-                value={environmentalImpact.waterUsage}
+                value={environmentalImpact.waterUsage || 0}
                 max={1.5}
                 delay={0.5}
               />
               <ModernProgressBar
                 label="土地占用"
                 icon="🌳"
-                value={environmentalImpact.landUsage}
+                value={environmentalImpact.landUsage || 0}
                 max={1.5}
                 delay={0.6}
               />
               <ModernProgressBar
                 label="健康度"
                 icon="❤️"
-                value={environmentalImpact.healthScore}
+                value={environmentalImpact.healthScore || 0}
                 max={1}
                 delay={0.7}
               />
