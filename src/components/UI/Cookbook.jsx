@@ -8,35 +8,38 @@ const Cookbook = ({ show, onClose, unlockedRecipeIds }) => {
   const allRecipes = useMemo(() => getRecipes(), []);
   const allFoods = useMemo(() => getFoods().sort((a, b) => a.name.localeCompare(b.name, 'zh-Hans')), []);
 
-  // Control body scroll when modal is open
+  // Control body scroll when modal is open - COMPLETELY REWRITTEN
   useEffect(() => {
     if (show) {
       // Add modal-open class to body to prevent scrolling
       document.body.classList.add('modal-open');
+      // Also set overflow hidden directly as backup
+      document.body.style.overflow = 'hidden';
     } else {
       // Remove modal-open class from body to restore scrolling
       document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
     }
 
     // Cleanup function to remove class when component unmounts
     return () => {
       document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
     };
   }, [show]);
-
 
   return (
     <AnimatePresence>
       {show && (
         <motion.div
-          className="achievement-gallery-overlay"
+          className="modal-overlay"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
         >
           <motion.div
-            className="achievement-gallery-modal cookbook-modal"
+            className="modal-container cookbook-modal"
             initial={{ y: "-100vh", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "100vh", opacity: 0 }}
@@ -45,34 +48,46 @@ const Cookbook = ({ show, onClose, unlockedRecipeIds }) => {
           >
             <div className="modal-header">
               <h2 className="modal-title">📚 未来图鉴</h2>
-              <button className="close-button" onClick={onClose}><IconX size={28} /></button>
+              <button className="modal-close-btn" onClick={onClose}>
+                <IconX size={28} />
+              </button>
             </div>
 
             <div className="modal-tabs">
-              <button className={`modal-tab ${activeTab === 'recipes' ? 'active' : ''}`} onClick={() => setActiveTab('recipes')}>
+              <button 
+                className={`modal-tab ${activeTab === 'recipes' ? 'active' : ''}`} 
+                onClick={() => setActiveTab('recipes')}
+              >
                 <IconToolsKitchen2 size={20} /> 菜谱
               </button>
-              <button className={`modal-tab ${activeTab === 'foods' ? 'active' : ''}`} onClick={() => setActiveTab('foods')}>
+              <button 
+                className={`modal-tab ${activeTab === 'foods' ? 'active' : ''}`} 
+                onClick={() => setActiveTab('foods')}
+              >
                 <IconLeaf size={20} /> 食材
               </button>
             </div>
             
             <div className="modal-content">
               {activeTab === 'recipes' && (
-                <div className="achievement-gallery-grid">
+                <div className="recipe-grid">
                   {allRecipes.map(recipe => {
                     const isUnlocked = unlockedRecipeIds.includes(recipe.id);
                     return (
-                      <div key={recipe.id} className={`achievement-gallery-item ${isUnlocked ? 'unlocked' : 'locked'}`} title={isUnlocked ? recipe.description : '未解锁'}>
+                      <div 
+                        key={recipe.id} 
+                        className={`recipe-card ${isUnlocked ? 'unlocked' : 'locked'}`} 
+                        title={isUnlocked ? recipe.description : '未解锁'}
+                      >
                         {isUnlocked ? (
                           <>
-                            <div className="achievement-gallery-icon">{recipe.emoji}</div>
-                            <div className="achievement-gallery-name">{recipe.name}</div>
+                            <div className="recipe-icon">{recipe.emoji}</div>
+                            <div className="recipe-name">{recipe.name}</div>
                           </>
                         ) : (
                           <>
-                            <div className="achievement-gallery-icon"><IconLock size={40} /></div>
-                            <div className="achievement-gallery-name">？？？</div>
+                            <div className="recipe-icon"><IconLock size={40} /></div>
+                            <div className="recipe-name">？？？</div>
                           </>
                         )}
                       </div>
@@ -82,32 +97,32 @@ const Cookbook = ({ show, onClose, unlockedRecipeIds }) => {
               )}
 
               {activeTab === 'foods' && (
-                <div className="cookbook-food-grid">
+                <div className="food-grid-cookbook">
                   {allFoods.map(food => (
-                    <div key={food.id} className="cookbook-food-card" title={food.description}>
-                      <div className="cookbook-food-emoji">{food.emoji}</div>
-                      <h3 className="cookbook-food-name">{food.name}</h3>
-                      <p className="cookbook-food-description">{food.description}</p>
-                      <div className="cookbook-food-stats">
-                        <div className="cookbook-food-stat" title={`碳排放: ${food.carbonFootprint}`}>
-                          <span className="cookbook-food-stat-icon">🌱</span>
-                          <span className="cookbook-food-stat-value">{Math.round(food.carbonFootprint * 100)}</span>
-                          <span className="cookbook-food-stat-label">碳排</span>
+                    <div key={food.id} className="food-card-cookbook" title={food.description}>
+                      <div className="food-emoji-cookbook">{food.emoji}</div>
+                      <h3 className="food-name-cookbook">{food.name}</h3>
+                      <p className="food-description-cookbook">{food.description}</p>
+                      <div className="food-stats-cookbook">
+                        <div className="food-stat-cookbook" title={`碳排放: ${food.carbonFootprint}`}>
+                          <span className="stat-icon">🌱</span>
+                          <span className="stat-value">{Math.round(food.carbonFootprint * 100)}</span>
+                          <span className="stat-label">碳排</span>
                         </div>
-                        <div className="cookbook-food-stat" title={`水消耗: ${food.waterUsage}`}>
-                          <span className="cookbook-food-stat-icon">💧</span>
-                          <span className="cookbook-food-stat-value">{Math.round(food.waterUsage * 100)}</span>
-                          <span className="cookbook-food-stat-label">水耗</span>
+                        <div className="food-stat-cookbook" title={`水消耗: ${food.waterUsage}`}>
+                          <span className="stat-icon">💧</span>
+                          <span className="stat-value">{Math.round(food.waterUsage * 100)}</span>
+                          <span className="stat-label">水耗</span>
                         </div>
-                        <div className="cookbook-food-stat" title={`土地占用: ${food.landUsage}`}>
-                          <span className="cookbook-food-stat-icon">🌍</span>
-                          <span className="cookbook-food-stat-value">{Math.round(food.landUsage * 100)}</span>
-                          <span className="cookbook-food-stat-label">土地</span>
+                        <div className="food-stat-cookbook" title={`土地占用: ${food.landUsage}`}>
+                          <span className="stat-icon">🌍</span>
+                          <span className="stat-value">{Math.round(food.landUsage * 100)}</span>
+                          <span className="stat-label">土地</span>
                         </div>
-                        <div className="cookbook-food-stat" title={`健康指数: ${food.healthScore}`}>
-                          <span className="cookbook-food-stat-icon">❤️</span>
-                          <span className="cookbook-food-stat-value">{Math.round(food.healthScore * 100)}</span>
-                          <span className="cookbook-food-stat-label">健康</span>
+                        <div className="food-stat-cookbook" title={`健康指数: ${food.healthScore}`}>
+                          <span className="stat-icon">❤️</span>
+                          <span className="stat-value">{Math.round(food.healthScore * 100)}</span>
+                          <span className="stat-label">健康</span>
                         </div>
                       </div>
                     </div>
