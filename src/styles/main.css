@@ -1746,6 +1746,263 @@ body.modal-open {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* ===== Food Selection Style Cards for Lists ===== */
+
+/* Recipe Grid in Cookbook */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0.5rem;
+}
+
+.recipe-card {
+  background-color: var(--surface-color);
+  border-radius: var(--radius-large);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  min-height: 180px;
+  justify-content: center;
+}
+
+.recipe-card.unlocked {
+  cursor: pointer;
+  background-color: var(--background-color);
+}
+
+.recipe-card.unlocked:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-large);
+  border-color: var(--primary-color);
+}
+
+.recipe-card.locked {
+  opacity: 0.6;
+  filter: grayscale(0.5);
+  background-color: var(--background-color);
+}
+
+.recipe-icon {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.recipe-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Food Grid in Cookbook */
+.food-grid-cookbook {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0.5rem;
+}
+
+.food-card-cookbook {
+  background-color: var(--surface-color);
+  border-radius: var(--radius-large);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 200px;
+}
+
+.food-card-cookbook:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-large);
+  border-color: var(--primary-color);
+}
+
+.food-emoji-cookbook {
+  font-size: 2.5rem;
+  text-align: center;
+  line-height: 1;
+}
+
+.food-name-cookbook {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  text-align: center;
+}
+
+.food-description-cookbook {
+  font-size: 0.9rem;
+  color: var(--text-secondary-color);
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+}
+
+.food-stats-cookbook {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.food-stat-cookbook {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background-color: var(--background-color);
+  border-radius: var(--radius-medium);
+}
+
+.stat-icon {
+  font-size: 1rem;
+}
+
+.stat-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary-color);
+}
+
+/* Achievement Grid */
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 0.5rem;
+}
+
+.achievement-card {
+  background-color: var(--surface-color);
+  border-radius: var(--radius-large);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  min-height: 160px;
+  justify-content: center;
+}
+
+.achievement-card.unlocked {
+  cursor: pointer;
+  background-color: var(--background-color);
+}
+
+.achievement-card.unlocked:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-large);
+  border-color: var(--success-color);
+}
+
+.achievement-card.locked {
+  opacity: 0.6;
+  filter: grayscale(0.5);
+  background-color: var(--background-color);
+}
+
+.achievement-icon {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.achievement-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Result Screen Lists Styling */
+.timeline {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.timeline__item {
+  background-color: var(--surface-color);
+  border-radius: var(--radius-medium);
+  border: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-small);
+  border-left: 4px solid var(--primary-color);
+}
+
+.timeline__item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--primary-color);
+}
+
+.timeline__item::before {
+  display: none; /* Remove the original timeline dots */
+}
+
+.tips-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tips-list__item {
+  background-color: var(--surface-color);
+  border-radius: var(--radius-medium);
+  border: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-small);
+  border-left: 4px solid var(--success-color);
+}
+
+.tips-list__item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--success-color);
+}
 /* Enhanced Food Cards for Cookbook - Complete Styles */
 .cookbook-food-grid {
   display: grid;
