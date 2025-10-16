@@ -97,32 +97,32 @@ const Cookbook = ({ show, onClose, unlockedRecipeIds }) => {
               )}
 
               {activeTab === 'foods' && (
-                <div className="food-grid-cookbook">
+                <div className="cookbook-food-grid">
                   {allFoods.map(food => (
-                    <div key={food.id} className="food-card-cookbook" title={food.description}>
-                      <div className="food-emoji-cookbook">{food.emoji}</div>
-                      <h3 className="food-name-cookbook">{food.name}</h3>
-                      <p className="food-description-cookbook">{food.description}</p>
-                      <div className="food-stats-cookbook">
-                        <div className="food-stat-cookbook" title={`碳排放: ${food.carbonFootprint}`}>
-                          <span className="stat-icon">🌱</span>
-                          <span className="stat-value">{Math.round(food.carbonFootprint * 100)}</span>
-                          <span className="stat-label">碳排</span>
+                    <div key={food.id} className="cookbook-food-card" title={food.description}>
+                      <div className="cookbook-food-emoji">{food.emoji}</div>
+                      <h3 className="cookbook-food-name">{food.name}</h3>
+                      <p className="cookbook-food-description">{food.description}</p>
+                      <div className="cookbook-food-stats">
+                        <div className="cookbook-food-stat" title={`碳排放: ${food.carbonFootprint}`}>
+                          <span className="cookbook-food-stat-icon">🌱</span>
+                          <span className="cookbook-food-stat-value">{Math.round(food.carbonFootprint * 100)}</span>
+                          <span className="cookbook-food-stat-label">碳排</span>
                         </div>
-                        <div className="food-stat-cookbook" title={`水消耗: ${food.waterUsage}`}>
-                          <span className="stat-icon">💧</span>
-                          <span className="stat-value">{Math.round(food.waterUsage * 100)}</span>
-                          <span className="stat-label">水耗</span>
+                        <div className="cookbook-food-stat" title={`水消耗: ${food.waterUsage}`}>
+                          <span className="cookbook-food-stat-icon">💧</span>
+                          <span className="cookbook-food-stat-value">{Math.round(food.waterUsage * 100)}</span>
+                          <span className="cookbook-food-stat-label">水耗</span>
                         </div>
-                        <div className="food-stat-cookbook" title={`土地占用: ${food.landUsage}`}>
-                          <span className="stat-icon">🌍</span>
-                          <span className="stat-value">{Math.round(food.landUsage * 100)}</span>
-                          <span className="stat-label">土地</span>
+                        <div className="cookbook-food-stat" title={`土地占用: ${food.landUsage}`}>
+                          <span className="cookbook-food-stat-icon">🌍</span>
+                          <span className="cookbook-food-stat-value">{Math.round(food.landUsage * 100)}</span>
+                          <span className="cookbook-food-stat-label">土地</span>
                         </div>
-                        <div className="food-stat-cookbook" title={`健康指数: ${food.healthScore}`}>
-                          <span className="stat-icon">❤️</span>
-                          <span className="stat-value">{Math.round(food.healthScore * 100)}</span>
-                          <span className="stat-label">健康</span>
+                        <div className="cookbook-food-stat" title={`健康指数: ${food.healthScore}`}>
+                          <span className="cookbook-food-stat-icon">❤️</span>
+                          <span className="cookbook-food-stat-value">{Math.round(food.healthScore * 100)}</span>
+                          <span className="cookbook-food-stat-label">健康</span>
                         </div>
                       </div>
                     </div>
