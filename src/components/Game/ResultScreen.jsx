@@ -120,7 +120,17 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGa
             <h2 className="content-block__title">🌍 饮食星球状态</h2>
             <div className="result-screen__planet-container">
               {planetStatus && selectedFoods && (
-                <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+                <Canvas
+                  camera={{ position: [0, 0, 5], fov: 50 }}
+                  gl={{
+                    antialias: true,
+                    alpha: true,
+                    powerPreference: "high-performance"
+                  }}
+                  onCreated={({ gl }) => {
+                    gl.setClearColor(0x000000, 0);
+                  }}
+                >
                   <PlanetScene
                     planetStatus={planetStatus}
                     selectedFoods={selectedFoods}

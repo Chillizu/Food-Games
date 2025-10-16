@@ -42,9 +42,9 @@ export const useGameLogic = () => {
     }
 
     const totals = selectedFoods.reduce((acc, food) => {
-      acc.carbonFootprint += food.carbonFootprint;
-      acc.waterUsage += food.waterUsage;
-      acc.healthScore += food.healthScore;
+      acc.carbonFootprint += food.carbonFootprint || 0;
+      acc.waterUsage += food.waterUsage || 0;
+      acc.healthScore += food.healthScore || 0;
       return acc;
     }, {
       carbonFootprint: 0,
@@ -56,8 +56,6 @@ export const useGameLogic = () => {
     totals.healthScore = totals.healthScore / selectedFoods.length;
     
     // 标准化环境影响指标
-    // 假设单个食物的平均影响值为 0.4 (这是一个估算值，可以调整)
-    // 那么推荐最大数量食物的总影响就是 RECOMMENDED_MAX_ITEMS * 0.4 = 2
     const maxImpact = RECOMMENDED_MAX_ITEMS * 0.5;
     totals.carbonFootprintNormalized = Math.min(totals.carbonFootprint / maxImpact, 1);
     totals.waterUsageNormalized = Math.min(totals.waterUsage / maxImpact, 1);

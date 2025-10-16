@@ -198,6 +198,9 @@ export const PlanetScene = ({ planetStatus, selectedFoods }) => {
         enableRotate={true}
         autoRotate
         autoRotateSpeed={0.5}
+        enableDamping={true}
+        dampingFactor={0.05}
+        rotateSpeed={0.5}
       />
     </>
   );

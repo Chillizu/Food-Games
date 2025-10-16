@@ -72,20 +72,36 @@ const Cookbook = ({ show, onClose, unlockedRecipeIds }) => {
               )}
 
               {activeTab === 'foods' && (
-                <div className="food-dex-list">
+                <div className="food-grid">
                   {allFoods.map(food => (
-                    <div key={food.id} className="food-dex-item">
-                      <div className="food-dex-info">
-                        <span className="food-dex-emoji">{food.emoji}</span>
-                        <h3 className="food-dex-name">{food.name}</h3>
-                        <p className="food-dex-description">{food.description}</p>
+                    <div key={food.id} className="food-card">
+                      <div className="food-card__content">
+                        <div className="food-card__header">
+                          <span className="food-card__emoji">{food.emoji}</span>
+                          <h3 className="food-card__name">{food.name}</h3>
+                        </div>
+                        <p className="food-card__description" title={food.description}>{food.description}</p>
+                        <div className="food-card__footer">
+                          <div className="food-card__stats">
+                            <div className="stat-item" title={`碳排放: ${food.carbonFootprint}`}>
+                              <span>🌱</span>
+                              <span>{Math.round(food.carbonFootprint * 100)}</span>
+                            </div>
+                            <div className="stat-item" title={`水消耗: ${food.waterUsage}`}>
+                              <span>💧</span>
+                              <span>{Math.round(food.waterUsage * 100)}</span>
+                            </div>
+                            <div className="stat-item" title={`土地占用: ${food.landUsage}`}>
+                              <span>🌍</span>
+                              <span>{Math.round(food.landUsage * 100)}</span>
+                            </div>
+                            <div className="stat-item" title={`健康指数: ${food.healthScore}`}>
+                              <span>❤️</span>
+                              <span>{Math.round(food.healthScore * 100)}</span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <ul className="food-dex-stats">
-                        <StatItem label="碳排放" value={food.carbonFootprint} />
-                        <StatItem label="水消耗" value={food.waterUsage} />
-                        <StatItem label="土地用" value={food.landUsage} />
-                        <StatItem label="健康分" value={food.healthScore} />
-                      </ul>
                     </div>
                   ))}
                 </div>
