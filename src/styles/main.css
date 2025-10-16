@@ -6,11 +6,8 @@
 
 body {
   font-family: 'Noto Sans SC', sans-serif;
-  background-color: #f8f9fa;
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0),
-    radial-gradient(circle at 10px 10px, rgba(0,0,0,0.05) 1px, transparent 0);
-  background-size: 20px 20px;
+  background-color: #1a1a1a; /* Darker background */
+  color: #e8e8e8;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -27,11 +24,11 @@ body {
   --accent-color: #F5A623;
   --success-color: #7ED321;
   --danger-color: #D0021B;
-  --text-color: #333333;
-  --text-secondary-color: #777777;
-  --background-color: #FFFFFF;
-  --surface-color: #F8F9FA;
-  --border-color: #EAECEF;
+  --text-color: #e8e8e8;
+  --text-secondary-color: #b3b3b3;
+  --background-color: #1a1a1a;
+  --surface-color: #2a2a2a;
+  --border-color: rgba(255, 255, 255, 0.1);
 
   /* New Shadows */
   --shadow-small: 0 2px 4px rgba(0,0,0,0.05);
@@ -58,8 +55,12 @@ body {
   display: flex;
   height: 100vh;
   width: 100vw;
-  background-color: var(--background-color);
+  background: #1D2B3A;
+  background:
+    radial-gradient(at 0% 0%, hsla(204, 50%, 30%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 98% 1%, hsla(240, 50%, 30%, 0.3) 0px, transparent 50%);
   overflow: hidden;
+  position: relative;
 }
 
 .main-area {
@@ -453,11 +454,14 @@ body {
 }
 
 .content-block {
-  background-color: var(--surface-color);
+  background-color: rgba(42, 42, 42, 0.5); /* Semi-transparent */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-large);
   padding: 2rem;
   text-align: left;
+  box-shadow: var(--shadow-medium);
 }
 
 .content-block__title {
@@ -1475,4 +1479,13 @@ body {
 .food-dex-stat-value {
   font-weight: 600;
   color: var(--text-color);
+}
+/* Hide scrollbar for .hand-area__cards-list */
+.hand-area__cards-list::-webkit-scrollbar {
+  display: none; /* Webkit browsers */
+}
+
+.hand-area__cards-list {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
