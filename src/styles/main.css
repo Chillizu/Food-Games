@@ -6,8 +6,8 @@
 
 body {
   font-family: 'Noto Sans SC', sans-serif;
-  background-color: #1a1a1a; /* Darker background */
-  color: #e8e8e8;
+  background-color: var(--background-color);
+  color: var(--text-color);
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -18,21 +18,21 @@ body {
 }
 
 :root {
-  /* New Theme Colors */
-  --primary-color: #4A90E2;
-  --secondary-color: #50E3C2;
-  --accent-color: #F5A623;
-  --success-color: #7ED321;
-  --danger-color: #D0021B;
-  --text-color: #e8e8e8;
-  --text-secondary-color: #b3b3b3;
-  --background-color: #1a1a1a;
-  --surface-color: #2a2a2a;
-  --border-color: rgba(255, 255, 255, 0.1);
+  /* Light Theme Colors */
+  --primary-color: #007AFF;
+  --secondary-color: #34C759;
+  --accent-color: #FF9500;
+  --success-color: #34C759;
+  --danger-color: #FF3B30;
+  --text-color: #1d1d1f;
+  --text-secondary-color: #6e6e73;
+  --background-color: #f5f5f7;
+  --surface-color: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.1);
 
-  /* New Shadows */
-  --shadow-small: 0 2px 4px rgba(0,0,0,0.05);
-  --shadow-medium: 0 4px 12px rgba(0,0,0,0.1);
+  /* Shadows */
+  --shadow-small: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-medium: 0 4px 12px rgba(0,0,0,0.08);
   --shadow-large: 0 10px 30px rgba(0,0,0,0.1);
 
   /* New Radius */
@@ -55,10 +55,7 @@ body {
   display: flex;
   height: 100vh;
   width: 100vw;
-  background: #1D2B3A;
-  background:
-    radial-gradient(at 0% 0%, hsla(204, 50%, 30%, 0.3) 0px, transparent 50%),
-    radial-gradient(at 98% 1%, hsla(240, 50%, 30%, 0.3) 0px, transparent 50%);
+  background-color: var(--background-color);
   overflow: hidden;
   position: relative;
 }
@@ -368,8 +365,9 @@ body {
   right: 2rem;
   max-width: 800px;
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-large);
   padding: 1rem 1.5rem;
@@ -383,6 +381,14 @@ body {
 .action-bar__info {
   font-weight: 500;
   color: var(--text-secondary-color);
+}
+
+.action-bar__stats {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-grow: 1;
+  padding-right: 2rem;
 }
 
 .action-bar__buttons {
@@ -454,9 +460,7 @@ body {
 }
 
 .content-block {
-  background-color: rgba(42, 42, 42, 0.5); /* Semi-transparent */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: var(--surface-color);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-large);
   padding: 2rem;

@@ -9,7 +9,7 @@ import HeaderActions from '../UI/HeaderActions'
 import ModernProgressBar from '../UI/ModernProgressBar';
 import AnimatedScore from '../UI/AnimatedScore';
 
-const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGame }) => {
+const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGame, planetStatus: initialPlanetStatus, selectedFoods: initialSelectedFoods }) => {
   const location = useLocation();
   const [resultData, setResultData] = useState(location.state);
 
@@ -46,18 +46,20 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGa
 
   const {
     environmentalImpact,
-    planetStatus,
+    planetStatus: dataPlanetStatus,
     foundRecipes,
     unmatchedFoods,
     planetHistory,
     tips,
   } = resultData;
 
+  const planetStatus = dataPlanetStatus || initialPlanetStatus;
   const selectedFoods = useMemo(() => {
+    if (initialSelectedFoods && initialSelectedFoods.length > 0) return initialSelectedFoods;
     if (!foundRecipes || !unmatchedFoods) return [];
     const foodsFromRecipes = foundRecipes.flatMap(recipe => recipe.ingredients_details || []);
     return [...foodsFromRecipes, ...unmatchedFoods];
-  }, [foundRecipes, unmatchedFoods]);
+  }, [foundRecipes, unmatchedFoods, initialSelectedFoods]);
 
   const sdgMessage = environmentalImpact ? getSDGMessage(environmentalImpact.totalScore) : null;
 
@@ -103,16 +105,18 @@ const ResultScreen = ({ onNewGame, onOpenCookbook, onOpenAchievements, onResetGa
           <div className="content-block">
             <h2 className="content-block__title">🌍 饮食星球状态</h2>
             <div className="result-screen__planet-container">
-              <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-                <PlanetScene
-                  planetStatus={planetStatus}
-                  selectedFoods={selectedFoods}
-                />
-              </Canvas>
+              {planetStatus && selectedFoods && (
+                <Canvas camera={{ position:, fov: 50 }}>
+                  <PlanetScene
+                    planetStatus={planetStatus}
+                    selectedFoods={selectedFoods}
+                  />
+                </Canvas>
+              )}
             </div>
             <div className="planet-status-info">
-              <span className="planet-status-info__indicator" style={{backgroundColor: planetStatus.color}} />
-              <span className="planet-status-info__text">{planetStatus.description}</span>
+              <span className="planet-status-info__indicator" style={{backgroundColor: planetStatus?.color}} />
+              <span className="planet-status-info__text">{planetStatus?.description}</span>
             </div>
           </div>
           

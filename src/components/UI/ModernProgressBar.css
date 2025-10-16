@@ -1,0 +1,60 @@
+.modern-progress-bar-container {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.progress-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-color-light);
+}
+
+.progress-bar-icon {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.progress-bar-label {
+  font-weight: 500;
+  flex-grow: 1;
+}
+
+.progress-bar-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.progress-bar-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--ui-background-dark);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-filler {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color-light), var(--accent-color));
+  border-radius: 4px;
+}
+
+/* Compact Styles */
+.modern-progress-bar-container.compact {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 80px;
+}
+
+.modern-progress-bar-container.compact .progress-bar-header {
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.modern-progress-bar-container.compact .progress-bar-track {
+  height: 6px;
+}

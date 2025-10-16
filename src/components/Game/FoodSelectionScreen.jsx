@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import FoodCard from '../Cards/FoodCard'
 import { getFoods, getFoodCategories } from '../../utils/dataProcessing'
-import HeaderActions from '../UI/HeaderActions'
+import ModernProgressBar from '../UI/ModernProgressBar'
 
 const FoodSelectionScreen = ({
   selectedFoods,
@@ -10,9 +10,7 @@ const FoodSelectionScreen = ({
   onDeselectFood,
   onStartCooking,
   canStartCooking,
-  selectionStats,
-  onOpenCookbook,
-  onOpenAchievements
+  selectionStats
 }) => {
   const [activeCategory, setActiveCategory] = useState('all')
   const foods = getFoods()
@@ -100,18 +98,20 @@ const FoodSelectionScreen = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
-        <div className="action-bar__info">
-          已选 <strong>{selectedFoods.length}</strong> 种食材
+        <div className="action-bar__stats">
+          {selectionStats && selectedFoods.length > 0 ? (
+            <>
+              <ModernProgressBar label="碳" value={selectionStats.carbonFootprint} max={2.5} compact />
+              <ModernProgressBar label="水" value={selectionStats.waterUsage} max={2.5} compact />
+              <ModernProgressBar label="健康" value={selectionStats.healthScore} max={1} compact />
+            </>
+          ) : (
+            <div className="action-bar__info">
+              已选 <strong>{selectedFoods.length}</strong> 种食材
+            </div>
+          )}
         </div>
         <div className="action-bar__buttons">
-          {selectedFoods.length > 0 && (
-            <button
-              className="button button--secondary"
-              onClick={() => selectedFoods.forEach(food => onDeselectFood(food.id))}
-            >
-              清空
-            </button>
-          )}
           <button
             className="button button--primary"
             onClick={onStartCooking}

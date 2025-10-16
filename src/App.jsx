@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     if (!currentAchievement && achievementQueue.length > 0) {
-      const nextAchievementId = achievementQueue[0];
+      const nextAchievementId = achievementQueue;
       const allAchievements = getAchievements();
       const nextAchievement = allAchievements.find(a => a.id === nextAchievementId);
       setCurrentAchievement(nextAchievement);
@@ -117,6 +117,8 @@ function App() {
                   onOpenCookbook={gameLogic.openCookbook}
                   onOpenAchievements={gameLogic.openAchievementGallery}
                   onResetGame={gameLogic.resetGame}
+                  planetStatus={gameLogic.planetStatus}
+                  selectedFoods={gameLogic.selectedFoods}
                 />}
               />
             </Routes>
