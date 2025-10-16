@@ -203,15 +203,10 @@ export const PlanetScene = ({ planetStatus, selectedFoods }) => {
   );
 };
 
-const PlanetVisualization = ({ planetStatus, selectedFoods }) => {
-  return (
-    <Canvas
-      camera={{ position: [0, 0, 5], fov: 50 }}
-      style={{ background: '#1a2a3a', width: '100%', height: '100%' }}
-    >
-      <PlanetScene planetStatus={planetStatus} selectedFoods={selectedFoods} />
-    </Canvas>
-  )
-}
+// PlanetVisualization 现在只是一个场景导出器，不再渲染 Canvas
+// Canvas 的管理已提升到 App.jsx
+
+// 保持默认导出为空组件或 null，以防旧的引用导致问题
+const PlanetVisualization = () => null;
 
 export default PlanetVisualization;

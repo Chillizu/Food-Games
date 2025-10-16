@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import StatProgressBar from './StatProgressBar';
+// import StatProgressBar from './StatProgressBar';
 
 const SelectionStatsPanel = ({ selectionStats }) => {
   const stats = selectionStats || {
@@ -17,12 +17,13 @@ const SelectionStatsPanel = ({ selectionStats }) => {
       transition={{ duration: 0.3, delay: 0.2, ease: 'easeOut' }}
     >
       <h3 className="stats-title">当前选择总览</h3>
+      {/*
       <div className="stats-progress-bars">
         <StatProgressBar
           label="总碳排放"
           icon="🌍"
           value={stats.carbonFootprint}
-          max={2}
+          max={2.5}
           higherIsBetter={false}
           delay={0.1}
         />
@@ -30,7 +31,7 @@ const SelectionStatsPanel = ({ selectionStats }) => {
           label="总水资源消耗"
           icon="💧"
           value={stats.waterUsage}
-          max={2}
+          max={2.5}
           higherIsBetter={false}
           delay={0.2}
         />
@@ -42,6 +43,7 @@ const SelectionStatsPanel = ({ selectionStats }) => {
           delay={0.3}
         />
       </div>
+      */}
     </motion.div>
   );
 };

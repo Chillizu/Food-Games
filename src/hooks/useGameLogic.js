@@ -29,11 +29,15 @@ export const useGameLogic = () => {
 
   // 计算当前选择总览
   const selectionStats = useMemo(() => {
+    const RECOMMENDED_MAX_ITEMS = 5; // 定义一餐推荐的最大食物数量作为参考基准
+
     if (selectedFoods.length === 0) {
       return {
         carbonFootprint: 0,
         waterUsage: 0,
         healthScore: 0,
+        carbonFootprintNormalized: 0,
+        waterUsageNormalized: 0,
       };
     }
 
@@ -50,6 +54,13 @@ export const useGameLogic = () => {
 
     // 平均健康分
     totals.healthScore = totals.healthScore / selectedFoods.length;
+    
+    // 标准化环境影响指标
+    // 假设单个食物的平均影响值为 0.4 (这是一个估算值，可以调整)
+    // 那么推荐最大数量食物的总影响就是 RECOMMENDED_MAX_ITEMS * 0.4 = 2
+    const maxImpact = RECOMMENDED_MAX_ITEMS * 0.5;
+    totals.carbonFootprintNormalized = Math.min(totals.carbonFootprint / maxImpact, 1);
+    totals.waterUsageNormalized = Math.min(totals.waterUsage / maxImpact, 1);
 
     return totals;
   }, [selectedFoods]);
@@ -114,13 +125,14 @@ export const useGameLogic = () => {
     
     setGameStage('cooking')
     
-    // 计算环境影响
-    const impact = calculateEnvironmentalImpact(selectedFoods);
-    
     // 识别菜品组合
     const { foundRecipes, unmatchedFoods } = identifyRecipes(selectedFoods);
     setFoundRecipes(foundRecipes);
     setUnmatchedFoods(unmatchedFoods);
+
+    // 在计算环境影响时直接传入菜谱，让函数内部处理加分
+    const impact = calculateEnvironmentalImpact(selectedFoods, foundRecipes);
+    setEnvironmentalImpact(impact);
 
     // 解锁并保存新菜谱
     if (foundRecipes.length > 0) {
@@ -135,33 +147,46 @@ export const useGameLogic = () => {
         return updatedIds;
       });
     }
-
-    // 计算总分（基础分 + 菜品加分）
-    const recipeBonus = foundRecipes.reduce((sum, recipe) => sum + recipe.bonusScore, 0);
-    const finalScore = impact.totalScore + recipeBonus;
-    
-    const finalImpact = { ...impact, totalScore: finalScore };
-    setEnvironmentalImpact(finalImpact);
     
     // 计算星球状态
-    const status = calculatePlanetStatus(finalImpact.totalScore);
+    const status = calculatePlanetStatus(impact.totalScore);
     setPlanetStatus(status);
     
     // 添加到星球历史（累加效果）
     setPlanetHistory(prev => [...prev, {
       timestamp: Date.now(),
-      score: finalImpact.totalScore,
+      score: impact.totalScore,
       status: status,
       foods: [...selectedFoods]
     }]);
     
     // 生成提示
-    const newTips = generateTips(finalImpact);
+    const newTips = generateTips(impact);
     setTips(newTips);
   }, [selectedFoods])
 
   // 完成烹饪，显示结果
   const completeCooking = useCallback(() => {
+    // 将结果数据存入 sessionStorage，以防 location.state 丢失
+    try {
+      const resultData = {
+        environmentalImpact,
+        planetStatus,
+        foundRecipes,
+        unmatchedFoods,
+        planetHistory: [...planetHistory, {
+          timestamp: Date.now(),
+          score: environmentalImpact.totalScore,
+          status: planetStatus,
+          foods: [...selectedFoods]
+        }],
+        tips,
+      };
+      sessionStorage.setItem('lastResultData', JSON.stringify(resultData));
+    } catch (error) {
+      console.error("Failed to save result to sessionStorage", error);
+    }
+
     setGameStage('result')
     
     // 更新游戏统计
@@ -204,6 +229,7 @@ export const useGameLogic = () => {
 
   // 重新开始游戏
   const restartGame = useCallback(() => {
+    sessionStorage.removeItem('lastResultData');
     setSelectedFoods([])
     setGameStage('selecting')
     setEnvironmentalImpact(null)
@@ -216,6 +242,7 @@ export const useGameLogic = () => {
 
   // 重置整个游戏
   const resetGame = useCallback(() => {
+    sessionStorage.removeItem('lastResultData');
     setSelectedFoods([])
     setGameStage('intro')
     setGameStats({

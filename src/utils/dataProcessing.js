@@ -4,7 +4,7 @@ import recipesData from '../data/recipes.json'
 import sdgsData from '../data/sdgs.json'
 
 // 计算环境影响分数
-export function calculateEnvironmentalImpact(selectedFoods) {
+export function calculateEnvironmentalImpact(selectedFoods, foundRecipes = []) {
   if (!selectedFoods || selectedFoods.length === 0) {
     return {
       carbonFootprint: 0,
@@ -70,9 +70,13 @@ export function calculateEnvironmentalImpact(selectedFoods) {
     waterScore * weights.water +
     landScore * weights.land;
 
-  const finalScore =
+  let finalScore =
     healthScore * weights.health +
     environmentScore * weights.environment;
+
+  // -- 5. 应用食谱加分 --
+  const recipeBonus = foundRecipes.reduce((sum, recipe) => sum + recipe.bonusScore, 0);
+  finalScore += recipeBonus;
 
   return {
     ...averages,

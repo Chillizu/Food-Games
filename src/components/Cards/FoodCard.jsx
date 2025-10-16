@@ -17,8 +17,8 @@ const FoodCard = ({ food, isSelected, onSelect }) => {
       variants={cardVariants}
       initial="initial"
       animate="animate"
-      whileHover={!isSelected ? "hover" : ""}
-      whileTap={!isSelected ? "tap" : ""}
+      whileHover={"hover"}
+      whileTap={"tap"}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       layout
     >

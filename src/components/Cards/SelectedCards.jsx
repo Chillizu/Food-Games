@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getHighlightStyle } from '../../utils/styleUtils';
-import StatProgressBar from '../UI/StatProgressBar';
+// import StatProgressBar from '../UI/StatProgressBar';
 
 const SelectedCards = ({ selectedFoods, onDeselectFood, highlightedFoods, selectionStats, isLocked = false }) => {
   return (
