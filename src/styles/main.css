@@ -1273,7 +1273,7 @@ body.modal-open {
   color: var(--text-secondary-color);
   font-weight: 500;
 }
-/* IntroScreen Reimagined */
+/* IntroScreen Reimagined - Fixed Height Issues */
 .intro-screen-reimagined {
   display: flex;
   height: 100vh;
@@ -1282,6 +1282,7 @@ body.modal-open {
   margin: 0 auto;
   overflow: hidden;
   background-color: var(--background-color);
+  position: relative;
 }
 
 .intro-left-panel {
@@ -1289,12 +1290,14 @@ body.modal-open {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4rem;
+  padding: 2rem;
   max-width: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .intro-title {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1.5rem;
@@ -1302,10 +1305,10 @@ body.modal-open {
 }
 
 .intro-description {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--text-secondary-color);
-  max-width: 550px;
-  margin-bottom: 2.5rem;
+  max-width: 500px;
+  margin-bottom: 2rem;
   line-height: 1.6;
 }
 
@@ -1318,6 +1321,8 @@ body.modal-open {
   position: relative;
   background-color: var(--surface-color);
   border-left: 1px solid var(--border-color);
+  overflow: hidden;
+  height: 100%;
 }
 
 .intro-planet-container {
@@ -1329,16 +1334,25 @@ body.modal-open {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: visible;
+  overflow: hidden;
   z-index: 1;
+}
+
+.intro-planet-container canvas {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .intro-cards-container {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   position: absolute;
-  bottom: 4rem;
+  bottom: 2rem;
   z-index: 2;
+  width: auto;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .intro-info-card {
@@ -2171,4 +2185,268 @@ body.modal-open {
   position: fixed !important;
   width: 100% !important;
   height: 100% !important;
+}
+
+/* ===== ModernProgressBar Styles - Merged to ensure loading ===== */
+.modern-progress-bar-container {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.progress-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary-color);
+}
+
+.progress-bar-icon {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.progress-bar-label {
+  font-weight: 500;
+  flex-grow: 1;
+}
+
+.progress-bar-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.progress-bar-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-filler {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 4px;
+}
+
+/* Compact Styles */
+.modern-progress-bar-container.compact {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 80px;
+}
+
+.modern-progress-bar-container.compact .progress-bar-header {
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.modern-progress-bar-container.compact .progress-bar-track {
+  height: 6px;
+}
+
+/* ===== Enhanced Achievement Gallery Styles with Higher Specificity ===== */
+.achievement-modal .achievement-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+  gap: 1.5rem !important;
+  padding: 0.5rem !important;
+}
+
+.achievement-modal .achievement-card {
+  background-color: var(--surface-color) !important;
+  border-radius: var(--radius-large) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 1.5rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.2s ease-in-out !important;
+  box-shadow: var(--shadow-medium) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 1rem !important;
+  min-height: 160px !important;
+  justify-content: center !important;
+}
+
+.achievement-modal .achievement-card.unlocked {
+  cursor: pointer !important;
+  background-color: var(--background-color) !important;
+  border-color: var(--success-color) !important;
+}
+
+.achievement-modal .achievement-card.unlocked:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-large) !important;
+  border-color: var(--success-color) !important;
+}
+
+.achievement-modal .achievement-card.locked {
+  opacity: 0.6 !important;
+  filter: grayscale(0.5) !important;
+  background-color: var(--background-color) !important;
+}
+
+.achievement-modal .achievement-icon {
+  font-size: 3rem !important;
+  line-height: 1 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.achievement-modal .achievement-name {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: var(--text-color) !important;
+  margin: 0 !important;
+}
+
+/* ===== Enhanced Cookbook Styles with Higher Specificity ===== */
+.cookbook-modal .recipe-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 1.5rem !important;
+  padding: 0.5rem !important;
+}
+
+.cookbook-modal .recipe-card {
+  background-color: var(--surface-color) !important;
+  border-radius: var(--radius-large) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 1.5rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.2s ease-in-out !important;
+  box-shadow: var(--shadow-medium) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 1rem !important;
+  min-height: 180px !important;
+  justify-content: center !important;
+}
+
+.cookbook-modal .recipe-card.unlocked {
+  cursor: pointer !important;
+  background-color: var(--background-color) !important;
+}
+
+.cookbook-modal .recipe-card.unlocked:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-large) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.cookbook-modal .recipe-card.locked {
+  opacity: 0.6 !important;
+  filter: grayscale(0.5) !important;
+  background-color: var(--background-color) !important;
+}
+
+.cookbook-modal .recipe-icon {
+  font-size: 3rem !important;
+  line-height: 1 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.cookbook-modal .recipe-name {
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  color: var(--text-color) !important;
+  margin: 0 !important;
+}
+
+.cookbook-modal .cookbook-food-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 1.5rem !important;
+  padding: 0.5rem !important;
+}
+
+.cookbook-modal .cookbook-food-card {
+  background-color: var(--surface-color) !important;
+  border-radius: var(--radius-large) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 1.5rem !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.2s ease-in-out !important;
+  box-shadow: var(--shadow-medium) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  min-height: 200px !important;
+}
+
+.cookbook-modal .cookbook-food-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-large) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.cookbook-modal .cookbook-food-emoji {
+  font-size: 2.5rem !important;
+  text-align: center !important;
+  line-height: 1 !important;
+}
+
+.cookbook-modal .cookbook-food-name {
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  color: var(--text-color) !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+.cookbook-modal .cookbook-food-description {
+  font-size: 0.9rem !important;
+  color: var(--text-secondary-color) !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex-grow: 1 !important;
+}
+
+.cookbook-modal .cookbook-food-stats {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 0.75rem !important;
+  margin-top: 0.5rem !important;
+}
+
+.cookbook-modal .cookbook-food-stat {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  padding: 0.5rem !important;
+  background-color: var(--background-color) !important;
+  border-radius: var(--radius-medium) !important;
+}
+
+.cookbook-modal .cookbook-food-stat-icon {
+  font-size: 1rem !important;
+  color: var(--text-secondary-color) !important;
+}
+
+.cookbook-modal .cookbook-food-stat-value {
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: var(--text-color) !important;
+}
+
+.cookbook-modal .cookbook-food-stat-label {
+  font-size: 0.7rem !important;
+  color: var(--text-secondary-color) !important;
 }
